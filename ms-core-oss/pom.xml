@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.msop</groupId>
+        <artifactId>MSToolbox</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>ms-core-oss</artifactId>
+    <version>${ms.toolbox.version}</version>
+    <name>${project.artifactId}</name>
+    <packaging>jar</packaging>
+    <description>
+        OSS存储工具
+    </description>
+    <dependencies>
+        <!-- 通用工具模块 -->
+        <dependency>
+            <groupId>com.msop</groupId>
+            <artifactId>ms-core-common</artifactId>
+            <version>${ms.toolbox.version}</version>
+        </dependency>
+        <!-- FastDFS存储 -->
+        <dependency>
+            <groupId>com.github.tobato</groupId>
+            <artifactId>fastdfs-client</artifactId>
+            <version>1.27.2</version>
+            <optional>true</optional>
+        </dependency>
+        <!-- 七牛云存储 -->
+        <dependency>
+            <groupId>com.qiniu</groupId>
+            <artifactId>qiniu-java-sdk</artifactId>
+            <version>7.7.0</version>
+        </dependency>
+        <!-- 阿里云存储 -->
+        <dependency>
+            <groupId>com.aliyun.oss</groupId>
+            <artifactId>aliyun-sdk-oss</artifactId>
+            <version>3.14.0</version>
+        </dependency>
+    </dependencies>
+</project>
