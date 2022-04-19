@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.msop.core.secure.AuthClientAutoConfiguration
