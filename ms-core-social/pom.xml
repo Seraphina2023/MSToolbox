@@ -5,15 +5,15 @@
     <parent>
         <groupId>com.msop</groupId>
         <artifactId>MSToolbox</artifactId>
-        <version>1.0.1</version>
+        <version>1.0.1-SNAPSHOT</version>
     </parent>
-    <artifactId>ms-core-oss</artifactId>
+    <artifactId>ms-core-social</artifactId>
     <version>${ms.toolbox.version}</version>
     <name>${project.artifactId}</name>
-    <packaging>jar</packaging>
-    <description>
-        OSS存储工具
-    </description>
+    <description>第三方登录工具</description>
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
     <dependencies>
         <!-- 通用工具模块 -->
         <dependency>
@@ -21,24 +21,17 @@
             <artifactId>ms-core-common</artifactId>
             <version>${ms.toolbox.version}</version>
         </dependency>
-        <!-- FastDFS存储 -->
+        <!-- 第三方登录工具 -->
         <dependency>
-            <groupId>com.github.tobato</groupId>
-            <artifactId>fastdfs-client</artifactId>
-            <version>1.27.2</version>
-            <optional>true</optional>
+            <groupId>me.zhyd.oauth</groupId>
+            <artifactId>JustAuth</artifactId>
+            <version>1.15.8</version>
         </dependency>
-        <!-- 七牛云存储 -->
+        <!-- 请求工具 -->
         <dependency>
-            <groupId>com.qiniu</groupId>
-            <artifactId>qiniu-java-sdk</artifactId>
-            <version>7.7.0</version>
-        </dependency>
-        <!-- 阿里云存储 -->
-        <dependency>
-            <groupId>com.aliyun.oss</groupId>
-            <artifactId>aliyun-sdk-oss</artifactId>
-            <version>3.14.0</version>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
         </dependency>
     </dependencies>
+
 </project>
