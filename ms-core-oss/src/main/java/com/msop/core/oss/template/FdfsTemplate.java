@@ -4,16 +4,12 @@ import com.github.tobato.fastdfs.domain.fdfs.StorePath;
 import com.github.tobato.fastdfs.domain.proto.storage.DownloadCallback;
 import com.github.tobato.fastdfs.service.FastFileStorageClient;
 import com.msop.core.oss.model.FileInfo;
-import com.msop.core.oss.propertis.FdfsProperties;
+import com.msop.core.oss.propertis.OssProperties;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import org.apache.commons.io.FilenameUtils;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
-
-import javax.annotation.Resource;
 import java.io.InputStream;
 
 /**
@@ -26,7 +22,7 @@ import java.io.InputStream;
 
 @AllArgsConstructor
 public class FdfsTemplate {
-    private FdfsProperties fdfsProperties;
+    private OssProperties ossProperties;
     private FastFileStorageClient storageClient;
 
     @SneakyThrows
@@ -51,7 +47,7 @@ public class FdfsTemplate {
         StorePath storePath = storageClient.uploadFile(inputStream, size, FilenameUtils.getExtension(objectName), null);
         FileInfo objectInfo = new FileInfo();
         objectInfo.setName(storePath.getFullPath());
-        objectInfo.setLink("http://" + fdfsProperties.getWebUrl());
+        objectInfo.setLink("http://" + ossProperties.getEndpoint());
         return objectInfo;
     }
 

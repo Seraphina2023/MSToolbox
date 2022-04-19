@@ -6,9 +6,10 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  * 参数配置类
+ * @author ruozhuliufeng
  */
 @Data
-@ConfigurationProperties(prefix = "oss")
+@ConfigurationProperties(prefix = "ms.oss")
 public class OssProperties {
     /**
      * 是否启用
