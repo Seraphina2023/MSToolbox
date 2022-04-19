@@ -54,6 +54,8 @@
         <module>ms-core-common</module>
         <!-- OSS存储工具模块 -->
         <module>ms-core-oss</module>
+        <!-- 第三方登录 -->
+        <module>ms-core-social</module>
     </modules>
 
     <dependencyManagement>

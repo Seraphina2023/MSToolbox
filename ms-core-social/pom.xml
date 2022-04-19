@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.msop</groupId>
+        <artifactId>MSToolbox</artifactId>
+        <version>1.0.1-SNAPSHOT</version>
+    </parent>
+    <artifactId>ms-core-social</artifactId>
+    <version>${ms.toolbox.version}</version>
+    <name>${project.artifactId}</name>
+    <description>第三方登录工具</description>
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+    <dependencies>
+        <!-- 通用工具模块 -->
+        <dependency>
+            <groupId>com.msop</groupId>
+            <artifactId>ms-core-common</artifactId>
+            <version>${ms.toolbox.version}</version>
+        </dependency>
+        <!-- 第三方登录工具 -->
+        <dependency>
+            <groupId>me.zhyd.oauth</groupId>
+            <artifactId>JustAuth</artifactId>
+            <version>1.15.8</version>
+        </dependency>
+        <!-- 请求工具 -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>
