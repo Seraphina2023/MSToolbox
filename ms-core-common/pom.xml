@@ -41,6 +41,11 @@
             <artifactId>protostuff-runtime</artifactId>
             <version>${protostuff.version}</version>
         </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <optional>true</optional>
+        </dependency>
     </dependencies>
 
 </project>
