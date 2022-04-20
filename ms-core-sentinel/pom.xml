@@ -5,40 +5,40 @@
     <parent>
         <groupId>com.msop</groupId>
         <artifactId>MSToolbox</artifactId>
-        <version>1.1.0</version>
+        <version>1.1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>ms-core-oss</artifactId>
+    <artifactId>ms-core-sentinel</artifactId>
     <version>${ms.toolbox.version}</version>
     <name>${project.artifactId}</name>
-    <packaging>jar</packaging>
-    <description>
-        OSS存储工具
-    </description>
+    <description>Sentinel限流封装</description>
     <dependencies>
-        <!-- 通用工具模块 -->
         <dependency>
             <groupId>com.msop</groupId>
             <artifactId>ms-core-common</artifactId>
             <version>${ms.toolbox.version}</version>
         </dependency>
-        <!-- FastDFS存储 -->
         <dependency>
-            <groupId>com.github.tobato</groupId>
-            <artifactId>fastdfs-client</artifactId>
-            <version>1.27.2</version>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.csp</groupId>
+            <artifactId>sentinel-datasource-nacos</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
             <optional>true</optional>
         </dependency>
-        <!-- 七牛云存储 -->
         <dependency>
-            <groupId>com.qiniu</groupId>
-            <artifactId>qiniu-java-sdk</artifactId>
-            <version>7.7.0</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <scope>provided</scope>
         </dependency>
-        <!-- 阿里云存储 -->
         <dependency>
-            <groupId>com.aliyun.oss</groupId>
-            <artifactId>aliyun-sdk-oss</artifactId>
-            <version>3.14.0</version>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webflux</artifactId>
+            <optional>true</optional>
         </dependency>
     </dependencies>
 </project>

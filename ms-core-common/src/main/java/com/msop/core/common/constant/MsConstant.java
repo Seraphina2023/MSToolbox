@@ -8,6 +8,10 @@ package com.msop.core.common.constant;
 public interface MsConstant {
 
     /**
+     * 锁前缀
+     */
+    String LOCK_KEY_PREFIX = "LOCK_KEY";
+    /**
      * 编码
      */
     String UTF_8 = "UTF-8";

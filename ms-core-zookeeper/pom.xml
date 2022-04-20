@@ -5,32 +5,22 @@
     <parent>
         <groupId>com.msop</groupId>
         <artifactId>MSToolbox</artifactId>
-        <version>1.1.0</version>
+        <version>1.1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>ms-core-social</artifactId>
+    <artifactId>ms-core-zookeeper</artifactId>
     <version>${ms.toolbox.version}</version>
     <name>${project.artifactId}</name>
-    <description>第三方登录工具</description>
-    <properties>
-        <java.version>1.8</java.version>
-    </properties>
+    <description>ZooKeeper组件封装</description>
+
     <dependencies>
-        <!-- 通用工具模块 -->
         <dependency>
             <groupId>com.msop</groupId>
             <artifactId>ms-core-common</artifactId>
             <version>${ms.toolbox.version}</version>
         </dependency>
-        <!-- 第三方登录工具 -->
         <dependency>
-            <groupId>me.zhyd.oauth</groupId>
-            <artifactId>JustAuth</artifactId>
-            <version>1.15.8</version>
-        </dependency>
-        <!-- 请求工具 -->
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-recipes</artifactId>
         </dependency>
     </dependencies>
 

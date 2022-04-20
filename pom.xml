@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.msop</groupId>
     <artifactId>MSToolbox</artifactId>
-    <version>1.0.1</version>
+    <version>1.1.0-SNAPSHOT</version>
     <name>MSToolbox</name>
     <packaging>pom</packaging>
     <description>
@@ -25,7 +25,7 @@
         </developer>
     </developers>
     <properties>
-        <ms.toolbox.version>1.0.1</ms.toolbox.version>
+        <ms.toolbox.version>1.1.0-SNAPSHOT</ms.toolbox.version>
         <java.version>1.8</java.version>
         <maven.plugin.version>3.8.1</maven.plugin.version>
         <swagger.version>2.10.5</swagger.version>
@@ -47,6 +47,14 @@
         <spring.platform.version>Cairo-SR8</spring.platform.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+        <druid-starter.version>1.2.6</druid-starter.version>
+        <mybatis-plus-boot-starter.version>3.4.0</mybatis-plus-boot-starter.version>
+        <security-oauth2.version>2.3.8.RELEASE</security-oauth2.version>
+        <security-jwt.version>1.1.0.RELEASE</security-jwt.version>
+        <jjwt.version>0.9.1</jjwt.version>
+        <redisson-starter.version>3.16.1</redisson-starter.version>
+        <spring-cloud-starter-oauth2.version>2.2.5.RELEASE</spring-cloud-starter-oauth2.version>
+        <knife4j.version>2.0.5</knife4j.version>
     </properties>
 
     <modules>
@@ -56,10 +64,39 @@
         <module>ms-core-oss</module>
         <!-- 第三方登录 -->
         <module>ms-core-social</module>
+        <!-- Security安全封装 -->
+        <module>ms-core-secure</module>
+        <!-- Swagger封装处理 -->
+        <module>ms-core-swagger</module>
+        <!-- Zookeeper组件封装 -->
+        <module>ms-core-zookeeper</module>
+        <!-- Redis组件封装 -->
+        <module>ms-core-redis</module>
+        <!-- 日志组件封装 -->
+        <module>ms-core-log</module>
+        <!-- Mybatis组件扩展封装 -->
+        <module>ms-core-mybatis</module>
+        <!-- Cloud组件封装 -->
+        <module>ms-core-cloud</module>
+        <!-- Sentinel限流策略 -->
+        <module>ms-core-sentinel</module>
+        <!-- 代码生成组件 -->
+        <module>ms-core-develop</module>
+        <!-- 负载均衡策略 -->
+        <module>ms-core-loadbalancer</module>
     </modules>
 
     <dependencyManagement>
         <dependencies>
+            <!-- Spring Cloud Alibaba版本管理 -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${alibaba.cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
             <dependency>
                 <groupId>org.springframework.plugin</groupId>
                 <artifactId>spring-plugin-core</artifactId>
@@ -94,6 +131,61 @@
                 <version>${spring.platform.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <!-- druid 官方 starter -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid-starter.version}</version>
+            </dependency>
+            <!-- mybatis-plus start -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus-boot-starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-extension</artifactId>
+                <version>${mybatis-plus-boot-starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus</artifactId>
+                <version>${mybatis-plus-boot-starter.version}</version>
+            </dependency>
+            <!-- 加入spring security spring security oauth2的处理 -->
+            <dependency>
+                <groupId>org.springframework.security.oauth</groupId>
+                <artifactId>spring-security-oauth2</artifactId>
+                <version>${security-oauth2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-jwt</artifactId>
+                <version>${security-jwt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-oauth2</artifactId>
+                <version>${spring-cloud-starter-oauth2.version}</version>
+            </dependency>
+            <!-- JWT -->
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+            <!-- 在Redis基础上的一个Java实用工具包 -->
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson-spring-boot-starter</artifactId>
+                <version>${redisson-starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-micro-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
