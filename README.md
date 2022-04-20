@@ -19,7 +19,7 @@ MSToolbox
 ```
 
 ## 待处理
-- [ ] ms-core-redis
+- [x] ms-core-redis
 - [ ] ms-core-log 
 - [ ] ms-core-mybatis 
 - [ ] ms-core-report 
@@ -28,7 +28,6 @@ MSToolbox
 - [ ] ms-core-test 
 - [ ] ms-core-develop 
 - [ ] ms-core-email 
-- [ ] ms-core-secure 
-- [ ] ms-core-secure 
-- [ ] ms-core-secure 
-- [ ] ms-core-secure 
+- [ ] ms-core-zookeeper 
+- [ ] ms-core-cloud 
+- [ ] ms-core-sentinel 
