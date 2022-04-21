@@ -23,11 +23,11 @@ MSToolbox
 - [ ] ms-core-log 
 - [ ] ms-core-mybatis 
 - [ ] ms-core-report 
-- [ ] ms-core-secure 
-- [ ] ms-core-swagger 
+- [x] ms-core-secure 
+- [x] ms-core-swagger 
 - [ ] ms-core-test 
 - [ ] ms-core-develop 
 - [ ] ms-core-email 
-- [ ] ms-core-zookeeper 
+- [x] ms-core-zookeeper 
 - [ ] ms-core-cloud 
-- [ ] ms-core-sentinel 
+- [x] ms-core-sentinel 
