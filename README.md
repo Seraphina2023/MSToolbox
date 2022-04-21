@@ -21,7 +21,7 @@ MSToolbox
 ## 待处理
 - [x] ms-core-redis
 - [ ] ms-core-log 
-- [ ] ms-core-mybatis 
+- [x] ms-core-mybatis 
 - [ ] ms-core-report 
 - [x] ms-core-secure 
 - [x] ms-core-swagger 

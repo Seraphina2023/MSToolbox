@@ -11,4 +11,20 @@
     <version>${ms.toolbox.version}</version>
     <name>${project.artifactId}</name>
     <description>Mybatis 扩展封装</description>
+    <dependencies>
+        <dependency>
+            <groupId>com.msop</groupId>
+            <artifactId>ms-core-common</artifactId>
+            <version>${ms.toolbox.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+        </dependency>
+        <!-- Druid 官方starter -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+        </dependency>
+    </dependencies>
 </project>

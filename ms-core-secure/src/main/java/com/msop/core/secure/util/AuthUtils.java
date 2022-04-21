@@ -1,6 +1,8 @@
 package com.msop.core.secure.util;
 
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.msop.core.common.utils.WebUtil;
 import com.msop.core.secure.constants.SecureConstant;
 import com.msop.core.secure.model.MsUser;
 import com.msop.core.secure.token.CustomWebAuthenticationDetails;
@@ -8,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.common.exceptions.UnapprovedClientAuthenticationException;
+import org.springframework.web.util.WebUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.nio.charset.StandardCharsets;
@@ -27,6 +30,26 @@ public class AuthUtils {
     }
 
     private static final String BASIC_ = "Basic ";
+
+    /**
+     * 获取用户信息
+     *
+     * @return 用户
+     */
+    public static MsUser getUser() {
+        MsUser user = new MsUser();
+        HttpServletRequest request = WebUtil.getRequest();
+        if (request == null) {
+            return null;
+        }
+        // 获取请求中的token信息
+        String token = extractToken(request);
+        // 解析Token，获取Token信息
+        JsonNode idToken = JwtUtils.decodeAndVerify(token);
+        user.setUserId(Long.valueOf(idToken.get("sub").textValue()));
+        user.setUsername(idToken.get("name").textValue());
+        return user;
+    }
 
     /**
      * 获取request(head/param)中的token
