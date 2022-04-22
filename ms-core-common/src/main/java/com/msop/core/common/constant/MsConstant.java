@@ -85,4 +85,8 @@ public interface MsConstant {
      * 默认未授权消息
      */
     String DEFAULT_UNAUTHORIZED_MESSAGE = "签名认证失败";
+    /**
+     * 超级管理员用户名
+     */
+    String ADMIN_USER_NAME = "admin";
 }

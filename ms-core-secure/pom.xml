@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.msop</groupId>
         <artifactId>MSToolbox</artifactId>
-        <version>1.1.0</version>
+        <version>1.2.0-SNAPSHOT</version>
     </parent>
     <artifactId>ms-core-secure</artifactId>
     <version>${ms.toolbox.version}</version>
@@ -18,6 +18,12 @@
         <dependency>
             <groupId>com.msop</groupId>
             <artifactId>ms-core-common</artifactId>
+            <version>${ms.toolbox.version}</version>
+        </dependency>
+        <!-- Redis操作 -->
+        <dependency>
+            <groupId>com.msop</groupId>
+            <artifactId>ms-core-redis</artifactId>
             <version>${ms.toolbox.version}</version>
         </dependency>
         <dependency>

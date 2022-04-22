@@ -1,2 +1,3 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.msop.core.mybatis.config.MybatisPlusAutoConfiguration
+com.msop.core.mybatis.config.MybatisPlusAutoConfiguration,\
+com.msop.core.mybatis.config.TenantAutoConfiguration
