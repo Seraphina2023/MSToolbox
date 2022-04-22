@@ -3,26 +3,23 @@ package com.msop.core.common.exception;
 import com.msop.core.common.model.CodeEnum;
 import lombok.Getter;
 
-/**
- * 业务异常
- */
-public class BusinessException extends RuntimeException {
+public class SecureException extends RuntimeException {
     private static final long serialVersionUID = 6610083281801529147L;
 
     @Getter
     private final CodeEnum codeEnum;
 
-    public BusinessException(String message) {
+    public SecureException(String message) {
         super(message);
-        this.codeEnum = CodeEnum.FAILURE;
+        this.codeEnum = CodeEnum.UN_AUTHORIZED;
     }
 
-    public BusinessException(CodeEnum codeEnum) {
+    public SecureException(CodeEnum codeEnum) {
         super(codeEnum.getMessage());
         this.codeEnum = codeEnum;
     }
 
-    public BusinessException(CodeEnum codeEnum,Throwable cause){
+    public SecureException(CodeEnum codeEnum,Throwable cause){
         super(cause);
         this.codeEnum = codeEnum;
     }

@@ -1,6 +1,10 @@
 package com.msop.core.common.utils;
 
+import com.msop.core.common.support.FastStringWriter;
+
+import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.UndeclaredThrowableException;
 
 /**
  * 异常处理工具类
@@ -28,5 +32,36 @@ public class Exceptions {
         } else {
             return new RuntimeException(throwable);
         }
+    }
+
+    /**
+     * 代理异常解包
+     *
+     * @param wrapped 包装过的异常
+     * @return 解包后的异常
+     */
+    public static Throwable unwrap(Throwable wrapped) {
+        Throwable unwrapped = wrapped;
+        while (true) {
+            if (unwrapped instanceof InvocationTargetException) {
+                unwrapped = ((InvocationTargetException) unwrapped).getTargetException();
+            } else if (unwrapped instanceof UndeclaredThrowableException) {
+                unwrapped = ((UndeclaredThrowableException) unwrapped).getUndeclaredThrowable();
+            } else {
+                return unwrapped;
+            }
+        }
+    }
+
+    /**
+     * 将ErrorStack转化为String
+     *
+     * @param throwable 错误堆栈信息
+     * @return String
+     */
+    public static String getStackTraceAsString(Throwable throwable) {
+        FastStringWriter stringWriter = new FastStringWriter();
+        throwable.printStackTrace(new PrintWriter(stringWriter));
+        return stringWriter.toString();
     }
 }

@@ -52,6 +52,26 @@ public class AuthUtils {
     }
 
     /**
+     * 获取用户信息
+     *
+     * @param request 请求信息
+     * @return 用户
+     */
+    public static MsUser getUser(HttpServletRequest request) {
+        MsUser user = new MsUser();
+        if (request == null) {
+            return null;
+        }
+        // 获取请求中的token信息
+        String token = extractToken(request);
+        // 解析Token，获取Token信息
+        JsonNode idToken = JwtUtils.decodeAndVerify(token);
+        user.setUserId(Long.valueOf(idToken.get("sub").textValue()));
+        user.setUsername(idToken.get("name").textValue());
+        return user;
+    }
+
+    /**
      * 获取request(head/param)中的token
      *
      * @param request 请求
