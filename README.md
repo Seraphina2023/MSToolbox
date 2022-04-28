@@ -16,6 +16,7 @@ MSToolbox
 └── ms-core-develop -- 代码生成工具模块 
 └── ms-core-email -- 邮件工具模块 
 └── ms-core-sentinel -- 限流工具模块 
+└── ms-core-loadbalancer -- 负载均衡工具模块 
 ```
 
 ## 待处理
@@ -31,3 +32,4 @@ MSToolbox
 - [x] ms-core-zookeeper 
 - [ ] ms-core-cloud 
 - [x] ms-core-sentinel 
+- [x] ms-core-loadbalancer 
