@@ -1,6 +1,5 @@
 package com.msop.core.common.utils;
 
-import com.google.common.base.Charsets;
 import org.springframework.util.Assert;
 
 import javax.crypto.Cipher;

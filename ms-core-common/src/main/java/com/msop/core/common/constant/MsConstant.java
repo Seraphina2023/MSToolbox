@@ -89,4 +89,26 @@ public interface MsConstant {
      * 超级管理员用户名
      */
     String ADMIN_USER_NAME = "admin";
+
+    /**
+     * 租户信息头(应用)
+     */
+    String TENANT_HEADER = "x-tenant-header";
+    /**
+     * 用户ID信息头
+     */
+    String USER_ID_HEADER = "x-userid-header";
+
+    /**
+     * 用户信息头
+     */
+    String USER_HEADER = "x-user-header";
+    /**
+     * 认证请求头
+     */
+    String BASIC_HEADER_KEY = "Auhorization";
+    /**
+     * 类型
+     */
+    String BEARER_TYPE = "Bearer";
 }
