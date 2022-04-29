@@ -11,17 +11,19 @@ import org.redisson.api.RedissonClient;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 
+import javax.annotation.Resource;
 import java.util.concurrent.TimeUnit;
 
 /**
  * Redisson实现分布式锁,基本锁功能的抽象实现，可以满足大部分的徐阿偶
  * @author ruozhuliufeng
  */
-@AllArgsConstructor
+
 @ConditionalOnClass(RedissonClient.class)
 @ConditionalOnProperty(prefix = "ms.lock",name = "lockerType",havingValue = "REDIS",matchIfMissing = true)
 public class RedissonDistributedLock implements DistributedLock {
 
+    @Resource
     private RedissonClient redisson;
 
     private MLock getLock(String key,boolean isFair){

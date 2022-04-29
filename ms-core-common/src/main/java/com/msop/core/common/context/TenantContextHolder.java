@@ -5,8 +5,8 @@ import com.alibaba.ttl.TransmittableThreadLocal;
 
 /**
  * 租户holder
+ *
  * @author ruozhuliufeng
- * @date 2021-09-01
  */
 public class TenantContextHolder {
     /**
@@ -14,9 +14,15 @@ public class TenantContextHolder {
      */
     private static final ThreadLocal<String> CONTEXT = new TransmittableThreadLocal<>();
 
-    public static void setTenant(String tenant){CONTEXT.set(tenant);}
+    public static void setTenant(String tenant) {
+        CONTEXT.set(tenant);
+    }
 
-    public static String getTenant(){return CONTEXT.get();}
+    public static String getTenant() {
+        return CONTEXT.get();
+    }
 
-    public static void clear(){CONTEXT.remove();}
+    public static void clear() {
+        CONTEXT.remove();
+    }
 }

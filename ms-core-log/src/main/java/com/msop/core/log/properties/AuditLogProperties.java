@@ -14,7 +14,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 @Setter
 @Getter
 @RefreshScope
-@ConfigurationProperties(prefix = "ms.audit-log")
+@ConfigurationProperties(prefix = "ms.audit.log")
 public class AuditLogProperties {
     /**
      * 是否开启审计日志

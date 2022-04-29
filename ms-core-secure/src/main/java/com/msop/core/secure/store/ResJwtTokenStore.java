@@ -3,7 +3,7 @@ package com.msop.core.secure.store;
 import com.msop.core.common.utils.StringUtil;
 import com.msop.core.secure.constants.SecureConstant;
 import com.msop.core.secure.converter.CustomUserAuthenticationConverter;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerProperties;
 import org.springframework.context.annotation.Bean;
@@ -32,10 +32,10 @@ import java.util.stream.Collectors;
  * @author ruozhuliufeng
  */
 @Configuration
-@AllArgsConstructor
 @ConditionalOnProperty(prefix = "ms.oauth2.token.store", name = "type", havingValue = "resJwt")
 public class ResJwtTokenStore {
 
+    @Autowired
     private ResourceServerProperties resource;
 
     @Bean

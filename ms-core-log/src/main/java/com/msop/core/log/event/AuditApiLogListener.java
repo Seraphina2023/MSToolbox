@@ -4,13 +4,13 @@ import com.msop.core.log.constant.EventConstant;
 import com.msop.core.log.model.AuditApiLog;
 import com.msop.core.log.service.IAuditService;
 import com.msop.core.log.utils.AuditLogAbstractUtil;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.event.EventListener;
 import org.springframework.core.annotation.Order;
 import org.springframework.scheduling.annotation.Async;
 
+import javax.annotation.Resource;
 import java.util.Map;
 
 /**
@@ -19,9 +19,9 @@ import java.util.Map;
  * @author ruozhuliufeng
  */
 @Slf4j
-@AllArgsConstructor
 public class AuditApiLogListener{
-    private final IAuditService auditService;
+    @Resource
+    private IAuditService auditService;
     @Value("${spring.application.name}")
     private String serviceId;
     @Async

@@ -15,6 +15,7 @@ import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
@@ -25,10 +26,13 @@ import java.util.Map;
 /**
  * 阿里云存储操作
  */
-@AllArgsConstructor
+
 public class AliossTemplate {
+    @Resource
     private OSSClient ossClient;
+    @Resource
     private OssProperties ossProperties;
+    @Resource
     private OssRule ossRule;
 
     @SneakyThrows

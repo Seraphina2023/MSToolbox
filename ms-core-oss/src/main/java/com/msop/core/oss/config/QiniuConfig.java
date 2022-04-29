@@ -16,17 +16,18 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.annotation.Resource;
+
 /**
  * 七牛云配置
  *
  * @author ruozhuliufeng
  */
 @Configuration(proxyBeanMethods = false)
-@AllArgsConstructor
 @EnableConfigurationProperties(OssProperties.class)
 @ConditionalOnProperty(value = "oss.name", havingValue = "qiniu")
 public class QiniuConfig {
-
+    @Resource
     private OssProperties ossProperties;
 
     @Bean
@@ -61,6 +62,6 @@ public class QiniuConfig {
     @ConditionalOnMissingBean(QiniuTemplate.class)
     @ConditionalOnBean({Auth.class, UploadManager.class, BucketManager.class, OssRule.class})
     public QiniuTemplate qiniuTemplate(Auth auth, UploadManager uploadManager, BucketManager bucketManager, OssRule ossRule) {
-        return new QiniuTemplate(auth, uploadManager, bucketManager, ossProperties, ossRule);
+        return new QiniuTemplate();
     }
 }

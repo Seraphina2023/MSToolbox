@@ -13,6 +13,7 @@ import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenCo
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory;
 
+import javax.annotation.Resource;
 import java.security.KeyPair;
 
 /**
@@ -20,11 +21,10 @@ import java.security.KeyPair;
  *
  * @author ruozhuliufeng
  */
-@AllArgsConstructor
 @Configuration
 @ConditionalOnProperty(prefix = "ms.oauth2.token.store", name = "type", havingValue = "authJwt")
 public class AuthJwtTokenStore {
-
+    @Resource
     private KeyProperties keyProperties;
 
     @Bean

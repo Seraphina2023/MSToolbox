@@ -13,15 +13,17 @@ import org.apache.ibatis.mapping.MappedStatement;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 
+import javax.annotation.Resource;
+
 /**
  * 多租户自动配置
  *
  * @author ruozhuliufeng
  */
-@AllArgsConstructor
 @EnableConfigurationProperties(TenantProperties.class)
 public class TenantAutoConfiguration {
 
+    @Resource
     private TenantProperties tenantProperties;
 
     @Bean

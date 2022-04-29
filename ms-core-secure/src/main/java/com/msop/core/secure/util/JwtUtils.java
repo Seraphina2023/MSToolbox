@@ -13,6 +13,7 @@ import org.springframework.security.jwt.crypto.sign.RsaVerifier;
 import org.springframework.security.jwt.crypto.sign.SignatureVerifier;
 import org.springframework.security.jwt.crypto.sign.Signer;
 import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.security.KeyPair;
@@ -23,20 +24,20 @@ import java.util.stream.Collectors;
 
 /**
  * Jwt工具类
+ *
  * @author ruozhuliufeng
- * @date 2021-07-26
  */
 public class JwtUtils {
     private static final String PUBKEY_START = "-----BEGIN PUBLIC KEY-----";
     private static final String PUBKEY_END = "-----END PUBLIC KEY-----";
 
-    public static RSAPublicKey getPubKeyObj(){
+    public static RSAPublicKey getPubKeyObj() {
         Resource res = new ClassPathResource("");
-        try(BufferedReader br = new BufferedReader(new InputStreamReader(res.getInputStream()))){
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(res.getInputStream()))) {
             String pubKey = br.lines().collect(Collectors.joining("\n"));
-            pubKey = pubKey.substring(PUBKEY_START.length(),pubKey.indexOf(PUBKEY_END));
+            pubKey = pubKey.substring(PUBKEY_START.length(), pubKey.indexOf(PUBKEY_END));
             return RsaUtils.getPublicKey(pubKey);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
@@ -44,7 +45,8 @@ public class JwtUtils {
 
     /**
      * {"exp":1563256084,"user_name":"admin","authorities":["ADMIN"],"jti":"4ce02f54-3d1c-4461-8af1-73f0841a35df","client_id":"webApp","scope":["app"]}
-     * @param jwtToken token值
+     *
+     * @param jwtToken     token值
      * @param rsaPublicKey 公钥
      * @return
      */
@@ -56,6 +58,7 @@ public class JwtUtils {
 
     /**
      * {"exp":1563256084,"user_name":"admin","authorities":["ADMIN"],"jti":"4ce02f54-3d1c-4461-8af1-73f0841a35df","client_id":"webApp","scope":["app"]}
+     *
      * @param jwtToken token值
      * @return
      */
@@ -65,7 +68,8 @@ public class JwtUtils {
 
     /**
      * 判断jwt是否过期
-     * @param claims jwt内容
+     *
+     * @param claims   jwt内容
      * @param currTime 当前时间
      * @return 未过期：true，已过期：false
      */
@@ -79,6 +83,7 @@ public class JwtUtils {
 
     /**
      * 判断jwt是否过期
+     *
      * @param claims jwt内容
      * @return 未过期：true，已过期：false
      */

@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
  */
 @Slf4j
 @Service
-@ConditionalOnProperty(name = "ms.audit-log.log-type", havingValue = "logger", matchIfMissing = true)
+@ConditionalOnProperty(name = "ms.audit.log.log-type", havingValue = "logger", matchIfMissing = true)
 public class LoggerAuditServiceImpl implements IAuditService {
 
     /**

@@ -12,11 +12,13 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplicat
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.annotation.Resource;
+
 @Configuration(proxyBeanMethods = false)
-@AllArgsConstructor
 @ConditionalOnWebApplication
 public class MsLogToolAutoConfiguration {
-    private final IAuditService auditService;
+    @Resource
+    private IAuditService auditService;
     @Value("${spring.application.name}")
     private String serviceId;
     @Bean
@@ -31,14 +33,14 @@ public class MsLogToolAutoConfiguration {
 
     @Bean
     public AuditApiLogListener auditApiLogListener(){
-        return new AuditApiLogListener(auditService,serviceId);
+        return new AuditApiLogListener();
     }
     @Bean
     public AuditErrorLogListener auditErrorLogListener(){
-        return new AuditErrorLogListener(auditService,serviceId);
+        return new AuditErrorLogListener();
     }
     @Bean
     public AuditUsualLogListener auditUsualLogListener(){
-        return new AuditUsualLogListener(auditService,serviceId);
+        return new AuditUsualLogListener();
     }
 }

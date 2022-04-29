@@ -14,18 +14,25 @@ import org.springframework.security.oauth2.provider.expression.OAuth2WebSecurity
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.web.AuthenticationEntryPoint;
 
+import javax.annotation.Resource;
+
 /**
  * 默认资源服务配置
  *
  * @author ruozhuliufeng
  */
-@AllArgsConstructor
+
 @Import(DefaultSecurityHandlerConfig.class)
 public class DefaultResourceServerConfig extends ResourceServerConfigurerAdapter {
+    @Resource
     private TokenStore tokenStore;
+    @Resource
     private AuthenticationEntryPoint authenticationEntryPoint;
+    @Resource
     private OAuth2WebSecurityExpressionHandler expressionHandler;
+    @Resource
     private OAuth2AccessDeniedHandler oAuth2AccessDeniedHandler;
+    @Resource
     private SecurityProperties securityProperties;
 
     @Override
