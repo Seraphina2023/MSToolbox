@@ -58,6 +58,7 @@
         <transmittable.version>2.12.1</transmittable.version>
         <dubbo.version>2.7.8</dubbo.version>
         <hutool.version>5.7.20</hutool.version>
+        <spring.data.elasticsearch.version>4.2.3</spring.data.elasticsearch.version>
     </properties>
 
     <modules>
@@ -87,6 +88,8 @@
         <module>ms-core-develop</module>
         <!-- 负载均衡策略 -->
         <module>ms-core-loadbalancer</module>
+        <!-- ES组件 -->
+        <module>ms-core-elasticsearch</module>
     </modules>
 
     <dependencyManagement>
@@ -205,6 +208,12 @@
                 <artifactId>knife4j-micro-spring-boot-starter</artifactId>
                 <version>${knife4j.version}</version>
             </dependency>
+            <!-- ElasticSearch -->
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-elasticsearch</artifactId>
+                <version>${spring.data.elasticsearch.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -224,6 +233,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
         </dependency>
 
         <dependency>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.msop</groupId>
+		<artifactId>MSToolbox</artifactId>
+		<version>1.2.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>ms-core-elasticsearch</artifactId>
+	<name>${project.artifactId}</name>
+	<description>ES搜索通用组件</description>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.msop</groupId>
+			<artifactId>ms-core-common</artifactId>
+			<version>${ms.toolbox.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-elasticsearch</artifactId>
+		</dependency>
+	</dependencies>
+
+
+</project>
