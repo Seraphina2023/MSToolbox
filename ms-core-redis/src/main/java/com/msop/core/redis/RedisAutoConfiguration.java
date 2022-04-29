@@ -17,6 +17,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.data.redis.serializer.RedisSerializer;
 
+import javax.annotation.Resource;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
@@ -26,10 +27,11 @@ import java.util.Map;
  *
  * @author ruozhuliufeng
  */
-@AllArgsConstructor
+
 @EnableCaching
 @EnableConfigurationProperties({RedisProperties.class, CacheManagerProperties.class})
 public class RedisAutoConfiguration {
+    @Resource
     private CacheManagerProperties cacheManagerProperties;
 
     /**

@@ -31,7 +31,7 @@ public class TenantProperties {
 
     /**
      * 配置不进行多租户隔离的SQL，需要配置mapper的全路径，如：
-     * cn.aixuxi.ossp.user.mapper.SysUserMapper.findList
+     * com.msop.user.mapper.SysUserMapper.findList
      */
     private List<String> ignoreSqls = new ArrayList<>();
 }

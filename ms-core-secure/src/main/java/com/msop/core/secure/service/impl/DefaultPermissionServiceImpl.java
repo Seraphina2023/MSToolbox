@@ -1,4 +1,4 @@
-package com.msop.core.secure.impl;
+package com.msop.core.secure.service.impl;
 
 import com.msop.core.common.constant.MsConstant;
 import com.msop.core.common.context.TenantContextHolder;
@@ -7,7 +7,6 @@ import com.msop.core.common.utils.StringUtil;
 import com.msop.core.secure.model.VerifyInfo;
 import com.msop.core.secure.properties.SecurityProperties;
 import com.msop.core.secure.util.AuthUtils;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -16,6 +15,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.util.AntPathMatcher;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,9 +24,10 @@ import java.util.stream.Collectors;
  *
  * @author ruozhuliufeng
  **/
-@AllArgsConstructor
+
 @Slf4j
 public abstract class DefaultPermissionServiceImpl {
+    @Resource
     private SecurityProperties propertis;
 
     private final AntPathMatcher antPathMatcher = new AntPathMatcher();

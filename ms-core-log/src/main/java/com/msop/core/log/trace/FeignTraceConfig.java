@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.StringUtils;
 
+import javax.annotation.Resource;
+
 /**
  * feign拦截器，传递traceId
  *
@@ -18,8 +20,8 @@ import org.springframework.util.StringUtils;
  */
 @Configuration
 @ConditionalOnClass(value = {RequestInterceptor.class})
-@AllArgsConstructor
 public class FeignTraceConfig {
+    @Resource
     private TraceProperties traceProperties;
 
     @Bean

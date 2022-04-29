@@ -10,6 +10,8 @@ import lombok.SneakyThrows;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.annotation.Resource;
 import java.io.InputStream;
 
 /**
@@ -20,9 +22,11 @@ import java.io.InputStream;
  * @date 2021-09-04 16:31
  **/
 
-@AllArgsConstructor
+
 public class FdfsTemplate {
+    @Resource
     private OssProperties ossProperties;
+    @Resource
     private FastFileStorageClient storageClient;
 
     @SneakyThrows

@@ -15,6 +15,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -22,12 +23,15 @@ import java.util.List;
  *
  * @author ruozhuliufeng
  */
-@AllArgsConstructor
 @EnableConfigurationProperties(MybatisPlusAutoFillProperties.class)
 public class MybatisPlusAutoConfiguration {
+    @Resource
     private TenantHandler tenantHandler;
+    @Resource
     private ISqlParserFilter sqlParserFilter;
+    @Resource
     private TenantProperties tenantProperties;
+    @Resource
     private MybatisPlusAutoFillProperties autoFillProperties;
 
     /**

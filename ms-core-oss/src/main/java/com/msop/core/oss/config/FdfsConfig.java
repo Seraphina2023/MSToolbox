@@ -12,16 +12,19 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.annotation.Resource;
+
 /**
  * FastDFS配置
  * @author ruozhuliufeng
  */
 @Configuration(proxyBeanMethods = false)
-@AllArgsConstructor
 @EnableConfigurationProperties(OssProperties.class)
 @ConditionalOnProperty(value = "oss.name", havingValue = "fastdfs")
 public class FdfsConfig {
+    @Resource
     private OssProperties ossProperties;
+    @Resource
     private FastFileStorageClient fastFileStorageClient;
 
     @Bean
@@ -34,6 +37,6 @@ public class FdfsConfig {
     @ConditionalOnMissingBean(FdfsTemplate.class)
     @ConditionalOnBean(FastFileStorageClient.class)
     public FdfsTemplate fdfsTemplate(){
-        return new FdfsTemplate(ossProperties,fastFileStorageClient);
+        return new FdfsTemplate();
     }
 }

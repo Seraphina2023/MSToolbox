@@ -26,7 +26,7 @@ import javax.sql.DataSource;
 @Slf4j
 @Service
 @ConditionalOnClass(JdbcTemplate.class)
-@ConditionalOnProperty(name = "ms.audit-log.log-type", havingValue = "db")
+@ConditionalOnProperty(name = "ms.audit.log.log-type", havingValue = "db")
 public class DbAuditServiceImpl implements IAuditService {
     /**
      * 数据库插入语句

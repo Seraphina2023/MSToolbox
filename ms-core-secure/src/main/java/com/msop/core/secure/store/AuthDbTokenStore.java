@@ -1,13 +1,12 @@
 package com.msop.core.secure.store;
 
-import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 
+import javax.annotation.Resource;
 import javax.sql.DataSource;
 
 /**
@@ -16,9 +15,9 @@ import javax.sql.DataSource;
  * @author ruozhuliufeng
  */
 @Configuration
-@AllArgsConstructor
 @ConditionalOnProperty(prefix = "ms.oauth2.token.store", name = "type", havingValue = "db")
 public class AuthDbTokenStore {
+    @Resource
     private DataSource dataSource;
 
     @Bean

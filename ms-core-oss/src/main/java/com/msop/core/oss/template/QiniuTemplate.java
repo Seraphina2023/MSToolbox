@@ -14,8 +14,10 @@ import com.qiniu.storage.model.FileInfo;
 import com.qiniu.util.Auth;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import java.io.InputStream;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -27,13 +29,19 @@ import java.util.List;
  *
  * @author ruozhuliufeng
  */
-@AllArgsConstructor
+@Slf4j
 public class QiniuTemplate {
+    @Resource
     private Auth auth;
+    @Resource
     private UploadManager uploadManager;
+    @Resource
     private BucketManager bucketManager;
+    @Resource
     private OssProperties ossProperties;
+    @Resource
     private OssRule ossRule;
+
 
     @SneakyThrows
     public void makeBucket(String bucketName) {

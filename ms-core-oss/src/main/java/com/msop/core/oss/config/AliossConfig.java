@@ -17,17 +17,19 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.annotation.Resource;
+
 /**
  * 阿里云存储配置
  *
  * @author ruozhuliufeng
  */
 @Configuration(proxyBeanMethods = false)
-@AllArgsConstructor
 @AutoConfigureAfter(QiniuConfig.class)
 @EnableConfigurationProperties(OssProperties.class)
 @ConditionalOnProperty(value = "oss.name", havingValue = "alioss")
 public class AliossConfig {
+    @Resource
     private OssProperties ossProperties;
 
     @Bean
@@ -61,7 +63,7 @@ public class AliossConfig {
     @ConditionalOnMissingBean(AliossTemplate.class)
     @ConditionalOnBean({OSSClient.class, OssRule.class})
     public AliossTemplate aliossTemplate(OSSClient ossClient, OssRule ossRule) {
-        return new AliossTemplate(ossClient, ossProperties, ossRule);
+        return new AliossTemplate();
     }
 
 }

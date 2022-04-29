@@ -12,6 +12,7 @@ import org.springframework.context.event.EventListener;
 import org.springframework.core.annotation.Order;
 import org.springframework.scheduling.annotation.Async;
 
+import javax.annotation.Resource;
 import java.util.Map;
 
 /**
@@ -20,9 +21,9 @@ import java.util.Map;
  * @author ruozhuliufeng
  */
 @Slf4j
-@AllArgsConstructor
 public class AuditErrorLogListener {
-    private final IAuditService auditService;
+    @Resource
+    private IAuditService auditService;
 
     @Value("${spring.application.name}")
     private String serviceId;

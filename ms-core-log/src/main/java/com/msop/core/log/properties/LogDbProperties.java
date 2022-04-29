@@ -14,6 +14,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  */
 @Getter
 @Setter
-@ConfigurationProperties(prefix = "ms.audit-log.datasource")
+@ConfigurationProperties(prefix = "ms.audit.log.datasource")
 public class LogDbProperties extends HikariConfig {
 }
