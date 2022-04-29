@@ -35,7 +35,7 @@
         <mybatis.plus.generator.version>3.5.2</mybatis.plus.generator.version>
         <protostuff.version>1.6.0</protostuff.version>
         <disruptor.version>3.4.2</disruptor.version>
-        <guava.version>31.1-jre</guava.version>
+        <guava.version>20.0</guava.version>
         <spring.boot.admin.version>2.6.2</spring.boot.admin.version>
         <mica.auto.version>1.2.5</mica.auto.version>
         <alibaba.cloud.version>2021.0.1.0</alibaba.cloud.version>
@@ -48,7 +48,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
         <druid-starter.version>1.2.6</druid-starter.version>
-        <mybatis-plus-boot-starter.version>3.5.1</mybatis-plus-boot-starter.version>
+        <mybatis.plus.boot.starter.version>3.4.0</mybatis.plus.boot.starter.version>
         <security-oauth2.version>2.3.8.RELEASE</security-oauth2.version>
         <security-jwt.version>1.1.0.RELEASE</security-jwt.version>
         <jjwt.version>0.9.1</jjwt.version>
@@ -160,17 +160,17 @@
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
-                <version>${mybatis-plus-boot-starter.version}</version>
+                <version>${mybatis.plus.boot.starter.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-extension</artifactId>
-                <version>${mybatis-plus-boot-starter.version}</version>
+                <version>${mybatis.plus.boot.starter.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus</artifactId>
-                <version>${mybatis-plus-boot-starter.version}</version>
+                <version>${mybatis.plus.boot.starter.version}</version>
             </dependency>
             <!-- 加入spring security spring security oauth2的处理 -->
             <dependency>
