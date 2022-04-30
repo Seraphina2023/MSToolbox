@@ -10,6 +10,7 @@ import com.msop.core.common.constant.StringConstant;
 import com.msop.core.common.utils.DateUtil;
 import com.msop.core.common.utils.Exceptions;
 import com.msop.core.common.utils.StringUtil;
+import io.micrometer.core.instrument.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
@@ -353,4 +354,37 @@ public class JsonUtil {
         }
     }
 
+    /**
+     * json字符串转换为list对象
+     *
+     * @param json json字符串
+     */
+    public static <T> List<T> toList(String json) {
+        if (StringUtils.isBlank(json)) {
+            return null;
+        }
+        try {
+            return MAPPER.readValue(json, List.class);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * json字符串转换为list对象，并指定元素类型
+     *
+     * @param json json字符串
+     * @param cls  list的元素类型
+     */
+    public static <T> List<T> toList(String json, Class<T> cls) {
+        if (StringUtils.isBlank(json)) {
+            return null;
+        }
+        try {
+            JavaType javaType = MAPPER.getTypeFactory().constructParametricType(List.class, cls);
+            return MAPPER.readValue(json, javaType);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
