@@ -14,7 +14,7 @@ import java.util.List;
 @Getter
 @Slf4j
 @Setter
-@ConfigurationProperties(prefix = "ossp.cache-manage")
+@ConfigurationProperties(prefix = "ms.cache-manage")
 public class CacheManagerProperties {
 
     private List<CacheConfig> configs;
