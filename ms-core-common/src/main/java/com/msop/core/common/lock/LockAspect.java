@@ -25,10 +25,8 @@ import java.util.Objects;
  */
 @Slf4j
 @Aspect
-@AllArgsConstructor
-@ComponentScan
 public class LockAspect {
-    @Autowired
+    @Autowired(required = false)
     private DistributedLock locker;
 
     /**

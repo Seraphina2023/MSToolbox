@@ -9,7 +9,6 @@ import java.util.concurrent.TimeUnit;
  *
  * @author ruozhuliufeng
  */
-@Component
 public interface DistributedLock {
     /**
      * 获取锁，如果获取不成功，则一直等待直到lock被获取
