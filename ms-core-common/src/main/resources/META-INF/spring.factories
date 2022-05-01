@@ -1,3 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.msop.core.common.lock.LockAspect,\
-com.msop.core.common.lock.DistributedLock
+com.msop.core.common.lock.LockAspect
