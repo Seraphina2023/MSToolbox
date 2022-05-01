@@ -30,6 +30,7 @@ import java.util.stream.Collectors;
 
 /**
  * Swagger自动配置
+ *
  * @author ruozhuliufeng
  */
 @Configuration
@@ -44,30 +45,30 @@ public class SwaggerAutoConfiguration implements BeanFactoryAware {
 
     @Bean
     @ConditionalOnMissingBean
-    public SwaggerProperties swaggerProperties(){
+    public SwaggerProperties swaggerProperties() {
         return new SwaggerProperties();
     }
 
     @Bean
     @ConditionalOnMissingBean
-    @ConditionalOnProperty(name = "ossp.swagger.enabled",matchIfMissing = true)
-    public List<Docket> createRestApi(SwaggerProperties swaggerProperties){
+    @ConditionalOnProperty(name = "ossp.swagger.enabled", matchIfMissing = true)
+    public List<Docket> createRestApi(SwaggerProperties swaggerProperties) {
         ConfigurableBeanFactory configurableBeanFactory = (ConfigurableBeanFactory) beanFactory;
         List<Docket> docketList = new LinkedList<>();
         // 没有分组
-        if (swaggerProperties.getDocket().size() == 0){
+        if (swaggerProperties.getDocket().size() == 0) {
             final Docket docket = createDocket(swaggerProperties);
-            configurableBeanFactory.registerSingleton("defaultDocket",docket);
+            configurableBeanFactory.registerSingleton("defaultDocket", docket);
             docketList.add(docket);
             return docketList;
         }
 
         // 分组创建
-        for (String groupName:swaggerProperties.getDocket().keySet()){
+        for (String groupName : swaggerProperties.getDocket().keySet()) {
             SwaggerProperties.DocketInfo docketInfo = swaggerProperties.getDocket().get(groupName);
 
             ApiInfo apiInfo = new ApiInfoBuilder()
-                    .title(docketInfo.getTitile().isEmpty()?swaggerProperties.getTitile():docketInfo.getTitile())
+                    .title(docketInfo.getTitile().isEmpty() ? swaggerProperties.getTitile() : docketInfo.getTitile())
                     .description(docketInfo.getDescription().isEmpty() ? swaggerProperties.getDescription() : docketInfo.getDescription())
                     .version(docketInfo.getVersion().isEmpty() ? swaggerProperties.getVersion() : docketInfo.getVersion())
                     .license(docketInfo.getLicense().isEmpty() ? swaggerProperties.getLicense() : docketInfo.getLicense())
@@ -83,7 +84,7 @@ public class SwaggerAutoConfiguration implements BeanFactoryAware {
                     .build();
             // base-path处理
             // 当没有配置任何path的时候，解析/**
-            if (swaggerProperties.getBasePath().isEmpty()){
+            if (swaggerProperties.getBasePath().isEmpty()) {
                 swaggerProperties.getBasePath().add("/**");
             }
             List<Predicate<String>> basePath = new ArrayList<>();
@@ -112,7 +113,7 @@ public class SwaggerAutoConfiguration implements BeanFactoryAware {
                     .build()
                     .securitySchemes(securitySchemes())
                     .securityContexts(securityContexts());
-            configurableBeanFactory.registerSingleton(groupName,docket);
+            configurableBeanFactory.registerSingleton(groupName, docket);
             docketList.add(docket);
         }
         return docketList;
@@ -121,6 +122,7 @@ public class SwaggerAutoConfiguration implements BeanFactoryAware {
 
     /**
      * 创建Docket对象
+     *
      * @param swaggerProperties swagger配置
      * @return Docket
      */
@@ -138,7 +140,7 @@ public class SwaggerAutoConfiguration implements BeanFactoryAware {
                 .build();
         // base-path处理
         // 当没有配置任何path的时候，解析/**
-        if (swaggerProperties.getBasePath().isEmpty()){
+        if (swaggerProperties.getBasePath().isEmpty()) {
             swaggerProperties.getBasePath().add("/**");
         }
         List<Predicate<String>> basePath = new ArrayList<>();
@@ -172,10 +174,10 @@ public class SwaggerAutoConfiguration implements BeanFactoryAware {
 
     private List<Parameter> buildGlobalOperationParametersFromSwaggerProperties(List<SwaggerProperties.GlobalOperationParameter> globalOperationParameters) {
         List<Parameter> parameters = Lists.newArrayList();
-        if (Objects.isNull(globalOperationParameters)){
+        if (Objects.isNull(globalOperationParameters)) {
             return parameters;
         }
-        for(SwaggerProperties.GlobalOperationParameter globalOperationParameter:globalOperationParameters){
+        for (SwaggerProperties.GlobalOperationParameter globalOperationParameter : globalOperationParameters) {
             parameters.add(new ParameterBuilder()
                     .name(globalOperationParameter.getName())
                     .description(globalOperationParameter.getDescription())
@@ -187,14 +189,14 @@ public class SwaggerAutoConfiguration implements BeanFactoryAware {
         return parameters;
     }
 
-    private List<ApiKey> securitySchemes(){
+    private List<ApiKey> securitySchemes() {
         List<ApiKey> apiKeys = new ArrayList<>(1);
-        ApiKey apiKey = new ApiKey(AUTH_KEY,AUTH_KEY,"header");
+        ApiKey apiKey = new ApiKey(AUTH_KEY, AUTH_KEY, "header");
         apiKeys.add(apiKey);
         return apiKeys;
     }
 
-    private List<SecurityContext> securityContexts(){
+    private List<SecurityContext> securityContexts() {
         List<SecurityContext> contexts = new ArrayList<>(1);
         SecurityContext securityContext = SecurityContext.builder()
                 .securityReferences(defaultAuth())
@@ -203,34 +205,35 @@ public class SwaggerAutoConfiguration implements BeanFactoryAware {
         return contexts;
     }
 
-    private List<SecurityReference> defaultAuth(){
-        AuthorizationScope authorizationScope = new AuthorizationScope("global","accessEverything");
+    private List<SecurityReference> defaultAuth() {
+        AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
         AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
         authorizationScopes[0] = authorizationScope;
         List<SecurityReference> references = new ArrayList<>(1);
-        references.add(new SecurityReference(AUTH_KEY,authorizationScopes));
+        references.add(new SecurityReference(AUTH_KEY, authorizationScopes));
         return references;
     }
 
 
     /**
      * 局部参数按照name覆盖局部参数
+     *
      * @param globalOperationParameters
      * @param docketOperationParameters
      * @return
      */
     private List<Parameter> assemblyGlobalOperationParameters(List<SwaggerProperties.GlobalOperationParameter> globalOperationParameters,
                                                               List<SwaggerProperties.GlobalOperationParameter> docketOperationParameters) {
-        if (Objects.isNull(docketOperationParameters) || docketOperationParameters.isEmpty()){
+        if (Objects.isNull(docketOperationParameters) || docketOperationParameters.isEmpty()) {
             return buildGlobalOperationParametersFromSwaggerProperties(globalOperationParameters);
         }
-        Set<String> docketNames =docketOperationParameters.stream()
+        Set<String> docketNames = docketOperationParameters.stream()
                 .map(SwaggerProperties.GlobalOperationParameter::getName)
                 .collect(Collectors.toSet());
         List<SwaggerProperties.GlobalOperationParameter> resultOperationParameters = Lists.newArrayList();
-        if (Objects.nonNull(globalOperationParameters)){
-            for (SwaggerProperties.GlobalOperationParameter parameter:globalOperationParameters){
-                if (!docketNames.contains(parameter.getName())){
+        if (Objects.nonNull(globalOperationParameters)) {
+            for (SwaggerProperties.GlobalOperationParameter parameter : globalOperationParameters) {
+                if (!docketNames.contains(parameter.getName())) {
                     resultOperationParameters.add(parameter);
                 }
             }

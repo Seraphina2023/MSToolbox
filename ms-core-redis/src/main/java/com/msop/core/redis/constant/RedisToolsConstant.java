@@ -2,12 +2,14 @@ package com.msop.core.redis.constant;
 
 /**
  * Redis常量工具
+ *
  * @author ruozhuliufeng
- * @date 2021-07-19
  */
 public class RedisToolsConstant {
 
-    private RedisToolsConstant(){throw new IllegalStateException("Utility class");}
+    private RedisToolsConstant() {
+        throw new IllegalStateException("Utility class");
+    }
 
     /**
      * 单机

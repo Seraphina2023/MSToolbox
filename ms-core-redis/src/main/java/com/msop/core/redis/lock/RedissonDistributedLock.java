@@ -18,7 +18,6 @@ import java.util.concurrent.TimeUnit;
  * Redisson实现分布式锁,基本锁功能的抽象实现，可以满足大部分的徐阿偶
  * @author ruozhuliufeng
  */
-
 @ConditionalOnClass(RedissonClient.class)
 @ConditionalOnProperty(prefix = "ms.lock",name = "lockerType",havingValue = "REDIS",matchIfMissing = true)
 public class RedissonDistributedLock implements DistributedLock {

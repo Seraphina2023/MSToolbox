@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Configuration;
  * @author ruozhuliufeng
  * @date 2021-07-17
  */
+@Configuration(proxyBeanMethods = false)
 @ComponentScan
 @EnableConfigurationProperties({AuditLogProperties.class, TraceProperties.class})
 public class LogAutoConfiguration {
