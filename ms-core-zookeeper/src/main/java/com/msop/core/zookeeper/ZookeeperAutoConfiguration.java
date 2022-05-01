@@ -9,12 +9,14 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * Zookeeper配置类
  *
  * @author ruozhuliufeng
  */
+@Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties(ZookeeperProperty.class)
 @ComponentScan
 public class ZookeeperAutoConfiguration {

@@ -13,6 +13,7 @@ import org.springframework.boot.autoconfigure.elasticsearch.RestClientBuilderCus
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.context.properties.PropertyMapper;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 
 /**
@@ -20,6 +21,7 @@ import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
  *
  * @author ruozhuliufeng
  */
+@Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties(RestClientPoolProperties.class)
 public class RestAutoConfiguration {
 

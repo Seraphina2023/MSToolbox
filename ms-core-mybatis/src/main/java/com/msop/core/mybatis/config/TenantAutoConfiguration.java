@@ -12,6 +12,7 @@ import net.sf.jsqlparser.expression.StringValue;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.Resource;
 
@@ -20,6 +21,7 @@ import javax.annotation.Resource;
  *
  * @author ruozhuliufeng
  */
+@Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties(TenantProperties.class)
 public class TenantAutoConfiguration {
 

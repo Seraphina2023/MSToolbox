@@ -14,6 +14,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -23,6 +24,7 @@ import java.util.List;
  *
  * @author ruozhuliufeng
  */
+@Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties(MybatisPlusAutoFillProperties.class)
 public class MybatisPlusAutoConfiguration {
     @Resource
