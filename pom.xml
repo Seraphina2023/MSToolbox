@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.msop</groupId>
     <artifactId>MSToolbox</artifactId>
-    <version>0.1.1-SNAPSHOT</version>
+    <version>0.1.2-SNAPSHOT</version>
     <name>MSToolbox</name>
     <packaging>pom</packaging>
     <description>
@@ -25,7 +25,7 @@
         </developer>
     </developers>
     <properties>
-        <ms.toolbox.version>0.1.1-SNAPSHOT</ms.toolbox.version>
+        <ms.toolbox.version>0.1.2-SNAPSHOT</ms.toolbox.version>
         <java.version>1.8</java.version>
         <maven.plugin.version>3.8.1</maven.plugin.version>
         <swagger.version>2.10.5</swagger.version>
