@@ -12,7 +12,7 @@ import javax.validation.Valid;
  */
 @Slf4j
 public class MsLogger implements InitializingBean {
-    @Value("${spring.applicaion.name}")
+    @Value("${spring.application.name}")
     private String serviceId;
 
     public void info(String id,String data){
