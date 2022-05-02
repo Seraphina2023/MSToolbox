@@ -1,6 +1,7 @@
 package com.msop.core.redis.template;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisClusterNode;
 import org.springframework.data.redis.connection.RedisConnection;
@@ -9,6 +10,7 @@ import org.springframework.data.redis.connection.RedisServerCommands;
 import org.springframework.data.redis.core.*;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.SerializationUtils;
+import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 import java.util.List;
 import java.util.Map;
@@ -21,8 +23,9 @@ import java.util.concurrent.TimeUnit;
  * @author ruozhuliufeng
  */
 @Slf4j
+@Configuration(proxyBeanMethods = false)
 public class RedisRepository {
-    private RedisTemplate<String, Object> redisTemplate;
+    private final RedisTemplate<String, Object> redisTemplate;
 
     public RedisRepository(RedisTemplate<String, Object> redisTemplate) {
         this.redisTemplate = redisTemplate;

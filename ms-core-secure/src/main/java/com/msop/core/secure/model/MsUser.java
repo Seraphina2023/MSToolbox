@@ -40,4 +40,8 @@ public class MsUser implements Serializable {
      * 角色名
      */
     private String roleName;
+    /**
+     * 头像地址
+     */
+    private String avatar;
 }
