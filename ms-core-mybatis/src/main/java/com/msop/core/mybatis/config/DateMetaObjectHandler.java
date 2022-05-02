@@ -2,6 +2,8 @@ package com.msop.core.mybatis.config;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import com.msop.core.mybatis.properties.MybatisPlusAutoFillProperties;
+import com.msop.core.secure.model.MsUser;
+import com.msop.core.secure.util.AuthUtils;
 import org.apache.ibatis.reflection.MetaObject;
 
 import java.util.Date;
@@ -46,17 +48,16 @@ public class DateMetaObjectHandler implements MetaObjectHandler {
      */
     @Override
     public void insertFill(MetaObject metaObject) {
-        Object createTime = getFieldValByName(autoFillProperties.getCreateTimeField(), metaObject);
-        Object updateTime = getFieldValByName(autoFillProperties.getUpdateTimeField(), metaObject);
-        if (createTime == null || updateTime == null) {
-            Date date = new Date();
-            if (createTime == null) {
-                setFieldValByName(autoFillProperties.getCreateTimeField(), date, metaObject);
-            }
-            if (updateTime == null) {
-                setFieldValByName(autoFillProperties.getUpdateTimeField(), date, metaObject);
-            }
+        MsUser msUser = AuthUtils.getUser();
+        Long userId = 0L;
+        if (msUser != null) {
+            userId = msUser.getUserId();
         }
+        setFieldValByName(autoFillProperties.getCreateTimeField(), new Date(), metaObject);
+        setFieldValByName(autoFillProperties.getCreateUserField(), userId, metaObject);
+        setFieldValByName(autoFillProperties.getUpdateTimeField(), new Date(), metaObject);
+        setFieldValByName(autoFillProperties.getUpdateUserField(), userId, metaObject);
+
     }
 
     /**
@@ -66,6 +67,12 @@ public class DateMetaObjectHandler implements MetaObjectHandler {
      */
     @Override
     public void updateFill(MetaObject metaObject) {
+        MsUser msUser = AuthUtils.getUser();
+        Long userId = 0L;
+        if (msUser != null) {
+            userId = msUser.getUserId();
+        }
         setFieldValByName(autoFillProperties.getUpdateTimeField(), new Date(), metaObject);
+        setFieldValByName(autoFillProperties.getUpdateUserField(), userId, metaObject);
     }
 }
