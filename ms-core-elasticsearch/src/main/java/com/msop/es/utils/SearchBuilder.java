@@ -4,7 +4,7 @@ package com.msop.es.utils;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.msop.core.common.jackson.JsonUtil;
-import com.msop.core.common.entity.PageResult;
+import com.msop.core.common.model.PageResult;
 import com.msop.core.common.utils.Func;
 import lombok.Getter;
 import lombok.Setter;

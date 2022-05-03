@@ -1,6 +1,6 @@
 package com.msop.core.common.exception;
 
-import com.msop.core.common.entity.CodeEnum;
+import com.msop.core.common.model.CodeEnum;
 import lombok.Getter;
 
 public class SecureException extends RuntimeException {

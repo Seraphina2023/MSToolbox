@@ -1,4 +1,4 @@
-package com.msop.core.common.entity;
+package com.msop.core.common.model;
 
 import javax.servlet.http.HttpServletResponse;
 

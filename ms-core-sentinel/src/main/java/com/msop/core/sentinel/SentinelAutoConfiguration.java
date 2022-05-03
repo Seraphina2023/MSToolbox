@@ -3,7 +3,7 @@ package com.msop.core.sentinel;
 import com.alibaba.csp.sentinel.adapter.spring.webflux.callback.BlockRequestHandler;
 import com.alibaba.csp.sentinel.adapter.spring.webmvc.callback.BlockExceptionHandler;
 import com.msop.core.common.jackson.JsonUtil;
-import com.msop.core.common.entity.Result;
+import com.msop.core.common.model.Result;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

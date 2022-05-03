@@ -1,4 +1,4 @@
-package com.msop.core.common.entity;
+package com.msop.core.mybatis.entity;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

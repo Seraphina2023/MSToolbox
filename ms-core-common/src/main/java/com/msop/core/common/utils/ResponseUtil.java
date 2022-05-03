@@ -1,7 +1,7 @@
 package com.msop.core.common.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.msop.core.common.entity.Result;
+import com.msop.core.common.model.Result;
 import org.springframework.http.MediaType;
 
 import javax.servlet.http.HttpServletResponse;

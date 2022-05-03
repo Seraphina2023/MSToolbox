@@ -1,6 +1,6 @@
 package com.msop.core.log.error;
 
-import com.msop.core.common.entity.Result;
+import com.msop.core.common.model.Result;
 import com.msop.core.common.utils.BeanUtil;
 import com.msop.core.log.publisher.AuditErrorLogPublisher;
 import lombok.extern.slf4j.Slf4j;

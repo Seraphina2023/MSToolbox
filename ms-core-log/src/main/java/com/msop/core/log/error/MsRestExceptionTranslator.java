@@ -1,9 +1,10 @@
 package com.msop.core.log.error;
 
 import com.msop.core.common.exception.BusinessException;
+import com.msop.core.common.exception.IdempotencyException;
 import com.msop.core.common.exception.SecureException;
-import com.msop.core.common.entity.CodeEnum;
-import com.msop.core.common.entity.Result;
+import com.msop.core.common.model.CodeEnum;
+import com.msop.core.common.model.Result;
 import com.msop.core.common.utils.Func;
 import com.msop.core.common.utils.UrlUtil;
 import com.msop.core.common.utils.WebUtil;
@@ -23,6 +24,7 @@ import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
@@ -32,6 +34,8 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 import javax.servlet.Servlet;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+import java.nio.file.AccessDeniedException;
+import java.sql.SQLException;
 import java.util.Objects;
 import java.util.Set;
 
