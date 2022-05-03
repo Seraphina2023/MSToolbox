@@ -1,4 +1,4 @@
-package com.msop.core.common.model;
+package com.msop.core.common.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

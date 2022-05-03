@@ -1,6 +1,6 @@
 package com.msop.core.common.exception;
 
-import com.msop.core.common.model.CodeEnum;
+import com.msop.core.common.entity.CodeEnum;
 import lombok.Getter;
 
 /**

@@ -1,7 +1,7 @@
 package com.msop.core.common.utils;
 
 import com.msop.core.common.jackson.JsonUtil;
-import com.msop.core.common.model.Result;
+import com.msop.core.common.entity.Result;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DataBufferFactory;
 import org.springframework.core.io.buffer.DataBufferUtils;
