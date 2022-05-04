@@ -8,7 +8,7 @@ import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.elasticsearch.client.RestClientBuilder;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.autoconfigure.elasticsearch.ElasticsearchProperties;
+import org.springframework.boot.autoconfigure.elasticsearch.ElasticsearchRestClientProperties;
 import org.springframework.boot.autoconfigure.elasticsearch.RestClientBuilderCustomizer;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.context.properties.PropertyMapper;
@@ -27,7 +27,7 @@ public class RestAutoConfiguration {
 
     @Bean
     public RestClientBuilderCustomizer restClientBuilderCustomizer(RestClientPoolProperties poolProperties,
-                                                                   ElasticsearchProperties restProperties) {
+                                                                   ElasticsearchRestClientProperties restProperties) {
         return (builder) -> {
             setRequestConfig(builder, poolProperties);
             setHttpClientConfig(builder, poolProperties, restProperties);
@@ -58,7 +58,7 @@ public class RestAutoConfiguration {
      */
     private void setHttpClientConfig(RestClientBuilder builder,
                                      RestClientPoolProperties poolProperties,
-                                     ElasticsearchProperties restProperties) {
+                                     ElasticsearchRestClientProperties restProperties) {
         builder.setHttpClientConfigCallback(httpClientBuilder -> {
             httpClientBuilder.setMaxConnTotal(poolProperties.getMaxConnectNum())
                     .setMaxConnPerRoute(poolProperties.getMaxConnectPerRoute());
