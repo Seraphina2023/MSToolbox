@@ -38,22 +38,22 @@
         <guava.version>20.0</guava.version>
         <spring.boot.admin.version>2.6.2</spring.boot.admin.version>
         <mica.auto.version>1.2.5</mica.auto.version>
-        <alibaba.cloud.version>2021.0.1.0</alibaba.cloud.version>
+        <alibaba.cloud.version>2021.1</alibaba.cloud.version>
         <alibaba.nacos.version>1.4.2</alibaba.nacos.version>
         <alibaba.seata.version>1.4.2</alibaba.seata.version>
         <spring.plugin.version>2.0.0.RELEASE</spring.plugin.version>
-        <spring.boot.version>2.6.0</spring.boot.version>
-        <spring.cloud.version>2021.0.1</spring.cloud.version>
+        <spring.boot.version>2.5.9</spring.boot.version>
+        <spring.cloud.version>2020.0.4</spring.cloud.version>
         <spring.platform.version>Cairo-SR8</spring.platform.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
-        <druid-starter.version>1.2.6</druid-starter.version>
+        <druid.starter.version>1.2.6</druid.starter.version>
         <mybatis.plus.boot.starter.version>3.4.0</mybatis.plus.boot.starter.version>
-        <security-oauth2.version>2.3.8.RELEASE</security-oauth2.version>
-        <security-jwt.version>1.1.0.RELEASE</security-jwt.version>
+        <security.oauth2.version>2.3.8.RELEASE</security.oauth2.version>
+        <security.jwt.version>1.1.0.RELEASE</security.jwt.version>
         <jjwt.version>0.9.1</jjwt.version>
-        <redisson-starter.version>3.16.1</redisson-starter.version>
-        <spring-cloud-starter-oauth2.version>2.2.5.RELEASE</spring-cloud-starter-oauth2.version>
+        <redisson.starter.version>3.16.1</redisson.starter.version>
+        <spring.cloud.starter.oauth2.version>2.2.5.RELEASE</spring.cloud.starter.oauth2.version>
         <knife4j.version>2.0.5</knife4j.version>
         <transmittable.version>2.12.1</transmittable.version>
         <dubbo.version>2.7.8</dubbo.version>
@@ -157,7 +157,7 @@
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid-spring-boot-starter</artifactId>
-                <version>${druid-starter.version}</version>
+                <version>${druid.starter.version}</version>
             </dependency>
             <!-- mybatis-plus start -->
             <dependency>
@@ -179,17 +179,17 @@
             <dependency>
                 <groupId>org.springframework.security.oauth</groupId>
                 <artifactId>spring-security-oauth2</artifactId>
-                <version>${security-oauth2.version}</version>
+                <version>${security.oauth2.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.security</groupId>
                 <artifactId>spring-security-jwt</artifactId>
-                <version>${security-jwt.version}</version>
+                <version>${security.jwt.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-starter-oauth2</artifactId>
-                <version>${spring-cloud-starter-oauth2.version}</version>
+                <version>${spring.cloud.starter.oauth2.version}</version>
             </dependency>
             <!-- JWT -->
             <dependency>
@@ -201,7 +201,7 @@
             <dependency>
                 <groupId>org.redisson</groupId>
                 <artifactId>redisson-spring-boot-starter</artifactId>
-                <version>${redisson-starter.version}</version>
+                <version>${redisson.starter.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.github.xiaoymin</groupId>
