@@ -10,7 +10,6 @@ import com.msop.core.common.constant.StringConstant;
 import com.msop.core.common.utils.DateUtil;
 import com.msop.core.common.utils.Exceptions;
 import com.msop.core.common.utils.StringUtil;
-import io.micrometer.core.instrument.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
@@ -45,7 +44,7 @@ public class JsonUtil {
         // 排除空值字段
         MAPPER.setSerializationInclusion(JsonInclude.Include.NON_NULL);
         // 使用驼峰式
-        MAPPER.setPropertyNamingStrategy(PropertyNamingStrategy.LOWER_CAMEL_CASE);
+        MAPPER.setPropertyNamingStrategy(PropertyNamingStrategies.LOWER_CAMEL_CASE);
         // 使用bean名称
         MAPPER.enable(MapperFeature.USE_STD_BEAN_NAMING);
         // 所有日期格式都统一为固定格式
@@ -314,7 +313,7 @@ public class JsonUtil {
     }
 
     private static class JacksonHolder {
-        private static ObjectMapper INSTANCE = new JacksonObjectMapper();
+        private static final ObjectMapper INSTANCE = new JacksonObjectMapper();
     }
 
     public static class JacksonObjectMapper extends ObjectMapper {
@@ -361,7 +360,7 @@ public class JsonUtil {
      * @param json json字符串
      */
     public static <T> List<T> toList(String json) {
-        if (StringUtils.isBlank(json)) {
+        if (StringUtil.isBlank(json)) {
             return null;
         }
         try {
@@ -378,7 +377,7 @@ public class JsonUtil {
      * @param cls  list的元素类型
      */
     public static <T> List<T> toList(String json, Class<T> cls) {
-        if (StringUtils.isBlank(json)) {
+        if (StringUtil.isBlank(json)) {
             return null;
         }
         try {
