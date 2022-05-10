@@ -17,7 +17,6 @@ import java.util.concurrent.TimeUnit;
  * Zookeeper分布式锁实现
  *
  * @author ruozhuliufeng
- * @date 2021-08-31
  */
 @Component
 @ConditionalOnProperty(prefix = "ms.lock", name = "lockerType", havingValue = "ZK")
