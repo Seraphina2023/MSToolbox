@@ -1,7 +1,6 @@
 package com.msop.core.secure.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.msop.core.common.utils.ResponseUtil;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.access.AccessDeniedException;

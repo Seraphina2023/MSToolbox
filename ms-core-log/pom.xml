@@ -17,13 +17,11 @@
         <dependency>
             <groupId>com.msop</groupId>
             <artifactId>ms-core-common</artifactId>
-            <version>${ms.toolbox.version}</version>
         </dependency>
         <!-- 认证 -->
         <dependency>
             <groupId>com.msop</groupId>
             <artifactId>ms-core-secure</artifactId>
-            <version>${ms.toolbox.version}</version>
         </dependency>
         <!-- slf4j日志 -->
         <dependency>
@@ -39,11 +37,6 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-context</artifactId>
-        </dependency>
-        <!-- 线程同步 -->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>transmittable-thread-local</artifactId>
         </dependency>
         <!-- Web -->
         <dependency>
@@ -63,12 +56,6 @@
             <artifactId>spring-boot-starter-jdbc</artifactId>
             <optional>true</optional>
         </dependency>
-        <!-- dubbo远程调用 -->
-        <dependency>
-            <groupId>org.apache.dubbo</groupId>
-            <artifactId>dubbo</artifactId>
-            <optional>true</optional>
-        </dependency>
         <!-- Feign核心 -->
         <dependency>
             <groupId>io.github.openfeign</groupId>
@@ -79,10 +66,6 @@
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjweaver</artifactId>
             <version>1.9.6</version>
-        </dependency>
-        <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-all</artifactId>
         </dependency>
     </dependencies>
 </project>

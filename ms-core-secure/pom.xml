@@ -13,33 +13,33 @@
     <description>
         认证工具
     </description>
-    <dependencies>
-        <!-- 通用依赖 -->
-        <dependency>
-            <groupId>com.msop</groupId>
-            <artifactId>ms-core-common</artifactId>
-            <version>${ms.toolbox.version}</version>
-        </dependency>
-        <!-- Redis操作 -->
-        <dependency>
-            <groupId>com.msop</groupId>
-            <artifactId>ms-core-redis</artifactId>
-            <version>${ms.toolbox.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-oauth2</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-context</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
-    </dependencies>
+<!--    <dependencies>-->
+<!--        &lt;!&ndash; 通用依赖 &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>com.msop</groupId>-->
+<!--            <artifactId>ms-core-common</artifactId>-->
+<!--            <version>${ms.toolbox.version}</version>-->
+<!--        </dependency>-->
+<!--        &lt;!&ndash; Redis操作 &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>com.msop</groupId>-->
+<!--            <artifactId>ms-core-redis</artifactId>-->
+<!--            <version>${ms.toolbox.version}</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.cloud</groupId>-->
+<!--            <artifactId>spring-cloud-starter-oauth2</artifactId>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.cloud</groupId>-->
+<!--            <artifactId>spring-cloud-context</artifactId>-->
+<!--            <scope>provided</scope>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>javax.servlet</groupId>-->
+<!--            <artifactId>javax.servlet-api</artifactId>-->
+<!--            <scope>provided</scope>-->
+<!--        </dependency>-->
+<!--    </dependencies>-->
 
 </project>

@@ -3,13 +3,11 @@ package com.msop.core.log.utils;
 import cn.hutool.core.util.ObjectUtil;
 import com.msop.core.common.constant.StringConstant;
 import com.msop.core.common.utils.DateUtil;
-import com.msop.core.common.utils.INetUtil;
 import com.msop.core.common.utils.UrlUtil;
 import com.msop.core.common.utils.WebUtil;
 import com.msop.core.log.model.AuditLogAbstract;
 import com.msop.core.log.trace.MDCTraceUtils;
 import com.msop.core.secure.util.AuthUtils;
-import org.springframework.beans.factory.annotation.Value;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Objects;
