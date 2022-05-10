@@ -38,6 +38,7 @@
         <swagger.version>2.10.5</swagger.version>
         <swagger.models.version>1.6.2</swagger.models.version>
         <redisson.version>3.16.1</redisson.version>
+        <JustAuth.version>1.15.8</JustAuth.version>
     </properties>
 
     <modules>
