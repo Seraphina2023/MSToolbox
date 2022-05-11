@@ -6,6 +6,7 @@ import com.msop.core.common.utils.ObjectUtil;
 import com.msop.core.common.utils.UrlUtil;
 import com.msop.core.common.utils.WebUtil;
 import com.msop.core.log.model.AuditLogAbstract;
+import com.msop.core.secure.utils.SecureUtil;
 import com.msop.launch.properties.MsProperties;
 import com.msop.launch.server.ServerInfo;
 import com.msop.launch.utils.INetUtil;
@@ -32,7 +33,7 @@ public class AuditLogAbstractUtil {
             logAbstract.setRequestUri(UrlUtil.getPath(request.getRequestURI()));
             logAbstract.setMethod(request.getMethod());
             logAbstract.setParams(WebUtil.getRequestParamString(request));
-            logAbstract.setCreateUser(String.valueOf(Objects.requireNonNull(AuthUtils.getUser(request)).getUserId()));
+            logAbstract.setCreateUser(String.valueOf(SecureUtil.getUserId()));
             logAbstract.setTenantId(request.getHeader("x-tenant-header"));
         }
     }

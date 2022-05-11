@@ -1,6 +1,5 @@
 package com.msop.core.log.config;
 
-import org.slf4j.TtlMDCAdapter;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
 

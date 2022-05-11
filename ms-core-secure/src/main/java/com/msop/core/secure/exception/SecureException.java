@@ -1,4 +1,4 @@
-package com.msop.core.common.exception;
+package com.msop.core.secure.exception;
 
 import com.msop.core.common.model.CodeEnum;
 import lombok.Getter;

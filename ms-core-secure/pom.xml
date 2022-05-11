@@ -18,7 +18,6 @@
         <dependency>
             <groupId>com.msop</groupId>
             <artifactId>ms-core-common</artifactId>
-            <version>${ms.toolbox.version}</version>
         </dependency>
         <!-- JWT -->
         <dependency>

@@ -29,6 +29,26 @@ public class StringToEnumConverter implements ConditionalGenericConverter {
     }
 
     @Nullable
+    private static AccessibleObject getAnnotation(Class<?> clazz) {
+        Set<AccessibleObject> accessibleObjects = new HashSet<>();
+        // JsonValue METHOD,FIELD
+        Field[] fields = clazz.getDeclaredFields();
+        Collections.addAll(accessibleObjects, fields);
+        // methods
+        Method[] methods = clazz.getDeclaredMethods();
+        Collections.addAll(accessibleObjects, methods);
+        for (AccessibleObject accessibleObject : accessibleObjects) {
+            // 复用 jackson 的 JsonCreator 注解
+            JsonCreator jsonCreator = accessibleObject.getAnnotation(JsonCreator.class);
+            if (jsonCreator != null && JsonCreator.Mode.DISABLED != jsonCreator.mode()) {
+                accessibleObject.setAccessible(true);
+                return accessibleObject;
+            }
+        }
+        return null;
+    }
+
+    @Nullable
     private static Object invoke(Class<?> clazz,
                                  AccessibleObject accessibleObject,
                                  String value)
@@ -67,19 +87,16 @@ public class StringToEnumConverter implements ConditionalGenericConverter {
         }
         Class<?> sourceClazz = sourceType.getType();
         AccessibleObject accessibleObject = ENUM_CACHE_MAP.computeIfAbsent(sourceClazz, StringToEnumConverter::getAnnotation);
-        Class<?> targetClazz = targetType.getType();
+        String value = ((String) source).trim();
         // 如果为null，走默认的转换
         if (accessibleObject == null) {
-            if (String.class == targetClazz) {
-                return ((Enum) source).name();
-            }
-            int ordinal = ((Enum) source).ordinal();
-            return ConvertUtil.convert(ordinal, targetClazz);
+            return valueOf(sourceClazz, value);
         }
         try {
-            return EnumToStringConverter.invoke(sourceClazz, accessibleObject, source, targetClazz);
+            return StringToEnumConverter.invoke(sourceClazz, accessibleObject, value);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
         }
         return null;
     }
+}
