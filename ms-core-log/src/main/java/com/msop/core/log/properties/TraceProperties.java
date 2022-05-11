@@ -6,8 +6,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  * 日志链路追踪配置
+ *
  * @author ruozhuliufeng
- * @date 2021-07-17
  */
 @Getter
 @Setter
