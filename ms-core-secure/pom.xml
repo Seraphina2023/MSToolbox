@@ -13,33 +13,35 @@
     <description>
         认证工具
     </description>
-<!--    <dependencies>-->
-<!--        &lt;!&ndash; 通用依赖 &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>com.msop</groupId>-->
-<!--            <artifactId>ms-core-common</artifactId>-->
-<!--            <version>${ms.toolbox.version}</version>-->
-<!--        </dependency>-->
-<!--        &lt;!&ndash; Redis操作 &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>com.msop</groupId>-->
-<!--            <artifactId>ms-core-redis</artifactId>-->
-<!--            <version>${ms.toolbox.version}</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.cloud</groupId>-->
-<!--            <artifactId>spring-cloud-starter-oauth2</artifactId>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.cloud</groupId>-->
-<!--            <artifactId>spring-cloud-context</artifactId>-->
-<!--            <scope>provided</scope>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>javax.servlet</groupId>-->
-<!--            <artifactId>javax.servlet-api</artifactId>-->
-<!--            <scope>provided</scope>-->
-<!--        </dependency>-->
-<!--    </dependencies>-->
+    <dependencies>
+        <!-- 通用依赖 -->
+        <dependency>
+            <groupId>com.msop</groupId>
+            <artifactId>ms-core-common</artifactId>
+            <version>${ms.toolbox.version}</version>
+        </dependency>
+        <!-- JWT -->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-impl</artifactId>
+            <version>${jjwt.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-jackson</artifactId>
+            <version>${jjwt.version}</version>
+        </dependency>
+        <!-- JDBC -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.tomcat</groupId>
+                    <artifactId>tomcat-jdbc</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    </dependencies>
 
 </project>

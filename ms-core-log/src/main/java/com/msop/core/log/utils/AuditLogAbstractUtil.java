@@ -1,13 +1,14 @@
 package com.msop.core.log.utils;
 
-import cn.hutool.core.util.ObjectUtil;
 import com.msop.core.common.constant.StringConstant;
 import com.msop.core.common.utils.DateUtil;
+import com.msop.core.common.utils.ObjectUtil;
 import com.msop.core.common.utils.UrlUtil;
 import com.msop.core.common.utils.WebUtil;
 import com.msop.core.log.model.AuditLogAbstract;
-import com.msop.core.log.trace.MDCTraceUtils;
-import com.msop.core.secure.util.AuthUtils;
+import com.msop.launch.properties.MsProperties;
+import com.msop.launch.server.ServerInfo;
+import com.msop.launch.utils.INetUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Objects;
@@ -33,14 +34,13 @@ public class AuditLogAbstractUtil {
             logAbstract.setParams(WebUtil.getRequestParamString(request));
             logAbstract.setCreateUser(String.valueOf(Objects.requireNonNull(AuthUtils.getUser(request)).getUserId()));
             logAbstract.setTenantId(request.getHeader("x-tenant-header"));
-            logAbstract.setTraceId(request.getHeader(MDCTraceUtils.TRACE_ID_HEADER));
         }
     }
 
-    public static void addOtherInfoLog(AuditLogAbstract logAbstract, String serviceId) {
-        logAbstract.setServiceId(serviceId);
-        logAbstract.setServerHost(INetUtil.getHostName());
-        logAbstract.setServerIp(INetUtil.getHostIp());
+    public static void addOtherInfoLog(AuditLogAbstract logAbstract, MsProperties msProperties, ServerInfo serverInfo) {
+        logAbstract.setServiceId(msProperties.getName());
+        logAbstract.setServerHost(serverInfo.getHostName());
+        logAbstract.setServerIp(serverInfo.getIpWithPort());
         logAbstract.setCreateTime(DateUtil.now());
         if (ObjectUtil.isEmpty(logAbstract.getParams())) {
             logAbstract.setParams(StringConstant.EMPTY);

@@ -70,9 +70,4 @@ public class AuditLogAbstract implements Serializable {
      */
     protected Date createTime;
 
-    /**
-     * 链路追踪ID
-     */
-    protected String traceId;
-
 }

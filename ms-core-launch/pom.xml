@@ -7,27 +7,28 @@
         <artifactId>MSToolbox</artifactId>
         <version>0.1.7-SNAPSHOT</version>
     </parent>
-    <artifactId>ms-core-log</artifactId>
+    <artifactId>ms-core-launch</artifactId>
     <version>${ms.toolbox.version}</version>
     <name>${project.artifactId}</name>
-    <description>Log封装</description>
-
+    <description>
+        工具通用模块
+    </description>
     <dependencies>
-        <!-- 通用工具模块 -->
-        <dependency>
-            <groupId>com.msop</groupId>
-            <artifactId>ms-core-launch</artifactId>
-        </dependency>
-        <!-- 认证 -->
-        <dependency>
-            <groupId>com.msop</groupId>
-            <artifactId>ms-core-secure</artifactId>
-        </dependency>
-        <!-- JDBC -->
+        <!-- Spring Web -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-jdbc</artifactId>
-            <optional>true</optional>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-undertow</artifactId>
         </dependency>
     </dependencies>
+
 </project>

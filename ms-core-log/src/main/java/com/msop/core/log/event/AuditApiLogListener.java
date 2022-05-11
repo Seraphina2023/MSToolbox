@@ -4,6 +4,8 @@ import com.msop.core.log.constant.EventConstant;
 import com.msop.core.log.model.AuditApiLog;
 import com.msop.core.log.service.IAuditService;
 import com.msop.core.log.utils.AuditLogAbstractUtil;
+import com.msop.launch.properties.MsProperties;
+import com.msop.launch.server.ServerInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.event.EventListener;
@@ -19,18 +21,21 @@ import java.util.Map;
  * @author ruozhuliufeng
  */
 @Slf4j
-public class AuditApiLogListener{
+public class AuditApiLogListener {
     @Resource
     private IAuditService auditService;
-    @Value("${spring.application.name}")
-    private String serviceId;
+    @Resource
+    private ServerInfo serverInfo;
+    @Resource
+    private MsProperties msProperties;
+
     @Async
     @Order
     @EventListener(AuditApiLogEvent.class)
-    public void saveAuditApiLog(AuditApiLogEvent event){
-        Map<String,Object> source = (Map<String, Object>) event.getSource();
+    public void saveAuditApiLog(AuditApiLogEvent event) {
+        Map<String, Object> source = (Map<String, Object>) event.getSource();
         AuditApiLog apiLog = (AuditApiLog) source.get(EventConstant.EVENT_LOG);
-        AuditLogAbstractUtil.addOtherInfoLog(apiLog,serviceId);
+        AuditLogAbstractUtil.addOtherInfoLog(apiLog, msProperties, serverInfo);
         auditService.saveAuditApiLog(apiLog);
     }
 }

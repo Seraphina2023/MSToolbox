@@ -39,6 +39,9 @@
         <swagger.models.version>1.6.2</swagger.models.version>
         <redisson.version>3.16.1</redisson.version>
         <JustAuth.version>1.15.8</JustAuth.version>
+        <jjwt.version>0.11.2</jjwt.version>
+        <mybatis.plus.version>3.5.1</mybatis.plus.version>
+        <mybatis.plus.generator.version>3.5.2</mybatis.plus.generator.version>
     </properties>
 
     <modules>
@@ -70,6 +73,8 @@
         <module>ms-core-loadbalancer</module>
         <!-- ES组件 -->
         <module>ms-core-elasticsearch</module>
+        <!--  Launch 组件 -->
+        <module>ms-core-launch</module>
     </modules>
     <!-- 依赖版本管理 -->
     <dependencyManagement>
@@ -118,6 +123,11 @@
             <dependency>
                 <groupId>com.msop</groupId>
                 <artifactId>ms-core-cloud</artifactId>
+                <version>${ms.toolbox.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.msop</groupId>
+                <artifactId>ms-core-launch</artifactId>
                 <version>${ms.toolbox.version}</version>
             </dependency>
             <dependency>
