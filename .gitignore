@@ -29,7 +29,6 @@ hs_err_pid*
 **/mvnw
 **/mvnw.cmd
 **/.mvn
-**/test
 **/node_modules
 # 配置文件不上传
 /ossp-config/**
