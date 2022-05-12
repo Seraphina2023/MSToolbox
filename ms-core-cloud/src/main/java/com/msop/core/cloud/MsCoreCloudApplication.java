@@ -1,13 +1,13 @@
-package com.msop.core.db;
+package com.msop.core.cloud;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MsCoreDbApplication {
+public class MsCoreCloudApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(MsCoreDbApplication.class, args);
+        SpringApplication.run(MsCoreCloudApplication.class, args);
     }
 
 }

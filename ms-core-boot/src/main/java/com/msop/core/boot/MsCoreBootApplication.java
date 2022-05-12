@@ -1,13 +1,13 @@
-package com.msop.core.auto;
+package com.msop.core.boot;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MsCoreAutoApplication {
+public class MsCoreBootApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(MsCoreAutoApplication.class, args);
+        SpringApplication.run(MsCoreBootApplication.class, args);
     }
 
 }
