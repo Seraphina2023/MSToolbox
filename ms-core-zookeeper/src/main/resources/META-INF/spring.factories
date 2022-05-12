@@ -1,3 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.msop.core.zookeeper.ZookeeperAutoConfiguration,\
-com.msop.core.zookeeper.lock.ZookeeperDistributedLock

@@ -1,5 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.msop.core.log.LogAutoConfiguration,\
-com.msop.core.log.config.MsErrorMvcAutoConfiguration,\
-com.msop.core.log.config.MsLogToolAutoConfiguration,\
-com.msop.core.log.error.MsRestExceptionTranslator

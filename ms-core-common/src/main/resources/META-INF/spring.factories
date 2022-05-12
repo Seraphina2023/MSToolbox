@@ -1,6 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.msop.core.common.lock.LockAspect,\
-com.msop.core.common.config.JacksonConfiguration,\
-com.msop.core.common.config.MessageConfiguration.\
-com.msop.core.common.config.RequestConfiguration,\
-com.msop.core.common.config.ToolConfiguration
