@@ -1,4 +1,3 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 com.msop.core.oss.config.AliossConfig,\
-com.msop.core.oss.config.QiniuConfig,\
-com.msop.core.oss.config.FdfsConfig
+com.msop.core.oss.config.QiniuConfig

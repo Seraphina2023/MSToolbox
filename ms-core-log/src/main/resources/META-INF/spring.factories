@@ -1,5 +1,3 @@
-org.springframework.context.ApplicationContextInitializer=\
-com.msop.core.log.config.TtlMDCAdapterInitializer
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 com.msop.core.log.LogAutoConfiguration,\
 com.msop.core.log.config.MsErrorMvcAutoConfiguration,\

@@ -9,6 +9,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.DefaultParameterNameDiscoverer;
 import org.springframework.expression.EvaluationContext;
 import org.springframework.expression.Expression;
@@ -24,8 +25,8 @@ import java.util.Objects;
  */
 @Slf4j
 @Aspect
-@AllArgsConstructor
 public class LockAspect {
+    @Autowired(required = false)
     private DistributedLock locker;
 
     /**

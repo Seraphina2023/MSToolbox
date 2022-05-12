@@ -1,6 +1,6 @@
 package com.msop.core.log.service.impl;
 
-import cn.hutool.core.util.StrUtil;
+import com.msop.core.common.utils.StringUtil;
 import com.msop.core.log.model.AuditApiLog;
 import com.msop.core.log.model.AuditErrorLog;
 import com.msop.core.log.model.AuditUsualLog;
@@ -32,14 +32,14 @@ public class DbAuditServiceImpl implements IAuditService {
      * 数据库插入语句
      */
     private static final String INSERT_API_URL = "INSERT INTO audit_api_log " +
-            " (tenant_id,trace_id,service_id,server_host,server_ip,type,title," +
+            " (tenant_id,service_id,server_host,server_ip,type,title," +
             "method,request_uri,user_agent,remote_ip,method_class,method_name,params,time,create_by,create_time) " +
-            " values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            " values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     private static final String INSERT_ERROR_URL = "INSERT INTO audit_error_log " +
-            " (tenant_id,service_id,server_host,server_ip,trace_id,method,request_uri,user_agent," +
+            " (tenant_id,service_id,server_host,server_ip,method,request_uri,user_agent," +
             "stack_trace,exception_name,message,line_number,remote_ip,method_class,file_name,method_name," +
             "params,create_by,create_time) " +
-            " values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            " values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     private static final String INSERT_USUAL_URL = "INSERT INTO audit_usual_log " +
             " (tenant_id,service_id,server_host,server_ip,log_level,log_id,log_data,method," +
             "request_uri,remote_ip,method_class,method_name,user_agent,params,create_by,create_time) " +
@@ -49,7 +49,7 @@ public class DbAuditServiceImpl implements IAuditService {
 
     public DbAuditServiceImpl(@Autowired(required = false) LogDbProperties logDbProperties, DataSource dataSource) {
         // 优先使用配置的日志数据源，否则使用默认的数据源
-        if (logDbProperties != null && StrUtil.isNotEmpty(logDbProperties.getJdbcUrl())) {
+        if (logDbProperties != null && StringUtil.isNotBlank(logDbProperties.getJdbcUrl())) {
             dataSource = new HikariDataSource(logDbProperties);
         }
         this.jdbcTemplate = new JdbcTemplate(dataSource);
@@ -64,7 +64,6 @@ public class DbAuditServiceImpl implements IAuditService {
     public void init() {
         String createAuditApiLogSql = "CREATE TABLE IF NOT EXISTS `audit_api_log` (\n" +
                 "  `tenant_id` varchar(12) DEFAULT '000000' COMMENT '租户ID',\n" +
-                "  `trace_id` varchar(12) DEFAULT NULL COMMENT '链路ID',\n" +
                 "  `service_id` varchar(32) DEFAULT NULL COMMENT '服务ID',\n" +
                 "  `server_host` varchar(255) DEFAULT NULL COMMENT '服务器名',\n" +
                 "  `server_ip` varchar(255) DEFAULT NULL COMMENT '服务器IP地址',\n" +
@@ -86,7 +85,6 @@ public class DbAuditServiceImpl implements IAuditService {
                 "  `service_id` varchar(32) DEFAULT NULL COMMENT '服务ID',\n" +
                 "  `server_host` varchar(255) DEFAULT NULL COMMENT '服务器名',\n" +
                 "  `server_ip` varchar(255) DEFAULT NULL COMMENT '服务器IP地址',\n" +
-                "  `trace_id` varchar(255) DEFAULT NULL COMMENT '链路ID',\n" +
                 "  `method` varchar(10) DEFAULT NULL COMMENT '操作方式',\n" +
                 "  `request_uri` varchar(255) DEFAULT NULL COMMENT '请求URI',\n" +
                 "  `user_agent` varchar(1000) DEFAULT NULL COMMENT '用户代理',\n" +
@@ -107,7 +105,6 @@ public class DbAuditServiceImpl implements IAuditService {
                 "  `service_id` varchar(32) DEFAULT NULL COMMENT '服务ID',\n" +
                 "  `server_host` varchar(255) DEFAULT NULL COMMENT '服务器名',\n" +
                 "  `server_ip` varchar(255) DEFAULT NULL COMMENT '服务器IP地址',\n" +
-                "  `trace_id` varchar(255) DEFAULT NULL COMMENT '链路ID',\n" +
                 "  `log_level` varchar(10) DEFAULT NULL COMMENT '日志级别',\n" +
                 "  `log_id` varchar(100) DEFAULT NULL COMMENT '日志业务id',\n" +
                 "  `log_data` text COMMENT '日志数据',\n" +
@@ -135,7 +132,7 @@ public class DbAuditServiceImpl implements IAuditService {
     @Async
     @Override
     public void saveAuditApiLog(AuditApiLog apiLog) {
-        this.jdbcTemplate.update(INSERT_API_URL, apiLog.getTenantId(), apiLog.getTraceId(), apiLog.getServiceId(),
+        this.jdbcTemplate.update(INSERT_API_URL, apiLog.getTenantId(), apiLog.getServiceId(),
                 apiLog.getServerHost(), apiLog.getServerIp(), apiLog.getType(), apiLog.getTitle(), apiLog.getMethod(),
                 apiLog.getRequestUri(), apiLog.getUserAgent(), apiLog.getRemoteIp(), apiLog.getMethodClass(), apiLog.getMethodName(),
                 apiLog.getParams(), apiLog.getTime(), apiLog.getCreateUser(), apiLog.getCreateTime());
@@ -150,7 +147,7 @@ public class DbAuditServiceImpl implements IAuditService {
     @Override
     public void saveAuditErrorLog(AuditErrorLog errorLog) {
         this.jdbcTemplate.update(INSERT_ERROR_URL, errorLog.getTenantId(), errorLog.getServiceId(), errorLog.getServerHost(),
-                errorLog.getServerIp(), errorLog.getTraceId(), errorLog.getMethod(), errorLog.getRequestUri(), errorLog.getUserAgent(),
+                errorLog.getServerIp(), errorLog.getMethod(), errorLog.getRequestUri(), errorLog.getUserAgent(),
                 errorLog.getStackTrace(), errorLog.getExceptionName(), errorLog.getMessage(), errorLog.getLineNumber(), errorLog.getRemoteIp(),
                 errorLog.getMethodClass(), errorLog.getFileName(), errorLog.getMethodName(), errorLog.getParams(), errorLog.getCreateUser(), errorLog.getCreateTime());
     }
@@ -164,7 +161,7 @@ public class DbAuditServiceImpl implements IAuditService {
     @Override
     public void saveAuditUsualLog(AuditUsualLog usualLog) {
         this.jdbcTemplate.update(INSERT_USUAL_URL, usualLog.getTenantId(), usualLog.getServiceId(), usualLog.getServerHost(),
-                usualLog.getServerIp(), usualLog.getTraceId(), usualLog.getLogLevel(), usualLog.getLogId(), usualLog.getLogData(),
+                usualLog.getServerIp(), usualLog.getLogLevel(), usualLog.getLogId(), usualLog.getLogData(),
                 usualLog.getMethod(), usualLog.getMethod(), usualLog.getRequestUri(), usualLog.getRemoteIp(), usualLog.getMethodClass(),
                 usualLog.getMethodName(), usualLog.getUserAgent(), usualLog.getParams(), usualLog.getCreateUser(), usualLog.getCreateTime());
     }

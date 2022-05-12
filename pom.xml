@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.msop</groupId>
     <artifactId>MSToolbox</artifactId>
-    <version>0.1.0</version>
+    <version>0.1.8-SNAPSHOT</version>
     <name>MSToolbox</name>
     <packaging>pom</packaging>
     <description>
@@ -25,40 +25,27 @@
         </developer>
     </developers>
     <properties>
-        <ms.toolbox.version>0.1.0</ms.toolbox.version>
+        <ms.toolbox.version>0.1.8-SNAPSHOT</ms.toolbox.version>
         <java.version>1.8</java.version>
         <maven.plugin.version>3.8.1</maven.plugin.version>
-        <swagger.version>2.10.5</swagger.version>
-        <swagger.models.version>1.6.2</swagger.models.version>
-        <knife4j.version>2.0.9</knife4j.version>
-        <mybatis.plus.version>3.5.1</mybatis.plus.version>
-        <mybatis.plus.generator.version>3.5.2</mybatis.plus.generator.version>
-        <protostuff.version>1.6.0</protostuff.version>
-        <disruptor.version>3.4.2</disruptor.version>
-        <guava.version>20.0</guava.version>
-        <spring.boot.admin.version>2.6.2</spring.boot.admin.version>
-        <mica.auto.version>1.2.5</mica.auto.version>
-        <alibaba.cloud.version>2021.0.1.0</alibaba.cloud.version>
-        <alibaba.nacos.version>1.4.2</alibaba.nacos.version>
-        <alibaba.seata.version>1.4.2</alibaba.seata.version>
         <spring.plugin.version>2.0.0.RELEASE</spring.plugin.version>
-        <spring.boot.version>2.6.0</spring.boot.version>
+        <spring.boot.version>2.6.6</spring.boot.version>
         <spring.cloud.version>2021.0.1</spring.cloud.version>
         <spring.platform.version>Cairo-SR8</spring.platform.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
-        <druid-starter.version>1.2.6</druid-starter.version>
-        <mybatis.plus.boot.starter.version>3.4.0</mybatis.plus.boot.starter.version>
-        <security-oauth2.version>2.3.8.RELEASE</security-oauth2.version>
-        <security-jwt.version>1.1.0.RELEASE</security-jwt.version>
-        <jjwt.version>0.9.1</jjwt.version>
-        <redisson-starter.version>3.16.1</redisson-starter.version>
-        <spring-cloud-starter-oauth2.version>2.2.5.RELEASE</spring-cloud-starter-oauth2.version>
-        <knife4j.version>2.0.5</knife4j.version>
-        <transmittable.version>2.12.1</transmittable.version>
-        <dubbo.version>2.7.8</dubbo.version>
-        <hutool.version>5.7.20</hutool.version>
-        <spring.data.elasticsearch.version>4.2.3</spring.data.elasticsearch.version>
+        <mica.auto.version>2.2.2</mica.auto.version>
+        <guava.version>20.0</guava.version>
+        <protostuff.version>1.6.0</protostuff.version>
+        <swagger.version>2.10.5</swagger.version>
+        <swagger.models.version>1.6.2</swagger.models.version>
+        <redisson.version>3.16.1</redisson.version>
+        <JustAuth.version>1.15.8</JustAuth.version>
+        <jjwt.version>0.11.2</jjwt.version>
+        <mybatis.plus.version>3.5.1</mybatis.plus.version>
+        <mybatis.plus.generator.version>3.5.2</mybatis.plus.generator.version>
+        <spring.boot.admin.version>2.6.2</spring.boot.admin.version>
+        <alibaba.cloud.version>2021.0.1.0</alibaba.cloud.version>
+        <alibaba.nacos.version>2.0.4</alibaba.nacos.version>
+        <alibaba.seata.version>1.4.2</alibaba.seata.version>
     </properties>
 
     <modules>
@@ -90,31 +77,24 @@
         <module>ms-core-loadbalancer</module>
         <!-- ES组件 -->
         <module>ms-core-elasticsearch</module>
+        <!--  Launch 组件 -->
+        <module>ms-core-launch</module>
     </modules>
-
+    <!-- 依赖版本管理 -->
     <dependencyManagement>
         <dependencies>
-            <!-- Spring Cloud Alibaba版本管理 -->
-            <dependency>
-                <groupId>com.alibaba.cloud</groupId>
-                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
-                <version>${alibaba.cloud.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-
+            <!-- Spring Plugin 依赖管理 -->
             <dependency>
                 <groupId>org.springframework.plugin</groupId>
                 <artifactId>spring-plugin-core</artifactId>
                 <version>${spring.plugin.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>org.springframework.plugin</groupId>
                 <artifactId>spring-plugin-metadata</artifactId>
                 <version>${spring.plugin.version}</version>
             </dependency>
-
+            <!-- Spring Boot 依赖版本管理 -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
@@ -122,22 +102,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>transmittable-thread-local</artifactId>
-                <version>${transmittable.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.dubbo</groupId>
-                <artifactId>dubbo</artifactId>
-                <version>${dubbo.version}</version>
-            </dependency>
-            <!-- hutool java工具类库  -->
-            <dependency>
-                <groupId>cn.hutool</groupId>
-                <artifactId>hutool-all</artifactId>
-                <version>${hutool.version}</version>
-            </dependency>
+            <!-- Spring Cloud 依赖版本管理 -->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
@@ -145,7 +110,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-
+            <!-- Platform 依赖版本管理 -->
             <dependency>
                 <groupId>io.spring.platform</groupId>
                 <artifactId>platform-bom</artifactId>
@@ -153,118 +118,124 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <!-- druid 官方 starter -->
+            <!-- 模块依赖版本管理 -->
             <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>druid-spring-boot-starter</artifactId>
-                <version>${druid-starter.version}</version>
-            </dependency>
-            <!-- mybatis-plus start -->
-            <dependency>
-                <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus-boot-starter</artifactId>
-                <version>${mybatis.plus.boot.starter.version}</version>
+                <groupId>com.msop</groupId>
+                <artifactId>ms-core-common</artifactId>
+                <version>${ms.toolbox.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus-extension</artifactId>
-                <version>${mybatis.plus.boot.starter.version}</version>
+                <groupId>com.msop</groupId>
+                <artifactId>ms-core-cloud</artifactId>
+                <version>${ms.toolbox.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus</artifactId>
-                <version>${mybatis.plus.boot.starter.version}</version>
-            </dependency>
-            <!-- 加入spring security spring security oauth2的处理 -->
-            <dependency>
-                <groupId>org.springframework.security.oauth</groupId>
-                <artifactId>spring-security-oauth2</artifactId>
-                <version>${security-oauth2.version}</version>
+                <groupId>com.msop</groupId>
+                <artifactId>ms-core-launch</artifactId>
+                <version>${ms.toolbox.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.springframework.security</groupId>
-                <artifactId>spring-security-jwt</artifactId>
-                <version>${security-jwt.version}</version>
+                <groupId>com.msop</groupId>
+                <artifactId>ms-core-develop</artifactId>
+                <version>${ms.toolbox.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-starter-oauth2</artifactId>
-                <version>${spring-cloud-starter-oauth2.version}</version>
-            </dependency>
-            <!-- JWT -->
-            <dependency>
-                <groupId>io.jsonwebtoken</groupId>
-                <artifactId>jjwt</artifactId>
-                <version>${jjwt.version}</version>
-            </dependency>
-            <!-- 在Redis基础上的一个Java实用工具包 -->
-            <dependency>
-                <groupId>org.redisson</groupId>
-                <artifactId>redisson-spring-boot-starter</artifactId>
-                <version>${redisson-starter.version}</version>
+                <groupId>com.msop</groupId>
+                <artifactId>ms-core-elasticsearch</artifactId>
+                <version>${ms.toolbox.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.github.xiaoymin</groupId>
-                <artifactId>knife4j-micro-spring-boot-starter</artifactId>
-                <version>${knife4j.version}</version>
+                <groupId>com.msop</groupId>
+                <artifactId>ms-core-loadbalancer</artifactId>
+                <version>${ms.toolbox.version}</version>
             </dependency>
-            <!-- ElasticSearch -->
             <dependency>
-                <groupId>org.springframework.data</groupId>
-                <artifactId>spring-data-elasticsearch</artifactId>
-                <version>${spring.data.elasticsearch.version}</version>
+                <groupId>com.msop</groupId>
+                <artifactId>ms-core-log</artifactId>
+                <version>${ms.toolbox.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.msop</groupId>
+                <artifactId>ms-core-mybatis</artifactId>
+                <version>${ms.toolbox.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.msop</groupId>
+                <artifactId>ms-core-oss</artifactId>
+                <version>${ms.toolbox.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.msop</groupId>
+                <artifactId>ms-core-redis</artifactId>
+                <version>${ms.toolbox.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.msop</groupId>
+                <artifactId>ms-core-secure</artifactId>
+                <version>${ms.toolbox.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.msop</groupId>
+                <artifactId>ms-core-sentinel</artifactId>
+                <version>${ms.toolbox.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.msop</groupId>
+                <artifactId>ms-core-social</artifactId>
+                <version>${ms.toolbox.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.msop</groupId>
+                <artifactId>ms-core-swagger</artifactId>
+                <version>${ms.toolbox.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.msop</groupId>
+                <artifactId>ms-core-zookeeper</artifactId>
+                <version>${ms.toolbox.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
 
+    <!-- 通用依赖 -->
     <dependencies>
+        <!-- Spring 切面 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
-
+        <!-- Spring 端点监控 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <!-- 配置管理 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
         </dependency>
-
-        <dependency>
-            <groupId>commons-beanutils</groupId>
-            <artifactId>commons-beanutils</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
-
+        <!-- Spring retry -->
         <dependency>
             <groupId>org.springframework.retry</groupId>
             <artifactId>spring-retry</artifactId>
         </dependency>
-
+        <!-- Lombok 简化开发 -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <scope>provided</scope>
         </dependency>
-
+        <!-- hibernate 校验 -->
         <dependency>
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>6.2.0.Final</version>
         </dependency>
-
         <dependency>
             <groupId>net.dreamlu</groupId>
             <artifactId>mica-auto</artifactId>
             <version>${mica.auto.version}</version>
             <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-bootstrap</artifactId>
-            <version>3.1.1</version>
         </dependency>
     </dependencies>
 
@@ -276,9 +247,11 @@
             </resource>
             <resource>
                 <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
             </resource>
         </resources>
-
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -287,19 +260,17 @@
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
-                    <encoding>${maven.compiler.encoding}</encoding>
+                    <encoding>UTF-8</encoding>
                     <compilerArgs>
                         <arg>-parameters</arg>
                     </compilerArgs>
                 </configuration>
             </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>2.9.1</version>
             </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>

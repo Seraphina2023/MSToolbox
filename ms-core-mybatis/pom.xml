@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.msop</groupId>
         <artifactId>MSToolbox</artifactId>
-        <version>0.1.0</version>
+        <version>0.1.8-SNAPSHOT</version>
     </parent>
     <artifactId>ms-core-mybatis</artifactId>
     <version>${ms.toolbox.version}</version>
@@ -13,18 +13,14 @@
     <description>Mybatis 扩展封装</description>
     <dependencies>
         <dependency>
-            <groupId>com.msop</groupId>
-            <artifactId>ms-core-common</artifactId>
-            <version>${ms.toolbox.version}</version>
-        </dependency>
-        <dependency>
             <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <artifactId>mybatis-plus</artifactId>
+            <version>${mybatis.plus.version}</version>
         </dependency>
-        <!-- Druid 官方starter -->
+        <!-- 安全 -->
         <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid-spring-boot-starter</artifactId>
+            <groupId>com.msop</groupId>
+            <artifactId>ms-core-secure</artifactId>
         </dependency>
     </dependencies>
 </project>

@@ -3,7 +3,6 @@ package com.msop.core.log.properties;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.cloud.context.config.annotation.RefreshScope;
 
 /**
  * 审计日志配置
@@ -13,7 +12,6 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  */
 @Setter
 @Getter
-@RefreshScope
 @ConfigurationProperties(prefix = "ms.audit.log")
 public class AuditLogProperties {
     /**

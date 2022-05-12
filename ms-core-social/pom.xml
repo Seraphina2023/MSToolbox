@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.msop</groupId>
         <artifactId>MSToolbox</artifactId>
-        <version>0.1.0</version>
+        <version>0.1.8-SNAPSHOT</version>
     </parent>
     <artifactId>ms-core-social</artifactId>
     <version>${ms.toolbox.version}</version>
@@ -19,13 +19,12 @@
         <dependency>
             <groupId>com.msop</groupId>
             <artifactId>ms-core-common</artifactId>
-            <version>${ms.toolbox.version}</version>
         </dependency>
         <!-- 第三方登录工具 -->
         <dependency>
             <groupId>me.zhyd.oauth</groupId>
             <artifactId>JustAuth</artifactId>
-            <version>1.15.8</version>
+            <version>${JustAuth.version}</version>
         </dependency>
         <!-- 请求工具 -->
         <dependency>

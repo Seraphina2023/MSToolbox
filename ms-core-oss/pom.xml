@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.msop</groupId>
         <artifactId>MSToolbox</artifactId>
-        <version>0.1.0</version>
+        <version>0.1.8-SNAPSHOT</version>
     </parent>
     <artifactId>ms-core-oss</artifactId>
     <version>${ms.toolbox.version}</version>
@@ -20,13 +20,6 @@
             <groupId>com.msop</groupId>
             <artifactId>ms-core-common</artifactId>
             <version>${ms.toolbox.version}</version>
-        </dependency>
-        <!-- FastDFS存储 -->
-        <dependency>
-            <groupId>com.github.tobato</groupId>
-            <artifactId>fastdfs-client</artifactId>
-            <version>1.27.2</version>
-            <optional>true</optional>
         </dependency>
         <!-- 七牛云存储 -->
         <dependency>

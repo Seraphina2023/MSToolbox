@@ -1,6 +1,6 @@
 package com.msop.core.common.utils;
 
-import io.micrometer.core.lang.Nullable;
+import org.springframework.lang.Nullable;
 import org.springframework.util.ObjectUtils;
 
 /**
