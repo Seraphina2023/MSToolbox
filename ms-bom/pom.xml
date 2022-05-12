@@ -13,7 +13,7 @@
     <version>${ms.tool.version}</version>
     <packaging>pom</packaging>
     <properties>
-        <ms.tool.version>0.2.1-SNAPSHOT</ms.tool.version>
+        <ms.tool.version>0.2.1</ms.tool.version>
     </properties>
     <dependencyManagement>
         <dependencies>
