@@ -5,6 +5,9 @@ import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+/**
+ * 树形节点类
+ */
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class TreeNode extends BaseNode {

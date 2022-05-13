@@ -5,12 +5,14 @@ import com.fasterxml.jackson.core.json.JsonReadFeature;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.msop.core.tool.jackson.MsJacksonProperties;
 import com.msop.core.tool.jackson.MsJavaTimeModule;
 import com.msop.core.tool.utils.DateUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -26,10 +28,10 @@ import java.util.TimeZone;
  *
  * @author ruozhuliufeng
  */
-@Configuration(proxyBeanMethods = false)
-@AllArgsConstructor
+@Configuration
 @ConditionalOnClass(ObjectMapper.class)
 @AutoConfigureBefore(JacksonAutoConfiguration.class)
+@EnableConfigurationProperties(MsJacksonProperties.class)
 public class JacksonConfiguration {
 
     @Primary

@@ -73,11 +73,11 @@ public enum MsLogLevel {
     /**
      * 请求日志配置前缀
      */
-    public static final String REQ_LOG_PROPS_PREFIX = "blade.log.request";
+    public static final String REQ_LOG_PROPS_PREFIX = "ms.log.request";
     /**
      * 控制台日志是否启用
      */
-    public static final String CONSOLE_LOG_ENABLED_PROP = "blade.log.console.enabled";
+    public static final String CONSOLE_LOG_ENABLED_PROP = "ms.log.console.enabled";
 
     /**
      * 级别

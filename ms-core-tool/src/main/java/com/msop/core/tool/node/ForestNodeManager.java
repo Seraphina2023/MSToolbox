@@ -1,7 +1,12 @@
 package com.msop.core.tool.node;
 
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Maps;
+import com.msop.core.tool.constant.StringConstant;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 森林管理类
@@ -12,15 +17,15 @@ public class ForestNodeManager<T extends INode> {
     /**
      * 森林的所有节点
      */
-    private List<T> list;
+    private final ImmutableMap<Long, T> nodeMap;
 
     /**
      * 森林的父节点ID
      */
-    private List<Long> parentIds = new ArrayList<>();
+    private final Map<Long, Object> parentIdMap = Maps.newHashMap();
 
-    public ForestNodeManager(List<T> items) {
-        list = items;
+    public ForestNodeManager(List<T> nodes) {
+        nodeMap = Maps.uniqueIndex(nodes, INode::getId);
     }
 
     /**
@@ -29,11 +34,9 @@ public class ForestNodeManager<T extends INode> {
      * @param id 节点ID
      * @return 对应的节点对象
      */
-    public INode getTreeNodeAT(Long id) {
-        for (INode forestNode : list) {
-            if (forestNode.getId().longValue() == id) {
-                return forestNode;
-            }
+    public INode<T> getTreeNodeAT(Long id) {
+        if (nodeMap.containsKey(id)) {
+            return nodeMap.get(id);
         }
         return null;
     }
@@ -44,7 +47,7 @@ public class ForestNodeManager<T extends INode> {
      * @param parentId 父节点
      */
     public void addParentId(Long parentId) {
-        parentIds.add(parentId);
+        parentIdMap.put(parentId, StringConstant.EMPTY);
     }
 
     /**
@@ -54,11 +57,11 @@ public class ForestNodeManager<T extends INode> {
      */
     public List<T> getRoot() {
         List<T> roots = new ArrayList<>();
-        for (T forestNode : list) {
-            if (forestNode.getParentId() == 0 || parentIds.contains(forestNode.getId())) {
-                roots.add(forestNode);
+        nodeMap.forEach((key, node) -> {
+            if (node.getParentId() == 0 || parentIdMap.containsKey(node.getId())) {
+                roots.add(node);
             }
-        }
+        });
         return roots;
     }
 }

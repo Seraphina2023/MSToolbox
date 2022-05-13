@@ -13,7 +13,7 @@ import java.util.concurrent.Callable;
  */
 public class CacheUtil {
 
-	public static final String SYS_CACHE = "blade:sys";
+	public static final String SYS_CACHE = "ms:sys";
 
 	private static CacheManager cacheManager;
 

@@ -1,10 +1,14 @@
 package com.msop.core.tool.config;
 
+import com.msop.core.tool.support.BinderSupplier;
 import com.msop.core.tool.utils.SpringUtil;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
+
+import java.util.function.Supplier;
 
 /**
  * 工具配置类
@@ -22,4 +26,11 @@ public class ToolConfiguration {
     public SpringUtil springUtil(){
         return new SpringUtil();
     }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public Supplier<Object> binderSupplier(){
+        return new BinderSupplier();
+    }
+
 }

@@ -39,7 +39,7 @@ public class MsProperties implements EnvironmentAware, EnvironmentCapable {
 	private Environment environment;
 
 	/**
-	 * 装载自定义配置blade.prop.xxx
+	 * 装载自定义配置ms.prop.xxx
 	 */
 	@Getter
 	private final Map<String, String> prop = new HashMap<>();
@@ -198,8 +198,8 @@ public class MsProperties implements EnvironmentAware, EnvironmentCapable {
 	 */
 	public String getEnv() {
 		Objects.requireNonNull(environment, "Spring boot 环境下 Environment 不可能为null");
-		String env = environment.getProperty("blade.env");
-		Assert.notNull(env, "请使用 BladeApplication 启动...");
+		String env = environment.getProperty("ms.env");
+		Assert.notNull(env, "请使用 MsApplication 启动...");
 		return env;
 	}
 
@@ -210,7 +210,7 @@ public class MsProperties implements EnvironmentAware, EnvironmentCapable {
 	 */
 	public String getName() {
 		Objects.requireNonNull(environment, "Spring boot 环境下 Environment 不可能为null");
-		return environment.getProperty("spring.application.name", environment.getProperty("blade.name", ""));
+		return environment.getProperty("spring.application.name", environment.getProperty("ms.name", ""));
 	}
 
 	@Override

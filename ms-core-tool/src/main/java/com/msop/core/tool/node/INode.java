@@ -8,7 +8,7 @@ import java.util.List;
  *
  * @author ruozhuliufeng
  */
-public interface INode extends Serializable {
+public interface INode<T> extends Serializable {
     /**
      * 主键
      *

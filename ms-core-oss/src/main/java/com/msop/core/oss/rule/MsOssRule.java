@@ -14,6 +14,10 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class MsOssRule implements OssRule {
     /**
+     * 租户模式
+     */
+    private final Boolean tenantMode;
+    /**
      * 获取存储桶规则
      *
      * @param bucketName 存储桶名称
@@ -21,7 +25,8 @@ public class MsOssRule implements OssRule {
      */
     @Override
     public String bucketName(String bucketName) {
-        return bucketName;
+        String prefix = (tenantMode) ? AuthUtil.getTenantId().concat(StringConstant.DASH) : StringConstant.EMPTY;
+        return prefix + bucketName;
     }
 
     /**

@@ -10,22 +10,10 @@
     <artifactId>ms-core-oss</artifactId>
     <name>${project.artifactId}</name>
     <dependencies>
-        <!-- 通用工具模块 -->
+
         <dependency>
             <groupId>com.msop</groupId>
-            <artifactId>ms-core-tool</artifactId>
-        </dependency>
-        <!-- 七牛云存储 -->
-        <dependency>
-            <groupId>com.qiniu</groupId>
-            <artifactId>qiniu-java-sdk</artifactId>
-            <version>7.7.0</version>
-        </dependency>
-        <!-- 阿里云存储 -->
-        <dependency>
-            <groupId>com.aliyun.oss</groupId>
-            <artifactId>aliyun-sdk-oss</artifactId>
-            <version>3.14.0</version>
+            <artifactId>ms-core-auto</artifactId>
         </dependency>
     </dependencies>
 </project>

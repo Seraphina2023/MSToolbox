@@ -23,17 +23,17 @@ public interface SecureConstant {
 	String BASIC_HEADER_PREFIX_EXT = "Basic%20";
 
 	/**
-	 * blade_client表字段
+	 * oauth_client表字段
 	 */
 	String CLIENT_FIELDS = "client_id, client_secret, access_token_validity, refresh_token_validity";
 
 	/**
-	 * blade_client查询语句
+	 * oauth_client查询语句
 	 */
 	String BASE_STATEMENT = "select " + CLIENT_FIELDS + " from msop_client";
 
 	/**
-	 * blade_client查询排序
+	 * oauth_client查询排序
 	 */
 	String DEFAULT_FIND_STATEMENT = BASE_STATEMENT + " order by client_id";
 
