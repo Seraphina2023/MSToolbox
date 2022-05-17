@@ -24,6 +24,25 @@ public interface MsConstant {
      * JSON 资源请求
      */
     String CONTENT_TYPE = "application/json;charset=utf-8";
+    /**
+     * 上下文键值
+     */
+    String CONTEXT_KEY = "msContext";
+
+    /**
+     * mdc request id key
+     */
+    String MDC_REQUEST_ID_KEY = "requestId";
+
+    /**
+     * mdc account id key
+     */
+    String MDC_ACCOUNT_ID_KEY = "accountId";
+
+    /**
+     * mdc tenant id key
+     */
+    String MDC_TENANT_ID_KEY = "tenantId";
 
     /**
      * Security 角色前缀

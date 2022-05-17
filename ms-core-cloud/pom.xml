@@ -9,5 +9,6 @@
     </parent>
     <artifactId>ms-core-cloud</artifactId>
     <name>${project.artifactId}</name>
+    <packaging>jar</packaging>
 
 </project>

@@ -9,6 +9,20 @@
     </parent>
     <artifactId>ms-core-context</artifactId>
     <name>${project.artifactId}</name>
+    <packaging>jar</packaging>
+    <dependencies>
+        <!-- MSToolbox -->
+        <dependency>
+            <groupId>com.msop</groupId>
+            <artifactId>ms-core-tool</artifactId>
+        </dependency>
+        <!-- 自动配置 -->
+        <dependency>
+            <groupId>com.msop</groupId>
+            <artifactId>ms-core-auto</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
 
 
 </project>

@@ -130,146 +130,175 @@
                 <artifactId>ms-starter-actuate</artifactId>
                 <version>${ms.tool.version}</version>
             </dependency>
+            <!-- API 加密 -->
             <dependency>
                 <groupId>com.msop</groupId>
                 <artifactId>ms-starter-api-crypto</artifactId>
                 <version>${ms.tool.version}</version>
             </dependency>
+            <!-- AUTH 认证 -->
             <dependency>
                 <groupId>com.msop</groupId>
                 <artifactId>ms-starter-auth</artifactId>
                 <version>${ms.tool.version}</version>
             </dependency>
+            <!-- 缓存 -->
             <dependency>
                 <groupId>com.msop</groupId>
                 <artifactId>ms-starter-cache</artifactId>
                 <version>${ms.tool.version}</version>
             </dependency>
+            <!-- 权限范围 -->
             <dependency>
                 <groupId>com.msop</groupId>
                 <artifactId>ms-starter-datascope</artifactId>
                 <version>${ms.tool.version}</version>
             </dependency>
+            <!-- 开发与代码生成 -->
             <dependency>
                 <groupId>com.msop</groupId>
                 <artifactId>ms-starter-develop</artifactId>
                 <version>${ms.tool.version}</version>
             </dependency>
+            <!-- 缓存 -->
             <dependency>
                 <groupId>com.msop</groupId>
                 <artifactId>ms-starter-ehcache</artifactId>
                 <version>${ms.tool.version}</version>
             </dependency>
+            <!-- Excel -->
             <dependency>
                 <groupId>com.msop</groupId>
                 <artifactId>ms-starter-excel</artifactId>
                 <version>${ms.tool.version}</version>
             </dependency>
+            <!-- HTTP 拓展 -->
             <dependency>
                 <groupId>com.msop</groupId>
                 <artifactId>ms-starter-http</artifactId>
                 <version>${ms.tool.version}</version>
             </dependency>
+            <!-- JWT 拓展 -->
             <dependency>
                 <groupId>com.msop</groupId>
                 <artifactId>ms-starter-jwt</artifactId>
                 <version>${ms.tool.version}</version>
             </dependency>
+            <!-- log 日志拓展 -->
             <dependency>
                 <groupId>com.msop</groupId>
                 <artifactId>ms-starter-log</artifactId>
                 <version>${ms.tool.version}</version>
             </dependency>
+            <!-- mongo 拓展 -->
             <dependency>
                 <groupId>com.msop</groupId>
                 <artifactId>ms-starter-mongo</artifactId>
                 <version>${ms.tool.version}</version>
             </dependency>
+            <!-- Mybatis 拓展 -->
             <dependency>
                 <groupId>com.msop</groupId>
                 <artifactId>ms-starter-mybatis</artifactId>
                 <version>${ms.tool.version}</version>
             </dependency>
+            <!-- 阿里云 OSS -->
             <dependency>
                 <groupId>com.msop</groupId>
                 <artifactId>ms-starter-oss-aliyun</artifactId>
                 <version>${ms.tool.version}</version>
             </dependency>
+            <!-- OSS -->
             <dependency>
                 <groupId>com.msop</groupId>
                 <artifactId>ms-starter-oss-all</artifactId>
                 <version>${ms.tool.version}</version>
             </dependency>
+            <!-- MINIO OSS -->
             <dependency>
                 <groupId>com.msop</groupId>
                 <artifactId>ms-starter-oss-minio</artifactId>
                 <version>${ms.tool.version}</version>
             </dependency>
+            <!-- 七牛云 OSS -->
             <dependency>
                 <groupId>com.msop</groupId>
                 <artifactId>ms-starter-oss-qiniu</artifactId>
                 <version>${ms.tool.version}</version>
             </dependency>
+            <!-- 腾讯云 OSS  -->
             <dependency>
                 <groupId>com.msop</groupId>
                 <artifactId>ms-starter-oss-tencent</artifactId>
                 <version>${ms.tool.version}</version>
             </dependency>
+            <!-- Redis -->
             <dependency>
                 <groupId>com.msop</groupId>
                 <artifactId>ms-starter-redis</artifactId>
                 <version>${ms.tool.version}</version>
             </dependency>
+            <!-- 报表 -->
             <dependency>
                 <groupId>com.msop</groupId>
                 <artifactId>ms-starter-report</artifactId>
                 <version>${ms.tool.version}</version>
             </dependency>
+            <!-- Ribbon 负载均衡 -->
             <dependency>
                 <groupId>com.msop</groupId>
                 <artifactId>ms-starter-ribbon</artifactId>
                 <version>${ms.tool.version}</version>
             </dependency>
+            <!-- 阿里云 SMS -->
             <dependency>
                 <groupId>com.msop</groupId>
                 <artifactId>ms-starter-sms-aliyun</artifactId>
                 <version>${ms.tool.version}</version>
             </dependency>
+            <!-- SMS -->
             <dependency>
                 <groupId>com.msop</groupId>
                 <artifactId>ms-starter-sms-all</artifactId>
                 <version>${ms.tool.version}</version>
             </dependency>
+            <!-- 七牛 SMS -->
             <dependency>
                 <groupId>com.msop</groupId>
                 <artifactId>ms-starter-sms-qiniu</artifactId>
                 <version>${ms.tool.version}</version>
             </dependency>
+            <!-- 云片SMS -->
             <dependency>
                 <groupId>com.msop</groupId>
                 <artifactId>ms-starter-sms-yunpian</artifactId>
                 <version>${ms.tool.version}</version>
             </dependency>
+            <!-- 第三方登录 -->
             <dependency>
                 <groupId>com.msop</groupId>
                 <artifactId>ms-starter-social</artifactId>
                 <version>${ms.tool.version}</version>
             </dependency>
+            <!-- Swagger模块 -->
             <dependency>
                 <groupId>com.msop</groupId>
                 <artifactId>ms-starter-swagger</artifactId>
                 <version>${ms.tool.version}</version>
             </dependency>
+            <!-- 多租户路模块 -->
             <dependency>
                 <groupId>com.msop</groupId>
                 <artifactId>ms-starter-tenant</artifactId>
                 <version>${ms.tool.version}</version>
             </dependency>
+            <!-- 链路追踪模块 -->
             <dependency>
                 <groupId>com.msop</groupId>
                 <artifactId>ms-starter-trace</artifactId>
                 <version>${ms.tool.version}</version>
             </dependency>
+            <!-- 分布式事务模块 -->
             <dependency>
                 <groupId>com.msop</groupId>
                 <artifactId>ms-starter-transaction</artifactId>
