@@ -20,13 +20,6 @@ public class AuthInfo {
 	private String tokenType;
 	@ApiModelProperty(value = "刷新令牌")
 	private String refreshToken;
-	@ApiModelProperty(value = "用户ID")
-	@JsonSerialize(using = ToStringSerializer.class)
-	private Long userId;
-	@ApiModelProperty(value = "租户ID")
-	private String tenantId;
-	@ApiModelProperty(value = "第三方系统ID")
-	private String oauthId;
 	@ApiModelProperty(value = "头像")
 	private String avatar = "https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png";
 	@ApiModelProperty(value = "角色名")

@@ -37,6 +37,14 @@ public class MsUser implements Serializable {
     @ApiModelProperty(hidden = true)
     private String deptId;
     /**
+     * 第三方认证ID
+     */
+    private String oauthId;
+    /**
+     * 账号
+     */
+    private String account;
+    /**
      * 用户名
      */
     @ApiModelProperty(hidden = true)
@@ -56,6 +64,7 @@ public class MsUser implements Serializable {
      */
     @ApiModelProperty(hidden = true)
     private String roleName;
+
 
     /**
      * 用户详情
