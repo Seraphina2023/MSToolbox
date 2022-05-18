@@ -75,7 +75,7 @@ public class AuthUtil {
      * @return MsUser
      */
     public static MsUser getUser(HttpServletRequest request) {
-        Claims claims = getClims(request);
+        Claims claims = null;
         if (claims == null) {
             return null;
         }
@@ -92,7 +92,7 @@ public class AuthUtil {
         user.setClientId(clientId);
         user.setUserId(userId);
         user.setTenantId(tenantId);
-        user.setAccount(account);
+        user.setUserName(account);
         user.setRoleId(roleId);
         user.setDeptId(deptId);
         user.setRoleName(roleName);
@@ -137,7 +137,7 @@ public class AuthUtil {
      */
     public static String getUserAccount() {
         MsUser user = getUser();
-        return (null == user) ? StringConstant.EMPTY : user.getAccount();
+        return (null == user) ? StringConstant.EMPTY : user.getUserName();
     }
 
     /**
@@ -148,7 +148,7 @@ public class AuthUtil {
      */
     public static String getUserAccount(HttpServletRequest request) {
         MsUser user = getUser(request);
-        return (null == user) ? StringConstant.EMPTY : user.getAccount();
+        return (null == user) ? StringConstant.EMPTY : user.getUserName();
     }
 
     /**
@@ -158,7 +158,7 @@ public class AuthUtil {
      */
     public static String getUserName() {
         MsUser user = getUser();
-        return (null == user) ? StringConstant.EMPTY : user.getAccount();
+        return (null == user) ? StringConstant.EMPTY : user.getUserName();
     }
 
     /**
@@ -236,29 +236,6 @@ public class AuthUtil {
     }
 
     /**
-     * 获取Claims
-     *
-     * @param request request
-     * @return claims
-     */
-    public static Claims getClims(HttpServletRequest request) {
-        String auth = request.getHeader(TokenConstant.HEADER);
-        if (StringUtil.isNotBlank(auth) && auth.length() > TokenConstant.AUTH_LENGTH) {
-            String headStr = auth.substring(0, 6).toLowerCase();
-            if (headStr.compareTo(TokenConstant.BEARER) == 0) {
-                auth = auth.substring(7);
-                return AuthUtil.parseJWT(auth);
-            }
-        } else {
-            String parameter = request.getParameter(TokenConstant.HEADER);
-            if (StringUtil.isNotBlank(parameter)) {
-                return AuthUtil.parseJWT(parameter);
-            }
-        }
-        return null;
-    }
-
-    /**
      * 获取请求头
      *
      * @return header
@@ -276,87 +253,6 @@ public class AuthUtil {
     public static String getHeader(HttpServletRequest request) {
         return request.getHeader(TokenConstant.HEADER);
     }
-
-    /**
-     * 解析jsonWebToken
-     *
-     * @param jsonWebToken jsonWebToken
-     * @return Claims
-     */
-    public static Claims parseJWT(String jsonWebToken) {
-        try {
-            return Jwts.parserBuilder()
-                    .setSigningKey(Base64.getDecoder().decode(BASE64_SECUREITY)).build()
-                    .parseClaimsJws(jsonWebToken)
-                    .getBody();
-        } catch (Exception ex) {
-            return null;
-        }
-    }
-
-    /**
-     * 创建令牌
-     *
-     * @param user      user
-     * @param audience  audience
-     * @param issuer    issuer
-     * @param tokenType tokenType
-     * @return jwt
-     */
-    public static TokenInfo createJWT(Map<String, String> user, String audience, String issuer, String tokenType) {
-        String[] tokens = extractAndDecodeHeader();
-        assert tokens.length == 2;
-        String clientId = tokens[0];
-        String clientSecret = tokens[1];
-
-        // 获取客户端信息
-        IClientDetails clientDetails = clientDetails(clientId);
-        // 校验客户端信息
-        if (!validateClient(clientDetails, clientId, clientSecret)) {
-            throw new SecureException("客户端认证失败");
-        }
-
-        SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
-
-        long nowMillis = System.currentTimeMillis();
-        Date now = new Date(nowMillis);
-
-        // 生成签名密钥
-        byte[] apiKeySecretBytes = Base64.getDecoder().decode(BASE64_SECUREITY);
-        Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
-
-        // 添加构成JWT的类
-        JwtBuilder builder = Jwts.builder().setHeaderParam("type", "JWT")
-                .setIssuer(issuer)
-                .setAudience(audience)
-                .signWith(signingKey);
-
-        // 设置JWT参数
-        user.forEach(builder::claim);
-
-        // 设置应用ID
-        builder.claim(TokenConstant.CLIENT_ID, clientId);
-
-        // 添加Token过期时间
-        long expireMillis;
-        if (tokenType.equals(TokenConstant.ACCESS_TOKEN)) {
-            expireMillis = clientDetails.getAccessTokenValidity() * 1000;
-        } else if (tokenType.equals(TokenConstant.REFRESH_TOKEN)) {
-            expireMillis = clientDetails.getRefreshTokenValidity() * 1000;
-        } else {
-            expireMillis = getExpire();
-        }
-        long expMillis = nowMillis + expireMillis;
-        Date exp = new Date(expMillis);
-        builder.setExpiration(exp).setNotBefore(now);
-
-        // 组装Token信息
-        TokenInfo tokenInfo = new TokenInfo();
-        tokenInfo.setToken(builder.compact());
-        tokenInfo.setExpire((int) (expireMillis / 1000));
-        return tokenInfo;
-    }
-
     /**
      * 获取过期时间 (次日凌晨3点)
      *
@@ -370,65 +266,5 @@ public class AuthUtil {
         cal.set(Calendar.MINUTE, 0);
         cal.set(Calendar.MILLISECOND, 0);
         return cal.getTimeInMillis() - System.currentTimeMillis();
-    }
-
-    @SneakyThrows
-    public static String[] extractAndDecodeHeader() {
-        // 获取请求头客户端信息
-        String header = Objects.requireNonNull(WebUtil.getRequest()).getHeader(SecureConstant.BASIC_HEADER_KEY);
-        header = Func.toStr(header).replaceAll(SecureConstant.BASIC_HEADER_PREFIX_EXT, SecureConstant.BASIC_HEADER_PREFIX);
-        if (!header.startsWith(SecureConstant.BASIC_HEADER_PREFIX)) {
-            throw new SecureException("No Client Information in Request Header");
-        }
-        byte[] base64Token = header.substring(6).getBytes(StandardCharsets.UTF_8);
-        byte[] decoed;
-        try {
-            decoed = Base64.getDecoder().decode(base64Token);
-        } catch (IllegalArgumentException exception) {
-            throw new RuntimeException("Failed to decode basic authentication token");
-        }
-        String token = new String(decoed, Charsets.UTF_8_NAME);
-        int index = token.indexOf(StringConstant.COLON);
-        if (index == -1) {
-            throw new RuntimeException("Invalid basic authentication token");
-        } else {
-            return new String[]{token.substring(0, index), token.substring(index + 1)};
-        }
-    }
-
-    /**
-     * 获取请求头中的客户端ID
-     *
-     * @return 客户端ID
-     */
-    public static String getClientIdFromHeader() {
-        String[] tokens = extractAndDecodeHeader();
-        assert tokens.length == 2;
-        return tokens[0];
-    }
-
-    /**
-     * 获取客户端信息
-     *
-     * @param clientId 客户端ID
-     * @return clientDetails
-     */
-    private static IClientDetails clientDetails(String clientId) {
-        return clientDetailsService.loadClientByClientId(clientId);
-    }
-
-    /**
-     * 校验Client
-     *
-     * @param clientDetails 客户端信息
-     * @param clientId      客户端ID
-     * @param clientSecret  客户端密钥
-     * @return Boolean
-     */
-    private static boolean validateClient(IClientDetails clientDetails, String clientId, String clientSecret) {
-        if (clientDetails != null) {
-            return StringUtil.equals(clientId, clientDetails.getClientId()) && StringUtil.equals(clientSecret, clientDetails.getClientSecret());
-        }
-        return false;
     }
 }
