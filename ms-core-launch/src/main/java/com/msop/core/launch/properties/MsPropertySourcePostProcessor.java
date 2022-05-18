@@ -59,12 +59,12 @@ public class MsPropertySourcePostProcessor implements BeanFactoryPostProcessor, 
 
 	@Override
 	public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-		log.info("MsPropertySourcePostProcessor process @BladePropertySource bean.");
+		log.info("MsPropertySourcePostProcessor process @MsPropertySource bean.");
 		Map<String, Object> beansWithAnnotation = beanFactory.getBeansWithAnnotation(MsPropertySource.class);
 		Set<Map.Entry<String, Object>> beanEntrySet = beansWithAnnotation.entrySet();
 		// 没有 @YmlPropertySource 注解，跳出
 		if (beanEntrySet.isEmpty()) {
-			log.warn("Not found @BladePropertySource on spring bean class.");
+			log.warn("Not found @MsPropertySource on spring bean class.");
 			return;
 		}
 		// 组装资源

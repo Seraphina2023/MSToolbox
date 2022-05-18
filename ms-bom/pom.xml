@@ -13,7 +13,40 @@
     <version>${ms.tool.version}</version>
     <packaging>pom</packaging>
     <properties>
-        <ms.tool.version>0.2.1</ms.tool.version>
+        <ms.tool.version>0.2.2-SNAPSHOT</ms.tool.version>
+        <guava.version>30.0-jre</guava.version>
+        <swagger.version>2.10.5</swagger.version>
+        <swagger.models.version>1.6.2</swagger.models.version>
+        <knife4j.version>2.0.6</knife4j.version>
+        <mybatis.plus.version>3.4.0</mybatis.plus.version>
+        <mybatis.plus.dynamic.version>3.2.0</mybatis.plus.dynamic.version>
+        <protostuff.version>1.6.0</protostuff.version>
+        <disruptor.version>3.4.2</disruptor.version>
+        <logstash.version>6.2</logstash.version>
+        <druid.version>1.2.1</druid.version>
+        <jackson.version>2.11.3</jackson.version>
+        <okhttp.version>3.14.5</okhttp.version>
+        <xxl.job.verison>2.1.2</xxl.job.verison>
+        <mysql.connector.version>8.0.22</mysql.connector.version>
+        <oracle.connector.version>12.2.0.1</oracle.connector.version>
+        <postgresql.connector.version>42.2.18</postgresql.connector.version>
+        <sqlserver.connector.version>8.4.1.jre8</sqlserver.connector.version>
+        <spring.boot.admmin.version>2.2.4</spring.boot.admmin.version>
+        <alibaba.cloud.version>2.2.3.RELEASE</alibaba.cloud.version>
+        <alibaba.seata.version>1.3.0</alibaba.seata.version>
+        <mybatis.spring.version>2.0.5</mybatis.spring.version>
+        <mybatis.version>3.5.5</mybatis.version>
+        <mybatis.typehandlers.version>1.0.2</mybatis.typehandlers.version>
+        <jjwt.version>0.11.2</jjwt.version>
+        <spring.plugin.version>2.0.0.RELEASE</spring.plugin.version>
+        <jsoup.version>1.12.1</jsoup.version>
+        <redisson.version>3.11.6</redisson.version>
+        <janino.version>3.0.15</janino.version>
+        <jsr305.version>3.0.2</jsr305.version>
+        <JustAuth.version>1.15.8</JustAuth.version>
+        <easyexcel.version>2.2.6</easyexcel.version>
+        <captcha.version>1.6.2</captcha.version>
+        <fastjson.version>1.2.74</fastjson.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -90,6 +123,437 @@
                 <groupId>com.msop</groupId>
                 <artifactId>ms-core-tool</artifactId>
                 <version>${ms.tool.version}</version>
+            </dependency>
+            <!-- MSTool Starter -->
+            <dependency>
+                <groupId>com.msop</groupId>
+                <artifactId>ms-starter-actuate</artifactId>
+                <version>${ms.tool.version}</version>
+            </dependency>
+            <!-- API 加密 -->
+            <dependency>
+                <groupId>com.msop</groupId>
+                <artifactId>ms-starter-api-crypto</artifactId>
+                <version>${ms.tool.version}</version>
+            </dependency>
+            <!-- AUTH 认证 -->
+            <dependency>
+                <groupId>com.msop</groupId>
+                <artifactId>ms-starter-auth</artifactId>
+                <version>${ms.tool.version}</version>
+            </dependency>
+            <!-- 缓存 -->
+            <dependency>
+                <groupId>com.msop</groupId>
+                <artifactId>ms-starter-cache</artifactId>
+                <version>${ms.tool.version}</version>
+            </dependency>
+            <!-- 权限范围 -->
+            <dependency>
+                <groupId>com.msop</groupId>
+                <artifactId>ms-starter-datascope</artifactId>
+                <version>${ms.tool.version}</version>
+            </dependency>
+            <!-- 开发与代码生成 -->
+            <dependency>
+                <groupId>com.msop</groupId>
+                <artifactId>ms-starter-develop</artifactId>
+                <version>${ms.tool.version}</version>
+            </dependency>
+            <!-- 缓存 -->
+            <dependency>
+                <groupId>com.msop</groupId>
+                <artifactId>ms-starter-ehcache</artifactId>
+                <version>${ms.tool.version}</version>
+            </dependency>
+            <!-- Excel -->
+            <dependency>
+                <groupId>com.msop</groupId>
+                <artifactId>ms-starter-excel</artifactId>
+                <version>${ms.tool.version}</version>
+            </dependency>
+            <!-- HTTP 拓展 -->
+            <dependency>
+                <groupId>com.msop</groupId>
+                <artifactId>ms-starter-http</artifactId>
+                <version>${ms.tool.version}</version>
+            </dependency>
+            <!-- JWT 拓展 -->
+            <dependency>
+                <groupId>com.msop</groupId>
+                <artifactId>ms-starter-jwt</artifactId>
+                <version>${ms.tool.version}</version>
+            </dependency>
+            <!-- log 日志拓展 -->
+            <dependency>
+                <groupId>com.msop</groupId>
+                <artifactId>ms-starter-log</artifactId>
+                <version>${ms.tool.version}</version>
+            </dependency>
+            <!-- mongo 拓展 -->
+            <dependency>
+                <groupId>com.msop</groupId>
+                <artifactId>ms-starter-mongo</artifactId>
+                <version>${ms.tool.version}</version>
+            </dependency>
+            <!-- Mybatis 拓展 -->
+            <dependency>
+                <groupId>com.msop</groupId>
+                <artifactId>ms-starter-mybatis</artifactId>
+                <version>${ms.tool.version}</version>
+            </dependency>
+            <!-- 阿里云 OSS -->
+            <dependency>
+                <groupId>com.msop</groupId>
+                <artifactId>ms-starter-oss-aliyun</artifactId>
+                <version>${ms.tool.version}</version>
+            </dependency>
+            <!-- OSS -->
+            <dependency>
+                <groupId>com.msop</groupId>
+                <artifactId>ms-starter-oss-all</artifactId>
+                <version>${ms.tool.version}</version>
+            </dependency>
+            <!-- MINIO OSS -->
+            <dependency>
+                <groupId>com.msop</groupId>
+                <artifactId>ms-starter-oss-minio</artifactId>
+                <version>${ms.tool.version}</version>
+            </dependency>
+            <!-- 七牛云 OSS -->
+            <dependency>
+                <groupId>com.msop</groupId>
+                <artifactId>ms-starter-oss-qiniu</artifactId>
+                <version>${ms.tool.version}</version>
+            </dependency>
+            <!-- 腾讯云 OSS  -->
+            <dependency>
+                <groupId>com.msop</groupId>
+                <artifactId>ms-starter-oss-tencent</artifactId>
+                <version>${ms.tool.version}</version>
+            </dependency>
+            <!-- Redis -->
+            <dependency>
+                <groupId>com.msop</groupId>
+                <artifactId>ms-starter-redis</artifactId>
+                <version>${ms.tool.version}</version>
+            </dependency>
+            <!-- 报表 -->
+            <dependency>
+                <groupId>com.msop</groupId>
+                <artifactId>ms-starter-report</artifactId>
+                <version>${ms.tool.version}</version>
+            </dependency>
+            <!-- Ribbon 负载均衡 -->
+            <dependency>
+                <groupId>com.msop</groupId>
+                <artifactId>ms-starter-ribbon</artifactId>
+                <version>${ms.tool.version}</version>
+            </dependency>
+            <!-- 阿里云 SMS -->
+            <dependency>
+                <groupId>com.msop</groupId>
+                <artifactId>ms-starter-sms-aliyun</artifactId>
+                <version>${ms.tool.version}</version>
+            </dependency>
+            <!-- SMS -->
+            <dependency>
+                <groupId>com.msop</groupId>
+                <artifactId>ms-starter-sms-all</artifactId>
+                <version>${ms.tool.version}</version>
+            </dependency>
+            <!-- 七牛 SMS -->
+            <dependency>
+                <groupId>com.msop</groupId>
+                <artifactId>ms-starter-sms-qiniu</artifactId>
+                <version>${ms.tool.version}</version>
+            </dependency>
+            <!-- 云片SMS -->
+            <dependency>
+                <groupId>com.msop</groupId>
+                <artifactId>ms-starter-sms-yunpian</artifactId>
+                <version>${ms.tool.version}</version>
+            </dependency>
+            <!-- 第三方登录 -->
+            <dependency>
+                <groupId>com.msop</groupId>
+                <artifactId>ms-starter-social</artifactId>
+                <version>${ms.tool.version}</version>
+            </dependency>
+            <!-- Swagger模块 -->
+            <dependency>
+                <groupId>com.msop</groupId>
+                <artifactId>ms-starter-swagger</artifactId>
+                <version>${ms.tool.version}</version>
+            </dependency>
+            <!-- 多租户路模块 -->
+            <dependency>
+                <groupId>com.msop</groupId>
+                <artifactId>ms-starter-tenant</artifactId>
+                <version>${ms.tool.version}</version>
+            </dependency>
+            <!-- 链路追踪模块 -->
+            <dependency>
+                <groupId>com.msop</groupId>
+                <artifactId>ms-starter-trace</artifactId>
+                <version>${ms.tool.version}</version>
+            </dependency>
+            <!-- 分布式事务模块 -->
+            <dependency>
+                <groupId>com.msop</groupId>
+                <artifactId>ms-starter-transaction</artifactId>
+                <version>${ms.tool.version}</version>
+            </dependency>
+            <!-- Nacos -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+                <version>${alibaba.cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+                <version>${alibaba.cloud.version}</version>
+            </dependency>
+            <!-- Sentinel -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+                <version>${alibaba.cloud.version}</version>
+            </dependency>
+            <!-- Seata -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-seata</artifactId>
+                <version>${alibaba.seata.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.seata</groupId>
+                <artifactId>seata-spring-boot-starter</artifactId>
+                <version>${alibaba.cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.seata</groupId>
+                <artifactId>seata-all</artifactId>
+                <version>${alibaba.seata.version}</version>
+            </dependency>
+            <!-- Mybatis -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus</artifactId>
+                <version>${mybatis.plus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis.plus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-generator</artifactId>
+                <version>${mybatis.plus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
+                <version>${mybatis.plus.dynamic.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis-spring</artifactId>
+                <version>${mybatis.spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis</artifactId>
+                <version>${mybatis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis-typehandlers-jsr310</artifactId>
+                <version>${mybatis.typehandlers.version}</version>
+            </dependency>
+            <!-- JWT -->
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-impl</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-jackson</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+            <!-- Admin -->
+            <dependency>
+                <groupId>de.codecentric</groupId>
+                <artifactId>spring-boot-admin-starter-server</artifactId>
+                <version>${spring.boot.admmin.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>de.codecentric</groupId>
+                <artifactId>spring-boot-admin-starter-client</artifactId>
+                <version>${spring.boot.admmin.version}</version>
+            </dependency>
+            <!--  Druid -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+            <!-- MySQL -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.connector.version}</version>
+            </dependency>
+            <!-- Oracle -->
+            <dependency>
+                <groupId>com.oracle</groupId>
+                <artifactId>ojdbc7</artifactId>
+                <version>${oracle.connector.version}</version>
+            </dependency>
+            <!-- PostgreSql -->
+            <dependency>
+                <groupId>org.postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>${postgresql.connector.version}</version>
+            </dependency>
+            <!-- SqlServer -->
+            <dependency>
+                <groupId>com.microsoft.sqlserver</groupId>
+                <artifactId>mssql-jdbc</artifactId>
+                <version>${sqlserver.connector.version}</version>
+            </dependency>
+            <!-- Swagger -->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.swagger</groupId>
+                <artifactId>swagger-models</artifactId>
+                <version>${swagger.models.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-micro-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-spring-ui</artifactId>
+                <version>${knife4j.version}</version>
+            </dependency>
+            <!-- Spring Plugin -->
+            <dependency>
+                <groupId>org.springframework.plugin</groupId>
+                <artifactId>spring-plugin-core</artifactId>
+                <version>${spring.plugin.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.plugin</groupId>
+                <artifactId>spring-plugin-metadata</artifactId>
+                <version>${spring.plugin.version}</version>
+            </dependency>
+            <!-- protostuff -->
+            <dependency>
+                <groupId>io.protostuff</groupId>
+                <artifactId>protostuff-core</artifactId>
+                <version>${protostuff.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.protostuff</groupId>
+                <artifactId>protostuff-runtime</artifactId>
+                <version>${protostuff.version}</version>
+            </dependency>
+            <!-- Http -->
+            <dependency>
+                <groupId>org.jsoup</groupId>
+                <artifactId>jsoup</artifactId>
+                <version>${jsoup.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.squareup.okhttp3</groupId>
+                <artifactId>okhttp</artifactId>
+                <version>${okhttp.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.squareup.okhttp3</groupId>
+                <artifactId>logging-interceptor</artifactId>
+                <version>${okhttp.version}</version>
+            </dependency>
+            <!-- redission -->
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson</artifactId>
+                <version>${redisson.version}</version>
+            </dependency>
+            <!-- Disruptor -->
+            <dependency>
+                <groupId>com.lmax</groupId>
+                <artifactId>disruptor</artifactId>
+                <version>${disruptor.version}</version>
+            </dependency>
+            <!-- LogStash -->
+            <dependency>
+                <groupId>net.logstash.logback</groupId>
+                <artifactId>logstash-logback-encoder</artifactId>
+                <version>${logstash.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.codehaus.janino</groupId>
+                <artifactId>janino</artifactId>
+                <version>${janino.version}</version>
+            </dependency>
+            <!-- xxl-job -->
+            <dependency>
+                <groupId>com.xuxueli</groupId>
+                <artifactId>xxl-job-core</artifactId>
+                <version>${xxl.job.verison}</version>
+            </dependency>
+            <!-- captcha -->
+            <dependency>
+                <groupId>com.github.whvcse</groupId>
+                <artifactId>easy-captcha</artifactId>
+                <version>${captcha.version}</version>
+            </dependency>
+            <!-- jackson -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.module</groupId>
+                <artifactId>jackson-module-jaxb-annotations</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <!-- fast josn -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+            <!-- easy excel -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>easyexcel</artifactId>
+                <version>${easyexcel.version}</version>
+            </dependency>
+            <!-- JustAuth -->
+            <dependency>
+                <groupId>me.zhyd.oauth</groupId>
+                <artifactId>JustAuth</artifactId>
+                <version>${JustAuth.version}</version>
+            </dependency>
+            <!-- Guava -->
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+            <!-- findbugs -->
+            <dependency>
+                <groupId>com.google.code.findbugs</groupId>
+                <artifactId>jsr305</artifactId>
+                <version>${jsr305.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
