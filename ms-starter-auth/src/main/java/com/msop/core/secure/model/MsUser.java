@@ -1,5 +1,6 @@
 package com.msop.core.secure.model;
 
+import com.msop.core.tool.support.Kv;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -36,15 +37,15 @@ public class MsUser implements Serializable {
     @ApiModelProperty(hidden = true)
     private String deptId;
     /**
-     * 昵称
+     * 用户名
      */
     @ApiModelProperty(hidden = true)
     private String userName;
     /**
-     * 账号
+     * 用户昵称
      */
     @ApiModelProperty(hidden = true)
-    private String account;
+    private String nickName;
     /**
      * 角色id
      */
@@ -56,4 +57,8 @@ public class MsUser implements Serializable {
     @ApiModelProperty(hidden = true)
     private String roleName;
 
+    /**
+     * 用户详情
+     */
+    private Kv detail;
 }

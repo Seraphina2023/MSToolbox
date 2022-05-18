@@ -19,7 +19,7 @@ public class SecureException extends RuntimeException {
         this.codeEnum = codeEnum;
     }
 
-    public SecureException(CodeEnum codeEnum,Throwable cause){
+    public SecureException(CodeEnum codeEnum, Throwable cause){
         super(cause);
         this.codeEnum = codeEnum;
     }

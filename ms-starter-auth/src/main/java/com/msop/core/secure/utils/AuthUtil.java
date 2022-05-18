@@ -1,15 +1,16 @@
 package com.msop.core.secure.utils;
 
-import com.msop.core.secure.constant.SecureConstant;
+import com.msop.core.jwt.properties.JwtProperties;
+import com.msop.core.launch.constant.TokenConstant;
 import com.msop.core.secure.exception.SecureException;
 import com.msop.core.secure.model.MsUser;
 import com.msop.core.secure.model.TokenInfo;
-import com.msop.core.secure.provider.IClientDetails;
-import com.msop.core.secure.provider.IClientDetailsService;
 import com.msop.core.tool.constant.RoleConstant;
 import com.msop.core.tool.constant.StringConstant;
-import com.msop.core.launch.constant.TokenConstant;
-import com.msop.core.tool.utils.*;
+import com.msop.core.tool.utils.Func;
+import com.msop.core.tool.utils.SpringUtil;
+import com.msop.core.tool.utils.StringUtil;
+import com.msop.core.tool.utils.WebUtil;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
@@ -27,12 +28,22 @@ import java.util.*;
  *
  * @author ruozhuliufeng
  */
-public class SecureUtil extends AuthUtil {
+public class AuthUtil {
 
-    private static final IClientDetailsService clientDetailsService;
+    private static final String MS_USER_REQUEST_ATTR = "_MS_USER_REQUEST_ATTR_";
 
-    static {
-        clientDetailsService = SpringUtil.getBean(IClientDetailsService.class);
+    private static JwtProperties jwtProperties;
+
+    /**
+     * 获取配置类
+     *
+     * @return jwtProperties
+     */
+    private static JwtProperties getJwtProperties() {
+        if (jwtProperties == null) {
+            jwtProperties = SpringUtil.getBean(JwtProperties.class);
+        }
+        return jwtProperties;
     }
 
     /**
@@ -71,6 +82,7 @@ public class SecureUtil extends AuthUtil {
         String clientId = Func.toStr(claims.get(TokenConstant.CLIENT_ID));
         Long userId = Func.toLong(claims.get(TokenConstant.USER_ID));
         String tenantId = Func.toStr(claims.get(TokenConstant.TENANT_ID));
+        String oauthId = Func.toStr(claims.get(TokenConstant.OAUTH_ID));
         String roleId = Func.toStr(claims.get(TokenConstant.ROLE_ID));
         String deptId = Func.toStr(claims.get(TokenConstant.DEPT_ID));
         String account = Func.toStr(claims.get(TokenConstant.ACCOUNT));
@@ -235,12 +247,12 @@ public class SecureUtil extends AuthUtil {
             String headStr = auth.substring(0, 6).toLowerCase();
             if (headStr.compareTo(TokenConstant.BEARER) == 0) {
                 auth = auth.substring(7);
-                return SecureUtil.parseJWT(auth);
+                return AuthUtil.parseJWT(auth);
             }
         } else {
             String parameter = request.getParameter(TokenConstant.HEADER);
             if (StringUtil.isNotBlank(parameter)) {
-                return SecureUtil.parseJWT(parameter);
+                return AuthUtil.parseJWT(parameter);
             }
         }
         return null;

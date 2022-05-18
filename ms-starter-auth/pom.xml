@@ -9,4 +9,17 @@
     </parent>
     <artifactId>ms-starter-auth</artifactId>
     <name>${project.artifactId}</name>
+    <packaging>jar</packaging>
+
+    <dependencies>
+        <!-- MSToolbox -->
+        <dependency>
+            <groupId>com.msop</groupId>
+            <artifactId>ms-core-tool</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.msop</groupId>
+            <artifactId>ms-starter-jwt</artifactId>
+        </dependency>
+    </dependencies>
 </project>
