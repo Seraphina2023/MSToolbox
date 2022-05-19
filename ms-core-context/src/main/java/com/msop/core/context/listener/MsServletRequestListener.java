@@ -1,6 +1,5 @@
 package com.msop.core.context.listener;
 
-import com.msop.core.context.MsContext;
 import com.msop.core.context.MsHttpHeadersGetter;
 import com.msop.core.context.properties.MsContextProperties;
 import com.msop.core.tool.constant.MsConstant;

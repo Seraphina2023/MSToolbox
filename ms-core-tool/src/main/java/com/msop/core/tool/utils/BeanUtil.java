@@ -1,5 +1,7 @@
 package com.msop.core.tool.utils;
 
+
+
 import com.msop.core.tool.beans.BeanProperty;
 import com.msop.core.tool.beans.MsBeanCopier;
 import com.msop.core.tool.beans.MsBeanMap;
@@ -15,7 +17,7 @@ import java.util.*;
 /**
  * 实体工具类
  *
- * @author L.cm
+ * @author ruozhuliufeng
  */
 public class BeanUtil extends org.springframework.beans.BeanUtils {
 

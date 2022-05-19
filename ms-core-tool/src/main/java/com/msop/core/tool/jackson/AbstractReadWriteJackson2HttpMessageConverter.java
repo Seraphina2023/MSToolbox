@@ -16,13 +16,14 @@ import org.springframework.http.converter.HttpMessageConversionException;
 import org.springframework.http.converter.HttpMessageNotWritableException;
 import org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJacksonValue;
+import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 import org.springframework.util.TypeUtils;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
@@ -33,7 +34,7 @@ import java.util.concurrent.atomic.AtomicReference;
 public abstract class AbstractReadWriteJackson2HttpMessageConverter extends AbstractJackson2HttpMessageConverter {
     private static final java.nio.charset.Charset DEFAULT_CHARSET = Charsets.UTF_8;
 
-    private ObjectMapper writeObjectMapper;
+    private final ObjectMapper writeObjectMapper;
     @Nullable
     private PrettyPrinter ssePrettyPrinter;
 
@@ -49,9 +50,9 @@ public abstract class AbstractReadWriteJackson2HttpMessageConverter extends Abst
         initSsePrettyPrinter();
     }
 
-    public AbstractReadWriteJackson2HttpMessageConverter(ObjectMapper readObjectMapper, ObjectMapper writeObjectMapper, MediaType... supportedMediaTypes) {
+    public AbstractReadWriteJackson2HttpMessageConverter(ObjectMapper readObjectMapper, ObjectMapper writeObjectMapper, List<MediaType> supportedMediaTypes) {
         this(readObjectMapper, writeObjectMapper);
-        setSupportedMediaTypes(Arrays.asList(supportedMediaTypes));
+        setSupportedMediaTypes(supportedMediaTypes);
     }
 
     private void initSsePrettyPrinter() {
@@ -62,7 +63,7 @@ public abstract class AbstractReadWriteJackson2HttpMessageConverter extends Abst
     }
 
     @Override
-    public boolean canWrite(Class<?> clazz, @Nullable MediaType mediaType) {
+    public boolean canWrite(@NonNull Class<?> clazz, @Nullable MediaType mediaType) {
         if (!canWrite(mediaType)) {
             return false;
         }
@@ -75,7 +76,7 @@ public abstract class AbstractReadWriteJackson2HttpMessageConverter extends Abst
     }
 
     @Override
-    protected void writeInternal(Object object, @Nullable Type type, HttpOutputMessage outputMessage)
+    protected void writeInternal(@NonNull Object object, @Nullable Type type, HttpOutputMessage outputMessage)
             throws IOException, HttpMessageNotWritableException {
 
         MediaType contentType = outputMessage.getHeaders().getContentType();
@@ -122,5 +123,4 @@ public abstract class AbstractReadWriteJackson2HttpMessageConverter extends Abst
             throw new HttpMessageNotWritableException("Could not write JSON: " + ex.getOriginalMessage(), ex);
         }
     }
-
 }

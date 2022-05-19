@@ -1,5 +1,6 @@
 package com.msop.core.tool.utils;
 
+import com.msop.core.tool.constant.StringConstant;
 import org.springframework.lang.Nullable;
 
 import java.io.File;
@@ -25,21 +26,27 @@ public class PathUtil {
 	@Nullable
 	public static String getJarPath() {
 		try {
-			URL url = PathUtil.class.getResource("/").toURI().toURL();
+			URL url = PathUtil.class.getResource(StringConstant.SLASH).toURI().toURL();
 			return PathUtil.toFilePath(url);
 		} catch (Exception e) {
-			String path = PathUtil.class.getResource("").getPath();
+			String path = PathUtil.class.getResource(StringConstant.EMPTY).getPath();
 			return new File(path).getParentFile().getParentFile().getAbsolutePath();
 		}
 	}
 
+	/**
+	 * 转换为文件路径
+	 *
+	 * @param url 路径
+	 * @return {String}
+	 */
 	@Nullable
 	public static String toFilePath(@Nullable URL url) {
 		if (url == null) {
 			return null;
 		}
 		String protocol = url.getProtocol();
-		String file = UrlUtil.decodeURL(url.getPath(), Charsets.UTF_8);
+		String file = UrlUtil.decode(url.getPath(), Charsets.UTF_8);
 		if (FILE_PROTOCOL.equals(protocol)) {
 			return new File(file).getParentFile().getParentFile().getAbsolutePath();
 		} else if (JAR_PROTOCOL.equals(protocol) || ZIP_PROTOCOL.equals(protocol)) {

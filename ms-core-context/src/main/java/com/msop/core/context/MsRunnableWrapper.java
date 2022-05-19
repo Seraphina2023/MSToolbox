@@ -5,7 +5,6 @@ import org.slf4j.MDC;
 import org.springframework.lang.Nullable;
 
 import java.util.Map;
-import java.util.concurrent.Callable;
 
 /**
  * 多线程中传递 context 和mdc

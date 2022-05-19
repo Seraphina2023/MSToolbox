@@ -104,5 +104,4 @@ public class MappingApiJackson2HttpMessageConverter extends AbstractReadWriteJac
             generator.writeRaw(this.jsonPrefix);
         }
     }
-
 }
