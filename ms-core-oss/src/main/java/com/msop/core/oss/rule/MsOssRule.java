@@ -1,5 +1,6 @@
 package com.msop.core.oss.rule;
 
+import com.msop.core.secure.utils.AuthUtil;
 import com.msop.core.tool.constant.StringConstant;
 import com.msop.core.tool.utils.DateUtil;
 import com.msop.core.tool.utils.FileUtil;

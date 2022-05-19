@@ -1,5 +1,7 @@
 package com.msop.core.secure.utils;
 
+import com.msop.core.jwt.properties.JwtProperties;
+import com.msop.core.jwt.utils.JwtUtil;
 import com.msop.core.secure.constant.SecureConstant;
 import com.msop.core.secure.exception.SecureException;
 import com.msop.core.secure.model.MsUser;
@@ -29,257 +31,31 @@ import java.util.*;
  */
 public class SecureUtil extends AuthUtil {
 
-    private static final IClientDetailsService clientDetailsService;
-
-    static {
-        clientDetailsService = SpringUtil.getBean(IClientDetailsService.class);
-    }
+    private static IClientDetailsService clientDetailsService;
+    private static JwtProperties jwtProperties;
 
     /**
-     * 获取用户信息
+     * 获取客户端服务类
      *
-     * @return MsUser
+     * @return clientDetailsService
      */
-    public static MsUser getUser() {
-        HttpServletRequest request = WebUtil.getRequest();
-        if (request == null) {
-            return null;
+    private static IClientDetailsService getClientDetailsService() {
+        if (clientDetailsService == null) {
+            clientDetailsService = SpringUtil.getBean(IClientDetailsService.class);
         }
-        // 优先从request中获取
-        Object msUser = request.getAttribute(MS_USER_REQUEST_ATTR);
-        if (msUser == null) {
-            msUser = getUser(request);
-            if (msUser != null) {
-                // 设置到request中
-                request.setAttribute(MS_USER_REQUEST_ATTR, msUser);
-            }
+        return clientDetailsService;
+    }
+
+    /**
+     * 获取Jwt配置类
+     *
+     * @return jwtProperties
+     */
+    private static JwtProperties getJwtProperties() {
+        if (jwtProperties == null) {
+            jwtProperties = SpringUtil.getBean(JwtProperties.class);
         }
-        return (MsUser) msUser;
-    }
-
-    /**
-     * 获取用户信息
-     *
-     * @param request request
-     * @return MsUser
-     */
-    public static MsUser getUser(HttpServletRequest request) {
-        Claims claims = getClims(request);
-        if (claims == null) {
-            return null;
-        }
-        String clientId = Func.toStr(claims.get(TokenConstant.CLIENT_ID));
-        Long userId = Func.toLong(claims.get(TokenConstant.USER_ID));
-        String tenantId = Func.toStr(claims.get(TokenConstant.TENANT_ID));
-        String roleId = Func.toStr(claims.get(TokenConstant.ROLE_ID));
-        String deptId = Func.toStr(claims.get(TokenConstant.DEPT_ID));
-        String account = Func.toStr(claims.get(TokenConstant.ACCOUNT));
-        String roleName = Func.toStr(claims.get(TokenConstant.ROLE_NAME));
-        String userName = Func.toStr(claims.get(TokenConstant.USER_NAME));
-        MsUser user = new MsUser();
-        user.setClientId(clientId);
-        user.setUserId(userId);
-        user.setTenantId(tenantId);
-        user.setAccount(account);
-        user.setRoleId(roleId);
-        user.setDeptId(deptId);
-        user.setRoleName(roleName);
-        user.setUserName(userName);
-        return user;
-    }
-
-    /**
-     * 是否为超管
-     *
-     * @return boolean
-     */
-    public static boolean isAdministrator() {
-        return StringUtil.containsAny(getUserRole(), RoleConstant.ADMIN);
-    }
-
-    /**
-     * 获取用户ID
-     *
-     * @return userId
-     */
-    public static Long getUserId() {
-        MsUser user = getUser();
-        return (null == user) ? -1 : user.getUserId();
-    }
-
-    /**
-     * 获取用户ID
-     *
-     * @param request request
-     * @return userId
-     */
-    public static Long getUserId(HttpServletRequest request) {
-        MsUser user = getUser(request);
-        return (null == user) ? -1 : user.getUserId();
-    }
-
-    /**
-     * 获取用户账户
-     *
-     * @return userAccount
-     */
-    public static String getUserAccount() {
-        MsUser user = getUser();
-        return (null == user) ? StringConstant.EMPTY : user.getAccount();
-    }
-
-    /**
-     * 获取用户账户
-     *
-     * @param request request
-     * @return userAccount
-     */
-    public static String getUserAccount(HttpServletRequest request) {
-        MsUser user = getUser(request);
-        return (null == user) ? StringConstant.EMPTY : user.getAccount();
-    }
-
-    /**
-     * 获取用户名
-     *
-     * @return userAccount
-     */
-    public static String getUserName() {
-        MsUser user = getUser();
-        return (null == user) ? StringConstant.EMPTY : user.getAccount();
-    }
-
-    /**
-     * 获取用户名
-     *
-     * @param request request
-     * @return userAccount
-     */
-    public static String getUserName(HttpServletRequest request) {
-        MsUser user = getUser(request);
-        return (null == user) ? StringConstant.EMPTY : user.getUserName();
-    }
-
-    /**
-     * 获取用户角色
-     *
-     * @return userAccount
-     */
-    public static String getUserRole() {
-        MsUser user = getUser();
-        return (null == user) ? StringConstant.EMPTY : user.getRoleName();
-    }
-
-    /**
-     * 获取用户角色
-     *
-     * @param request request
-     * @return userAccount
-     */
-    public static String getUserRole(HttpServletRequest request) {
-        MsUser user = getUser(request);
-        return (null == user) ? StringConstant.EMPTY : user.getRoleName();
-    }
-
-    /**
-     * 获取租户ID
-     *
-     * @return userAccount
-     */
-    public static String getTenantId() {
-        MsUser user = getUser();
-        return (null == user) ? StringConstant.EMPTY : user.getTenantId();
-    }
-
-    /**
-     * 获取租户ID
-     *
-     * @param request request
-     * @return userAccount
-     */
-    public static String getTenantId(HttpServletRequest request) {
-        MsUser user = getUser(request);
-        return (null == user) ? StringConstant.EMPTY : user.getTenantId();
-    }
-
-    /**
-     * 获取客户端ID
-     *
-     * @return userAccount
-     */
-    public static String getClientId() {
-        MsUser user = getUser();
-        return (null == user) ? StringConstant.EMPTY : user.getClientId();
-    }
-
-    /**
-     * 获取客户端ID
-     *
-     * @param request request
-     * @return userAccount
-     */
-    public static String getClientId(HttpServletRequest request) {
-        MsUser user = getUser(request);
-        return (null == user) ? StringConstant.EMPTY : user.getClientId();
-    }
-
-    /**
-     * 获取Claims
-     *
-     * @param request request
-     * @return claims
-     */
-    public static Claims getClims(HttpServletRequest request) {
-        String auth = request.getHeader(TokenConstant.HEADER);
-        if (StringUtil.isNotBlank(auth) && auth.length() > TokenConstant.AUTH_LENGTH) {
-            String headStr = auth.substring(0, 6).toLowerCase();
-            if (headStr.compareTo(TokenConstant.BEARER) == 0) {
-                auth = auth.substring(7);
-                return SecureUtil.parseJWT(auth);
-            }
-        } else {
-            String parameter = request.getParameter(TokenConstant.HEADER);
-            if (StringUtil.isNotBlank(parameter)) {
-                return SecureUtil.parseJWT(parameter);
-            }
-        }
-        return null;
-    }
-
-    /**
-     * 获取请求头
-     *
-     * @return header
-     */
-    public static String getHeader() {
-        return getHeader(Objects.requireNonNull(WebUtil.getRequest()));
-    }
-
-    /**
-     * 获取请求头
-     *
-     * @param request request
-     * @return header
-     */
-    public static String getHeader(HttpServletRequest request) {
-        return request.getHeader(TokenConstant.HEADER);
-    }
-
-    /**
-     * 解析jsonWebToken
-     *
-     * @param jsonWebToken jsonWebToken
-     * @return Claims
-     */
-    public static Claims parseJWT(String jsonWebToken) {
-        try {
-            return Jwts.parserBuilder()
-                    .setSigningKey(Base64.getDecoder().decode(BASE64_SECUREITY)).build()
-                    .parseClaimsJws(jsonWebToken)
-                    .getBody();
-        } catch (Exception ex) {
-            return null;
-        }
+        return jwtProperties;
     }
 
     /**
@@ -310,7 +86,7 @@ public class SecureUtil extends AuthUtil {
         Date now = new Date(nowMillis);
 
         // 生成签名密钥
-        byte[] apiKeySecretBytes = Base64.getDecoder().decode(BASE64_SECUREITY);
+        byte[] apiKeySecretBytes = Base64.getDecoder().decode(JwtUtil.getBase64Security());
         Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
 
         // 添加构成JWT的类
@@ -342,6 +118,12 @@ public class SecureUtil extends AuthUtil {
         TokenInfo tokenInfo = new TokenInfo();
         tokenInfo.setToken(builder.compact());
         tokenInfo.setExpire((int) (expireMillis / 1000));
+        // Token 状态配置，仅在生成AccessToken时执行
+        if (getJwtProperties().getState() && TokenConstant.ACCESS_TOKEN.equals(tokenType)) {
+            String tenantId = String.valueOf(user.get(TokenConstant.TENANT_ID));
+            String userId = String.valueOf(user.get(TokenConstant.USER_ID));
+            JwtUtil.addAccessToken(tenantId, userId, tokenInfo.getToken(), tokenInfo.getExpire());
+        }
         return tokenInfo;
     }
 
@@ -402,7 +184,7 @@ public class SecureUtil extends AuthUtil {
      * @return clientDetails
      */
     private static IClientDetails clientDetails(String clientId) {
-        return clientDetailsService.loadClientByClientId(clientId);
+        return getClientDetailsService().loadClientByClientId(clientId);
     }
 
     /**

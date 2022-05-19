@@ -10,10 +10,15 @@
     <artifactId>ms-core-oss</artifactId>
     <name>${project.artifactId}</name>
     <dependencies>
-
+        <!-- MSToolbox -->
+        <dependency>
+            <groupId>com.msop</groupId>
+            <artifactId>ms-starter-auth</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.msop</groupId>
             <artifactId>ms-core-auto</artifactId>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>
