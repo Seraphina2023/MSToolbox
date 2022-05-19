@@ -19,11 +19,11 @@ public class ProtostuffUtil {
 	/**
 	 * 避免每次序列化都重新申请Buffer空间
 	 */
-	private static LinkedBuffer buffer = LinkedBuffer.allocate(LinkedBuffer.DEFAULT_BUFFER_SIZE);
+	private static final LinkedBuffer BUFFER = LinkedBuffer.allocate(LinkedBuffer.DEFAULT_BUFFER_SIZE);
 	/**
 	 * 缓存Schema
 	 */
-	private static Map<Class<?>, Schema<?>> schemaCache = new ConcurrentHashMap<>();
+	private static final Map<Class<?>, Schema<?>> SCHEMA_CACHE = new ConcurrentHashMap<>();
 
 	/**
 	 * 序列化方法，把指定对象序列化成字节数组
@@ -38,9 +38,9 @@ public class ProtostuffUtil {
 		Schema<T> schema = getSchema(clazz);
 		byte[] data;
 		try {
-			data = ProtostuffIOUtil.toByteArray(obj, schema, buffer);
+			data = ProtostuffIOUtil.toByteArray(obj, schema, BUFFER);
 		} finally {
-			buffer.clear();
+			BUFFER.clear();
 		}
 		return data;
 	}
@@ -68,13 +68,13 @@ public class ProtostuffUtil {
 	 */
 	@SuppressWarnings("unchecked")
 	private static <T> Schema<T> getSchema(Class<T> clazz) {
-		Schema<T> schema = (Schema<T>) schemaCache.get(clazz);
+		Schema<T> schema = (Schema<T>) SCHEMA_CACHE.get(clazz);
 		if (Objects.isNull(schema)) {
 			//这个schema通过RuntimeSchema进行懒创建并缓存
 			//所以可以一直调用RuntimeSchema.getSchema(),这个方法是线程安全的
 			schema = RuntimeSchema.getSchema(clazz);
 			if (Objects.nonNull(schema)) {
-				schemaCache.put(clazz, schema);
+				SCHEMA_CACHE.put(clazz, schema);
 			}
 		}
 		return schema;

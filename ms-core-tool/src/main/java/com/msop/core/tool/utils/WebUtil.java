@@ -1,8 +1,8 @@
 package com.msop.core.tool.utils;
 
 import com.msop.core.tool.constant.StringConstant;
-import com.msop.core.tool.jackson.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
+import com.msop.core.tool.jackson.JsonUtil;
 import org.springframework.http.MediaType;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
@@ -22,6 +22,8 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.Enumeration;
+import java.util.Objects;
+import java.util.function.Predicate;
 
 
 /**
@@ -33,8 +35,6 @@ import java.util.Enumeration;
 public class WebUtil extends org.springframework.web.util.WebUtils {
 
 	public static final String USER_AGENT_HEADER = "user-agent";
-
-	public static final String UN_KNOWN = "unknown";
 
 	/**
 	 * 判断是否ajax请求
@@ -94,7 +94,7 @@ public class WebUtil extends org.springframework.web.util.WebUtils {
 	 */
 	public static void setCookie(HttpServletResponse response, String name, @Nullable String value, int maxAgeInSeconds) {
 		Cookie cookie = new Cookie(name, value);
-		cookie.setPath("/");
+		cookie.setPath(StringConstant.SLASH);
 		cookie.setMaxAge(maxAgeInSeconds);
 		cookie.setHttpOnly(true);
 		response.addCookie(cookie);
@@ -117,7 +117,7 @@ public class WebUtil extends org.springframework.web.util.WebUtils {
 	 * @param result   结果对象
 	 */
 	public static void renderJson(HttpServletResponse response, Object result) {
-		renderJson(response, result, MediaType.APPLICATION_JSON_VALUE);
+		renderJson(response, result, MediaType.APPLICATION_JSON_UTF8_VALUE);
 	}
 
 	/**
@@ -146,6 +146,16 @@ public class WebUtil extends org.springframework.web.util.WebUtils {
 		return getIP(WebUtil.getRequest());
 	}
 
+	private static final String[] IP_HEADER_NAMES = new String[]{
+		"x-forwarded-for",
+		"Proxy-Client-IP",
+		"WL-Proxy-Client-IP",
+		"HTTP_CLIENT_IP",
+		"HTTP_X_FORWARDED_FOR"
+	};
+
+	private static final Predicate<String> IP_PREDICATE = (ip) -> StringUtil.isBlank(ip) || StringConstant.UNKNOWN.equalsIgnoreCase(ip);
+
 	/**
 	 * 获取ip
 	 *
@@ -153,109 +163,64 @@ public class WebUtil extends org.springframework.web.util.WebUtils {
 	 * @return {String}
 	 */
 	@Nullable
-	public static String getIP(HttpServletRequest request) {
-		Assert.notNull(request, "HttpServletRequest is null");
-		String ip = request.getHeader("X-Requested-For");
-		if (StringUtil.isBlank(ip) || UN_KNOWN.equalsIgnoreCase(ip)) {
-			ip = request.getHeader("X-Forwarded-For");
-		}
-		if (StringUtil.isBlank(ip) || UN_KNOWN.equalsIgnoreCase(ip)) {
-			ip = request.getHeader("Proxy-Client-IP");
-		}
-		if (StringUtil.isBlank(ip) || UN_KNOWN.equalsIgnoreCase(ip)) {
-			ip = request.getHeader("WL-Proxy-Client-IP");
-		}
-		if (StringUtil.isBlank(ip) || UN_KNOWN.equalsIgnoreCase(ip)) {
-			ip = request.getHeader("HTTP_CLIENT_IP");
-		}
-		if (StringUtil.isBlank(ip) || UN_KNOWN.equalsIgnoreCase(ip)) {
-			ip = request.getHeader("HTTP_X_FORWARDED_FOR");
-		}
-		if (StringUtil.isBlank(ip) || UN_KNOWN.equalsIgnoreCase(ip)) {
-			ip = request.getRemoteAddr();
-		}
-		return StringUtil.isBlank(ip) ? null : ip.split(",")[0];
-	}
-
-
-	/***
-	 * 获取 request 中 json 字符串的内容
-	 *
-	 * @param request request
-	 * @return 字符串内容
-	 */
-	public static String getRequestParamString(HttpServletRequest request) {
-		try {
-			return getRequestStr(request);
-		} catch (Exception ex) {
+	public static String getIP(@Nullable HttpServletRequest request) {
+		if (request == null) {
 			return StringConstant.EMPTY;
 		}
-	}
-
-	/**
-	 * 获取 request 请求内容
-	 *
-	 * @param request request
-	 * @return String
-	 * @throws IOException IOException
-	 */
-	public static String getRequestStr(HttpServletRequest request) throws IOException {
-		String queryString = request.getQueryString();
-		if (StringUtil.isNotBlank(queryString)) {
-			return new String(queryString.getBytes(Charsets.ISO_8859_1), Charsets.UTF_8).replaceAll("&amp;", "&").replaceAll("%22", "\"");
-		}
-		return getRequestStr(request, getRequestBytes(request));
-	}
-
-	/**
-	 * 获取 request 请求的 byte[] 数组
-	 *
-	 * @param request request
-	 * @return byte[]
-	 * @throws IOException IOException
-	 */
-	public static byte[] getRequestBytes(HttpServletRequest request) throws IOException {
-		int contentLength = request.getContentLength();
-		if (contentLength < 0) {
-			return null;
-		}
-		byte[] buffer = new byte[contentLength];
-		for (int i = 0; i < contentLength; ) {
-
-			int readlen = request.getInputStream().read(buffer, i, contentLength - i);
-			if (readlen == -1) {
+		String ip = null;
+		for (String ipHeader : IP_HEADER_NAMES) {
+			ip = request.getHeader(ipHeader);
+			if (!IP_PREDICATE.test(ip)) {
 				break;
 			}
-			i += readlen;
 		}
-		return buffer;
+		if (IP_PREDICATE.test(ip)) {
+			ip = request.getRemoteAddr();
+		}
+		return StringUtil.isBlank(ip) ? null : StringUtil.splitTrim(ip, StringConstant.COMMA)[0];
 	}
 
 	/**
-	 * 获取 request 请求内容
+	 * 获取请求头的值
 	 *
-	 * @param request request
-	 * @param buffer buffer
-	 * @return String
-	 * @throws IOException IOException
+	 * @param name 请求头名称
+	 * @return 请求头
 	 */
-	public static String getRequestStr(HttpServletRequest request, byte[] buffer) throws IOException {
-		String charEncoding = request.getCharacterEncoding();
-		if (charEncoding == null) {
-			charEncoding = StringConstant.UTF_8;
-		}
-		String str = new String(buffer, charEncoding).trim();
-		if (StringUtil.isBlank(str)) {
-			StringBuilder sb = new StringBuilder();
-			Enumeration<String> parameterNames = request.getParameterNames();
-			while (parameterNames.hasMoreElements()) {
-				String key = parameterNames.nextElement();
-				String value = request.getParameter(key);
-				StringUtil.appendBuilder(sb, key, "=", value, "&");
-			}
-			str = StringUtil.removeSuffix(sb.toString(), "&");
-		}
-		return str.replaceAll("&amp;", "&");
+	public static String getHeader(String name) {
+		HttpServletRequest request = getRequest();
+		return Objects.requireNonNull(request).getHeader(name);
+	}
+
+	/**
+	 * 获取请求头的值
+	 *
+	 * @param name 请求头名称
+	 * @return 请求头
+	 */
+	public static Enumeration<String> getHeaders(String name) {
+		HttpServletRequest request = getRequest();
+		return Objects.requireNonNull(request).getHeaders(name);
+	}
+
+	/**
+	 * 获取所有的请求头
+	 *
+	 * @return 请求头集合
+	 */
+	public static Enumeration<String> getHeaderNames() {
+		HttpServletRequest request = getRequest();
+		return Objects.requireNonNull(request).getHeaderNames();
+	}
+
+	/**
+	 * 获取请求参数
+	 *
+	 * @param name 请求参数名
+	 * @return 请求参数
+	 */
+	public static String getParameter(String name) {
+		HttpServletRequest request = getRequest();
+		return Objects.requireNonNull(request).getParameter(name);
 	}
 
 	/**

@@ -3,22 +3,30 @@ package com.msop.core.tool.utils;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.msop.core.tool.constant.StringConstant;
 import com.msop.core.tool.jackson.JsonUtil;
 import org.springframework.beans.BeansException;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.annotation.AnnotatedElementUtils;
+import org.springframework.core.convert.TypeDescriptor;
 import org.springframework.lang.Nullable;
+import org.springframework.util.PatternMatchUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.method.HandlerMethod;
 
 import java.io.Closeable;
+import java.io.File;
 import java.io.InputStream;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.nio.charset.Charset;
+import java.text.DecimalFormat;
 import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.Temporal;
 import java.time.temporal.TemporalAccessor;
@@ -26,16 +34,14 @@ import java.util.*;
 import java.util.function.Supplier;
 
 /**
- * 工具包集合，只做简单的调用，不删除原有工具类
+ * 工具包集合，工具类快捷方式
  *
- * @author L.cm
+ * @author ruozhuliufeng
  */
 public class Func {
 
 	/**
-	 * Checks that the specified object reference is not {@code null}. This
-	 * method is designed primarily for doing parameter validation in methods
-	 * and constructors, as demonstrated below:
+	 * 断言，必须不能为 null
 	 * <blockquote><pre>
 	 * public Foo(Bar bar) {
 	 *     this.bar = $.requireNotNull(bar);
@@ -52,10 +58,7 @@ public class Func {
 	}
 
 	/**
-	 * Checks that the specified object reference is not {@code null} and
-	 * throws a customized {@link NullPointerException} if it is. This method
-	 * is designed primarily for doing parameter validation in methods and
-	 * constructors with multiple parameters, as demonstrated below:
+	 * 断言，必须不能为 null
 	 * <blockquote><pre>
 	 * public Foo(Bar bar, Baz baz) {
 	 *     this.bar = $.requireNotNull(bar, "bar must not be null");
@@ -75,16 +78,12 @@ public class Func {
 	}
 
 	/**
-	 * Checks that the specified object reference is not {@code null} and
-	 * throws a customized {@link NullPointerException} if it is.
-	 *
-	 * <p>Unlike the method {@link #requireNotNull(Object, String)},
-	 * this method allows creation of the message to be deferred until
-	 * after the null check is made. While this may confer a
-	 * performance advantage in the non-null case, when deciding to
-	 * call this method care should be taken that the costs of
-	 * creating the message supplier are less than the cost of just
-	 * creating the string message directly.
+	 * 断言，必须不能为 null
+	 * <blockquote><pre>
+	 * public Foo(Bar bar, Baz baz) {
+	 *     this.bar = $.requireNotNull(bar, () -> "bar must not be null");
+	 * }
+	 * </pre></blockquote>
 	 *
 	 * @param obj             the object reference to check for nullity
 	 * @param messageSupplier supplier of the detail message to be
@@ -92,41 +91,38 @@ public class Func {
 	 * @param <T>             the type of the reference
 	 * @return {@code obj} if not {@code null}
 	 * @throws NullPointerException if {@code obj} is {@code null}
-	 * @since 1.8
 	 */
 	public static <T> T requireNotNull(T obj, Supplier<String> messageSupplier) {
 		return Objects.requireNonNull(obj, messageSupplier);
 	}
 
 	/**
-	 * Returns {@code true} if the provided reference is {@code null} otherwise
-	 * returns {@code false}.
+	 * 判断对象是否为null
 	 * <p>
 	 * This method exists to be used as a
 	 * {@link java.util.function.Predicate}, {@code filter($::isNull)}
+	 * </p>
 	 *
 	 * @param obj a reference to be checked against {@code null}
 	 * @return {@code true} if the provided reference is {@code null} otherwise
 	 * {@code false}
 	 * @see java.util.function.Predicate
-	 * @since 1.8
 	 */
 	public static boolean isNull(@Nullable Object obj) {
 		return Objects.isNull(obj);
 	}
 
 	/**
-	 * Returns {@code true} if the provided reference is non-{@code null}
-	 * otherwise returns {@code false}.
+	 * 判断对象是否 not null
 	 * <p>
 	 * This method exists to be used as a
 	 * {@link java.util.function.Predicate}, {@code filter($::notNull)}
+	 * </p>
 	 *
 	 * @param obj a reference to be checked against {@code null}
 	 * @return {@code true} if the provided reference is non-{@code null}
 	 * otherwise {@code false}
 	 * @see java.util.function.Predicate
-	 * @since 1.8
 	 */
 	public static boolean notNull(@Nullable Object obj) {
 		return Objects.nonNull(obj);
@@ -139,7 +135,7 @@ public class Func {
 	 * @return {String}
 	 */
 	public static String firstCharToLower(String str) {
-		return StringUtil.lowerFirst(str);
+		return StringUtil.firstCharToLower(str);
 	}
 
 	/**
@@ -149,14 +145,11 @@ public class Func {
 	 * @return {String}
 	 */
 	public static String firstCharToUpper(String str) {
-		return StringUtil.upperFirst(str);
+		return StringUtil.firstCharToUpper(str);
 	}
 
 	/**
-	 * Check whether the given {@code CharSequence} contains actual <em>text</em>.
-	 * <p>More specifically, this method returns {@code true} if the
-	 * {@code CharSequence} is not {@code null}, its length is greater than
-	 * 0, and it contains at least one non-whitespace character.
+	 * 判断是否为空字符串
 	 * <pre class="code">
 	 * $.isBlank(null)		= true
 	 * $.isBlank("")		= true
@@ -175,7 +168,7 @@ public class Func {
 	}
 
 	/**
-	 * <p>Checks if a CharSequence is not empty (""), not null and not whitespace only.</p>
+	 * 判断不为空字符串
 	 * <pre>
 	 * $.isNotBlank(null)	= false
 	 * $.isNotBlank("")		= false
@@ -194,7 +187,7 @@ public class Func {
 	}
 
 	/**
-	 * 有 任意 一个 Blank
+	 * 判断是否有任意一个 空字符串
 	 *
 	 * @param css CharSequence
 	 * @return boolean
@@ -204,7 +197,7 @@ public class Func {
 	}
 
 	/**
-	 * 是否全非 Blank
+	 * 判断是否全为非空字符串
 	 *
 	 * @param css CharSequence
 	 * @return boolean
@@ -214,8 +207,7 @@ public class Func {
 	}
 
 	/**
-	 * Determine whether the given object is an array:
-	 * either an Object array or a primitive array.
+	 * 判断对象是数组
 	 *
 	 * @param obj the object to check
 	 * @return 是否数组
@@ -225,8 +217,7 @@ public class Func {
 	}
 
 	/**
-	 * Determine whether the given object is empty:
-	 * i.e. {@code null} or of zero length.
+	 * 判断空对象 object、map、list、set、字符串、数组
 	 *
 	 * @param obj the object to check
 	 * @return 数组是否为空
@@ -236,8 +227,7 @@ public class Func {
 	}
 
 	/**
-	 * Determine whether the given object is not empty:
-	 * i.e. {@code null} or of zero length.
+	 * 对象不为空 object、map、list、set、字符串、数组
 	 *
 	 * @param obj the object to check
 	 * @return 是否不为空
@@ -247,8 +237,7 @@ public class Func {
 	}
 
 	/**
-	 * Determine whether the given array is empty:
-	 * i.e. {@code null} or of zero length.
+	 * 判断数组为空
 	 *
 	 * @param array the array to check
 	 * @return 数组是否为空
@@ -283,18 +272,44 @@ public class Func {
 	}
 
 	/**
-	 * 对象组中是否全是 Empty Object
+	 * 对象组中是否全部为 Empty Object
 	 *
 	 * @param os 对象组
 	 * @return boolean
 	 */
-	public static boolean allEmpty(Object... os) {
+	public static boolean isAllEmpty(Object... os) {
 		for (Object o : os) {
-			if (!isEmpty(o)) {
+			if (isNotEmpty(o)) {
 				return false;
 			}
 		}
 		return true;
+	}
+
+	/**
+	 * 将字符串中特定模式的字符转换成map中对应的值
+	 * <p>
+	 * use: format("my name is ${name}, and i like ${like}!", {"name":"L.cm", "like": "Java"})
+	 *
+	 * @param message 需要转换的字符串
+	 * @param params  转换所需的键值对集合
+	 * @return 转换后的字符串
+	 */
+	public static String format(@Nullable String message, @Nullable Map<String, Object> params) {
+		return StringUtil.format(message, params);
+	}
+
+	/**
+	 * 同 log 格式的 format 规则
+	 * <p>
+	 * use: format("my name is {}, and i like {}!", "L.cm", "Java")
+	 *
+	 * @param message   需要转换的字符串
+	 * @param arguments 需要替换的变量
+	 * @return 转换后的字符串
+	 */
+	public static String format(@Nullable String message, @Nullable Object... arguments) {
+		return StringUtil.format(message, arguments);
 	}
 
 	/**
@@ -310,10 +325,7 @@ public class Func {
 	}
 
 	/**
-	 * Determine if the given objects are equal, returning {@code true} if
-	 * both are {@code null} or {@code false} if only one is {@code null}.
-	 * <p>Compares arrays with {@code Arrays.equals}, performing an equality
-	 * check based on the array elements rather than the array reference.
+	 * 安全的 equals
 	 *
 	 * @param o1 first Object to compare
 	 * @param o2 second Object to compare
@@ -326,7 +338,7 @@ public class Func {
 	}
 
 	/**
-	 * Check whether the given Array contains the given element.
+	 * 判断数组中是否包含元素
 	 *
 	 * @param array   the Array to check
 	 * @param element the element to look for
@@ -338,7 +350,7 @@ public class Func {
 	}
 
 	/**
-	 * Check whether the given Iterator contains the given element.
+	 * 判断迭代器中是否包含元素
 	 *
 	 * @param iterator the Iterator to check
 	 * @param element  the element to look for
@@ -349,7 +361,7 @@ public class Func {
 	}
 
 	/**
-	 * Check whether the given Enumeration contains the given element.
+	 * 判断枚举是否包含该元素
 	 *
 	 * @param enumeration the Enumeration to check
 	 * @param element     the element to look for
@@ -360,10 +372,34 @@ public class Func {
 	}
 
 	/**
+	 * 不可变 Set
+	 *
+	 * @param es  对象
+	 * @param <E> 泛型
+	 * @return 集合
+	 */
+	@SafeVarargs
+	public static <E> Set<E> ofImmutableSet(E... es) {
+		return CollectionUtil.ofImmutableSet(es);
+	}
+
+	/**
+	 * 不可变 List
+	 *
+	 * @param es  对象
+	 * @param <E> 泛型
+	 * @return 集合
+	 */
+	@SafeVarargs
+	public static <E> List<E> ofImmutableList(E... es) {
+		return CollectionUtil.ofImmutableList(es);
+	}
+
+	/**
 	 * 强转string,并去掉多余空格
 	 *
 	 * @param str 字符串
-	 * @return String
+	 * @return {String}
 	 */
 	public static String toStr(Object str) {
 		return toStr(str, "");
@@ -374,14 +410,29 @@ public class Func {
 	 *
 	 * @param str          字符串
 	 * @param defaultValue 默认值
-	 * @return String
+	 * @return {String}
 	 */
 	public static String toStr(Object str, String defaultValue) {
-		if (null == str) {
+		if (null == str || str.equals(StringConstant.NULL)) {
 			return defaultValue;
 		}
 		return String.valueOf(str);
 	}
+
+	/**
+	 * 强转string(包含空字符串),并去掉多余空格
+	 *
+	 * @param str          字符串
+	 * @param defaultValue 默认值
+	 * @return {String}
+	 */
+	public static String toStrWithEmpty(Object str, String defaultValue) {
+		if (null == str || str.equals(StringConstant.NULL) || str.equals(StringConstant.EMPTY)) {
+			return defaultValue;
+		}
+		return String.valueOf(str);
+	}
+
 
 	/**
 	 * 判断一个字符串是否是数字
@@ -394,10 +445,7 @@ public class Func {
 	}
 
 	/**
-	 * <p>Convert a <code>String</code> to an <code>int</code>, returning
-	 * <code>zero</code> if the conversion fails.</p>
-	 *
-	 * <p>If the string is <code>null</code>, <code>zero</code> is returned.</p>
+	 * 字符串转 int，为空则返回0
 	 *
 	 * <pre>
 	 *   $.toInt(null) = 0
@@ -405,19 +453,16 @@ public class Func {
 	 *   $.toInt("1")  = 1
 	 * </pre>
 	 *
-	 * @param value the string to convert, may be null
+	 * @param str the string to convert, may be null
 	 * @return the int represented by the string, or <code>zero</code> if
 	 * conversion fails
 	 */
-	public static int toInt(final Object value) {
-		return NumberUtil.toInt(String.valueOf(value));
+	public static int toInt(final Object str) {
+		return NumberUtil.toInt(String.valueOf(str));
 	}
 
 	/**
-	 * <p>Convert a <code>String</code> to an <code>int</code>, returning a
-	 * default value if the conversion fails.</p>
-	 *
-	 * <p>If the string is <code>null</code>, the default value is returned.</p>
+	 * 字符串转 int，为空则返回默认值
 	 *
 	 * <pre>
 	 *   $.toInt(null, 1) = 1
@@ -425,19 +470,16 @@ public class Func {
 	 *   $.toInt("1", 0)  = 1
 	 * </pre>
 	 *
-	 * @param value        the string to convert, may be null
+	 * @param str          the string to convert, may be null
 	 * @param defaultValue the default value
 	 * @return the int represented by the string, or the default if conversion fails
 	 */
-	public static int toInt(final Object value, final int defaultValue) {
-		return NumberUtil.toInt(String.valueOf(value), defaultValue);
+	public static int toInt(@Nullable final Object str, final int defaultValue) {
+		return NumberUtil.toInt(String.valueOf(str), defaultValue);
 	}
 
 	/**
-	 * <p>Convert a <code>String</code> to a <code>long</code>, returning
-	 * <code>zero</code> if the conversion fails.</p>
-	 *
-	 * <p>If the string is <code>null</code>, <code>zero</code> is returned.</p>
+	 * 字符串转 long，为空则返回0
 	 *
 	 * <pre>
 	 *   $.toLong(null) = 0L
@@ -445,19 +487,16 @@ public class Func {
 	 *   $.toLong("1")  = 1L
 	 * </pre>
 	 *
-	 * @param value the string to convert, may be null
+	 * @param str the string to convert, may be null
 	 * @return the long represented by the string, or <code>0</code> if
 	 * conversion fails
 	 */
-	public static long toLong(final Object value) {
-		return NumberUtil.toLong(String.valueOf(value));
+	public static long toLong(final Object str) {
+		return NumberUtil.toLong(String.valueOf(str));
 	}
 
 	/**
-	 * <p>Convert a <code>String</code> to a <code>long</code>, returning a
-	 * default value if the conversion fails.</p>
-	 *
-	 * <p>If the string is <code>null</code>, the default value is returned.</p>
+	 * 字符串转 long，为空则返回默认值
 	 *
 	 * <pre>
 	 *   $.toLong(null, 1L) = 1L
@@ -465,12 +504,12 @@ public class Func {
 	 *   $.toLong("1", 0L)  = 1L
 	 * </pre>
 	 *
-	 * @param value        the string to convert, may be null
+	 * @param str          the string to convert, may be null
 	 * @param defaultValue the default value
 	 * @return the long represented by the string, or the default if conversion fails
 	 */
-	public static long toLong(final Object value, final long defaultValue) {
-		return NumberUtil.toLong(String.valueOf(value), defaultValue);
+	public static long toLong(@Nullable final Object str, final long defaultValue) {
+		return NumberUtil.toLong(String.valueOf(str), defaultValue);
 	}
 
 	/**
@@ -647,6 +686,32 @@ public class Func {
 	}
 
 	/**
+	 * 获取第一位Integer数值
+	 *
+	 * @param str 被转换的值
+	 * @return 结果
+	 */
+	public static Integer firstInt(String str) {
+		return firstInt(",", str);
+	}
+
+	/**
+	 * 获取第一位Integer数值
+	 *
+	 * @param split 分隔符
+	 * @param str   被转换的值
+	 * @return 结果
+	 */
+	public static Integer firstInt(String split, String str) {
+		List<Integer> ints = toIntList(split, str);
+		if (isEmpty(ints)) {
+			return null;
+		} else {
+			return ints.get(0);
+		}
+	}
+
+	/**
 	 * 转换为Long数组<br>
 	 *
 	 * @param str 被转换的值
@@ -698,6 +763,32 @@ public class Func {
 	}
 
 	/**
+	 * 获取第一位Long数值
+	 *
+	 * @param str 被转换的值
+	 * @return 结果
+	 */
+	public static Long firstLong(String str) {
+		return firstLong(",", str);
+	}
+
+	/**
+	 * 获取第一位Long数值
+	 *
+	 * @param split 分隔符
+	 * @param str   被转换的值
+	 * @return 结果
+	 */
+	public static Long firstLong(String split, String str) {
+		List<Long> longs = toLongList(split, str);
+		if (isEmpty(longs)) {
+			return null;
+		} else {
+			return longs.get(0);
+		}
+	}
+
+	/**
 	 * 转换为String数组<br>
 	 *
 	 * @param str 被转换的值
@@ -743,6 +834,32 @@ public class Func {
 	}
 
 	/**
+	 * 获取第一位String数值
+	 *
+	 * @param str 被转换的值
+	 * @return 结果
+	 */
+	public static String firstStr(String str) {
+		return firstStr(",", str);
+	}
+
+	/**
+	 * 获取第一位String数值
+	 *
+	 * @param split 分隔符
+	 * @param str   被转换的值
+	 * @return 结果
+	 */
+	public static String firstStr(String split, String str) {
+		List<String> strs = toStrList(split, str);
+		if (isEmpty(strs)) {
+			return null;
+		} else {
+			return strs.get(0);
+		}
+	}
+
+	/**
 	 * 将 long 转短字符串 为 62 进制
 	 *
 	 * @param num 数字
@@ -753,8 +870,7 @@ public class Func {
 	}
 
 	/**
-	 * Convert a {@code Collection} into a delimited {@code String} (e.g., CSV).
-	 * <p>Useful for {@code toString()} implementations.
+	 * 将集合拼接成字符串，默认使用`,`拼接
 	 *
 	 * @param coll the {@code Collection} to convert
 	 * @return the delimited {@code String}
@@ -764,8 +880,7 @@ public class Func {
 	}
 
 	/**
-	 * Convert a {@code Collection} into a delimited {@code String} (e.g. CSV).
-	 * <p>Useful for {@code toString()} implementations.
+	 * 将集合拼接成字符串，默认指定分隔符
 	 *
 	 * @param coll  the {@code Collection} to convert
 	 * @param delim the delimiter to use (typically a ",")
@@ -776,9 +891,7 @@ public class Func {
 	}
 
 	/**
-	 * Convert a {@code String} array into a comma delimited {@code String}
-	 * (i.e., CSV).
-	 * <p>Useful for {@code toString()} implementations.
+	 * 将数组拼接成字符串，默认使用`,`拼接
 	 *
 	 * @param arr the array to display
 	 * @return the delimited {@code String}
@@ -788,8 +901,7 @@ public class Func {
 	}
 
 	/**
-	 * Convert a {@code String} array into a delimited {@code String} (e.g. CSV).
-	 * <p>Useful for {@code toString()} implementations.
+	 * 将数组拼接成字符串，默认指定分隔符
 	 *
 	 * @param arr   the array to display
 	 * @param delim the delimiter to use (typically a ",")
@@ -797,6 +909,91 @@ public class Func {
 	 */
 	public static String join(Object[] arr, String delim) {
 		return StringUtil.join(arr, delim);
+	}
+
+	/**
+	 * 切分字符串，不去除切分后每个元素两边的空白符，不去除空白项
+	 *
+	 * @param str       被切分的字符串
+	 * @param separator 分隔符字符
+	 * @return 切分后的集合
+	 */
+	public static List<String> split(CharSequence str, char separator) {
+		return StringUtil.split(str, separator, -1);
+	}
+
+	/**
+	 * 切分字符串，去除切分后每个元素两边的空白符，去除空白项
+	 *
+	 * @param str       被切分的字符串
+	 * @param separator 分隔符字符
+	 * @return 切分后的集合
+	 */
+	public static List<String> splitTrim(CharSequence str, char separator) {
+		return StringUtil.splitTrim(str, separator);
+	}
+
+	/**
+	 * 切分字符串，去除切分后每个元素两边的空白符，去除空白项
+	 *
+	 * @param str       被切分的字符串
+	 * @param separator 分隔符字符
+	 * @return 切分后的集合
+	 */
+	public static List<String> splitTrim(CharSequence str, CharSequence separator) {
+		return StringUtil.splitTrim(str, separator);
+	}
+
+	/**
+	 * 分割 字符串
+	 *
+	 * @param str       字符串
+	 * @param delimiter 分割符
+	 * @return 字符串数组
+	 */
+	public static String[] split(@Nullable String str, @Nullable String delimiter) {
+		return StringUtil.delimitedListToStringArray(str, delimiter);
+	}
+
+	/**
+	 * 分割 字符串 删除常见 空白符
+	 *
+	 * @param str       字符串
+	 * @param delimiter 分割符
+	 * @return 字符串数组
+	 */
+	public static String[] splitTrim(@Nullable String str, @Nullable String delimiter) {
+		return StringUtil.delimitedListToStringArray(str, delimiter, " \t\n\n\f");
+	}
+
+	/**
+	 * 字符串是否符合指定的 表达式
+	 *
+	 * <p>
+	 * pattern styles: "xxx*", "*xxx", "*xxx*" and "xxx*yyy"
+	 * </p>
+	 *
+	 * @param pattern 表达式
+	 * @param str     字符串
+	 * @return 是否匹配
+	 */
+	public static boolean simpleMatch(@Nullable String pattern, @Nullable String str) {
+		return PatternMatchUtils.simpleMatch(pattern, str);
+	}
+
+	/**
+	 * 字符串是否符合指定的 表达式
+	 *
+	 * <p>
+	 * pattern styles: "xxx*", "*xxx", "*xxx*" and "xxx*yyy"
+	 * </p>
+	 *
+	 * @param patterns 表达式 数组
+	 * @param str      字符串
+	 * @return 是否匹配
+	 */
+	public static boolean simpleMatch(@Nullable String[] patterns, String str) {
+		return PatternMatchUtils.simpleMatch(patterns, str);
 	}
 
 	/**
@@ -840,7 +1037,7 @@ public class Func {
 	}
 
 	/**
-	 * Calculates the MD5 digest and returns the value as a 32 character hex string.
+	 * 字符串序列化成 md5
 	 *
 	 * @param data Data to digest
 	 * @return MD5 digest as a hex string
@@ -850,43 +1047,270 @@ public class Func {
 	}
 
 	/**
-	 * Return a hexadecimal string representation of the MD5 digest of the given bytes.
+	 * 数组序列化成 md5
 	 *
 	 * @param bytes the bytes to calculate the digest over
-	 * @return a hexadecimal digest string
+	 * @return md5 digest string
 	 */
 	public static String md5Hex(final byte[] bytes) {
 		return DigestUtil.md5Hex(bytes);
 	}
 
-	public static String sha1(String srcStr) {
-		return DigestUtil.sha1(srcStr);
-	}
-
-	public static String sha256(String srcStr) {
-		return DigestUtil.sha256(srcStr);
-	}
-
-	public static String sha384(String srcStr) {
-		return DigestUtil.sha384(srcStr);
-	}
-
-	public static String sha512(String srcStr) {
-		return DigestUtil.sha512(srcStr);
-	}
 
 	/**
-	 * 自定义加密 先MD5再SHA1
+	 * sha1Hex
 	 *
-	 * @param data 字符串
-	 * @return String
+	 * @param data Data to digest
+	 * @return digest as a hex string
 	 */
-	public static String encrypt(String data) {
-		return DigestUtil.encrypt(data);
+	public static String sha1Hex(String data) {
+		return DigestUtil.sha1Hex(data);
 	}
 
 	/**
-	 * 编码
+	 * sha1Hex
+	 *
+	 * @param bytes Data to digest
+	 * @return digest as a hex string
+	 */
+	public static String sha1Hex(final byte[] bytes) {
+		return DigestUtil.sha1Hex(bytes);
+	}
+
+	/**
+	 * SHA224Hex
+	 *
+	 * @param data Data to digest
+	 * @return digest as a hex string
+	 */
+	public static String sha224Hex(String data) {
+		return DigestUtil.sha224Hex(data);
+	}
+
+	/**
+	 * SHA224Hex
+	 *
+	 * @param bytes Data to digest
+	 * @return digest as a hex string
+	 */
+	public static String sha224Hex(final byte[] bytes) {
+		return DigestUtil.sha224Hex(bytes);
+	}
+
+	/**
+	 * sha256Hex
+	 *
+	 * @param data Data to digest
+	 * @return digest as a hex string
+	 */
+	public static String sha256Hex(String data) {
+		return DigestUtil.sha256Hex(data);
+	}
+
+	/**
+	 * sha256Hex
+	 *
+	 * @param bytes Data to digest
+	 * @return digest as a hex string
+	 */
+	public static String sha256Hex(final byte[] bytes) {
+		return DigestUtil.sha256Hex(bytes);
+	}
+
+	/**
+	 * sha384Hex
+	 *
+	 * @param data Data to digest
+	 * @return digest as a hex string
+	 */
+	public static String sha384Hex(String data) {
+		return DigestUtil.sha384Hex(data);
+	}
+
+	/**
+	 * sha384Hex
+	 *
+	 * @param bytes Data to digest
+	 * @return digest as a hex string
+	 */
+	public static String sha384Hex(final byte[] bytes) {
+		return DigestUtil.sha384Hex(bytes);
+	}
+
+	/**
+	 * sha512Hex
+	 *
+	 * @param data Data to digest
+	 * @return digest as a hex string
+	 */
+	public static String sha512Hex(String data) {
+		return DigestUtil.sha512Hex(data);
+	}
+
+	/**
+	 * sha512Hex
+	 *
+	 * @param bytes Data to digest
+	 * @return digest as a hex string
+	 */
+	public static String sha512Hex(final byte[] bytes) {
+		return DigestUtil.sha512Hex(bytes);
+	}
+
+	/**
+	 * hmacMd5 Hex
+	 *
+	 * @param data Data to digest
+	 * @param key  key
+	 * @return digest as a hex string
+	 */
+	public static String hmacMd5Hex(String data, String key) {
+		return DigestUtil.hmacMd5Hex(data, key);
+	}
+
+	/**
+	 * hmacMd5 Hex
+	 *
+	 * @param bytes Data to digest
+	 * @param key   key
+	 * @return digest as a hex string
+	 */
+	public static String hmacMd5Hex(final byte[] bytes, String key) {
+		return DigestUtil.hmacMd5Hex(bytes, key);
+	}
+
+	/**
+	 * hmacSha1 Hex
+	 *
+	 * @param data Data to digest
+	 * @param key  key
+	 * @return digest as a hex string
+	 */
+	public static String hmacSha1Hex(String data, String key) {
+		return DigestUtil.hmacSha1Hex(data, key);
+	}
+
+	/**
+	 * hmacSha1 Hex
+	 *
+	 * @param bytes Data to digest
+	 * @param key   key
+	 * @return digest as a hex string
+	 */
+	public static String hmacSha1Hex(final byte[] bytes, String key) {
+		return DigestUtil.hmacSha1Hex(bytes, key);
+	}
+
+	/**
+	 * hmacSha224 Hex
+	 *
+	 * @param data Data to digest
+	 * @param key  key
+	 * @return digest as a hex string
+	 */
+	public static String hmacSha224Hex(String data, String key) {
+		return DigestUtil.hmacSha224Hex(data, key);
+	}
+
+	/**
+	 * hmacSha224 Hex
+	 *
+	 * @param bytes Data to digest
+	 * @param key   key
+	 * @return digest as a hex string
+	 */
+	public static String hmacSha224Hex(final byte[] bytes, String key) {
+		return DigestUtil.hmacSha224Hex(bytes, key);
+	}
+
+	/**
+	 * hmacSha256 Hex
+	 *
+	 * @param data Data to digest
+	 * @param key  key
+	 * @return digest as a hex string
+	 */
+	public static String hmacSha256Hex(String data, String key) {
+		return DigestUtil.hmacSha256Hex(data, key);
+	}
+
+	/**
+	 * hmacSha256 Hex
+	 *
+	 * @param bytes Data to digest
+	 * @param key   key
+	 * @return digest as a hex string
+	 */
+	public static String hmacSha256Hex(final byte[] bytes, String key) {
+		return DigestUtil.hmacSha256Hex(bytes, key);
+	}
+
+	/**
+	 * hmacSha384 Hex
+	 *
+	 * @param data Data to digest
+	 * @param key  key
+	 * @return digest as a hex string
+	 */
+	public static String hmacSha384Hex(String data, String key) {
+		return DigestUtil.hmacSha384Hex(data, key);
+	}
+
+	/**
+	 * hmacSha384 Hex
+	 *
+	 * @param bytes Data to digest
+	 * @param key   key
+	 * @return digest as a hex string
+	 */
+	public static String hmacSha384Hex(final byte[] bytes, String key) {
+		return DigestUtil.hmacSha384Hex(bytes, key);
+	}
+
+	/**
+	 * hmacSha512 Hex
+	 *
+	 * @param data Data to digest
+	 * @param key  key
+	 * @return digest as a hex string
+	 */
+	public static String hmacSha512Hex(String data, String key) {
+		return DigestUtil.hmacSha512Hex(data, key);
+	}
+
+	/**
+	 * hmacSha512 Hex
+	 *
+	 * @param bytes Data to digest
+	 * @param key   key
+	 * @return digest as a hex string
+	 */
+	public static String hmacSha512Hex(final byte[] bytes, String key) {
+		return DigestUtil.hmacSha512Hex(bytes, key);
+	}
+
+	/**
+	 * byte 数组序列化成 hex
+	 *
+	 * @param bytes bytes to encode
+	 * @return MD5 digest as a hex string
+	 */
+	public static String encodeHex(byte[] bytes) {
+		return DigestUtil.encodeHex(bytes);
+	}
+
+	/**
+	 * 字符串反序列化成 hex
+	 *
+	 * @param hexString String to decode
+	 * @return MD5 digest as a hex string
+	 */
+	public static byte[] decodeHex(final String hexString) {
+		return DigestUtil.decodeHex(hexString);
+	}
+
+	/**
+	 * Base64编码
 	 *
 	 * @param value 字符串
 	 * @return {String}
@@ -896,7 +1320,7 @@ public class Func {
 	}
 
 	/**
-	 * 编码
+	 * Base64编码
 	 *
 	 * @param value   字符串
 	 * @param charset 字符集
@@ -907,7 +1331,7 @@ public class Func {
 	}
 
 	/**
-	 * 编码URL安全
+	 * Base64编码为URL安全
 	 *
 	 * @param value 字符串
 	 * @return {String}
@@ -917,7 +1341,7 @@ public class Func {
 	}
 
 	/**
-	 * 编码URL安全
+	 * Base64编码为URL安全
 	 *
 	 * @param value   字符串
 	 * @param charset 字符集
@@ -928,7 +1352,7 @@ public class Func {
 	}
 
 	/**
-	 * 解码
+	 * Base64解码
 	 *
 	 * @param value 字符串
 	 * @return {String}
@@ -938,7 +1362,7 @@ public class Func {
 	}
 
 	/**
-	 * 解码
+	 * Base64解码
 	 *
 	 * @param value   字符串
 	 * @param charset 字符集
@@ -949,7 +1373,7 @@ public class Func {
 	}
 
 	/**
-	 * 解码URL安全
+	 * Base64URL安全解码
 	 *
 	 * @param value 字符串
 	 * @return {String}
@@ -959,7 +1383,7 @@ public class Func {
 	}
 
 	/**
-	 * 解码URL安全
+	 * Base64URL安全解码
 	 *
 	 * @param value   字符串
 	 * @param charset 字符集
@@ -970,7 +1394,7 @@ public class Func {
 	}
 
 	/**
-	 * closeQuietly
+	 * 关闭 Closeable
 	 *
 	 * @param closeable 自动关闭
 	 */
@@ -985,24 +1409,61 @@ public class Func {
 	 * @return the requested String
 	 * @throws NullPointerException if the input is null
 	 */
-	public static String toString(InputStream input) {
-		return IoUtil.toString(input);
+	public static String readToString(InputStream input) {
+		return IoUtil.readToString(input);
 	}
 
 	/**
 	 * InputStream to String
 	 *
 	 * @param input   the <code>InputStream</code> to read from
-	 * @param charset the <code>Charsets</code>
+	 * @param charset the <code>Charset</code>
 	 * @return the requested String
 	 * @throws NullPointerException if the input is null
 	 */
-	public static String toString(@Nullable InputStream input, Charset charset) {
-		return IoUtil.toString(input, charset);
+	public static String readToString(@Nullable InputStream input, Charset charset) {
+		return IoUtil.readToString(input, charset);
 	}
 
-	public static byte[] toByteArray(@Nullable InputStream input) {
-		return IoUtil.toByteArray(input);
+	/**
+	 * InputStream to bytes 数组
+	 *
+	 * @param input InputStream
+	 * @return the requested byte array
+	 */
+	public static byte[] readToByteArray(@Nullable InputStream input) {
+		return IoUtil.readToByteArray(input);
+	}
+
+	/**
+	 * 读取文件为字符串
+	 *
+	 * @param file the file to read, must not be {@code null}
+	 * @return the file contents, never {@code null}
+	 */
+	public static String readToString(final File file) {
+		return FileUtil.readToString(file);
+	}
+
+	/**
+	 * 读取文件为字符串
+	 *
+	 * @param file     the file to read, must not be {@code null}
+	 * @param encoding the encoding to use, {@code null} means platform default
+	 * @return the file contents, never {@code null}
+	 */
+	public static String readToString(File file, Charset encoding) {
+		return FileUtil.readToString(file, encoding);
+	}
+
+	/**
+	 * 读取文件为 byte 数组
+	 *
+	 * @param file the file to read, must not be {@code null}
+	 * @return the file contents, never {@code null}
+	 */
+	public static byte[] readToByteArray(File file) {
+		return FileUtil.readToByteArray(file);
 	}
 
 	/**
@@ -1073,7 +1534,7 @@ public class Func {
 	 * @param <T>       T 泛型标记
 	 * @return Bean
 	 */
-	public static <T> T parse(byte[] bytes, Class<T> valueType) {
+	public static <T> T readJson(byte[] bytes, Class<T> valueType) {
 		return JsonUtil.parse(bytes, valueType);
 	}
 
@@ -1085,7 +1546,7 @@ public class Func {
 	 * @param <T>        T 泛型标记
 	 * @return Bean
 	 */
-	public static <T> T parse(String jsonString, Class<T> valueType) {
+	public static <T> T readJson(String jsonString, Class<T> valueType) {
 		return JsonUtil.parse(jsonString, valueType);
 	}
 
@@ -1097,7 +1558,7 @@ public class Func {
 	 * @param <T>       T 泛型标记
 	 * @return Bean
 	 */
-	public static <T> T parse(InputStream in, Class<T> valueType) {
+	public static <T> T readJson(InputStream in, Class<T> valueType) {
 		return JsonUtil.parse(in, valueType);
 	}
 
@@ -1109,7 +1570,7 @@ public class Func {
 	 * @param <T>           T 泛型标记
 	 * @return Bean
 	 */
-	public static <T> T parse(byte[] bytes, TypeReference<T> typeReference) {
+	public static <T> T readJson(byte[] bytes, TypeReference<T> typeReference) {
 		return JsonUtil.parse(bytes, typeReference);
 	}
 
@@ -1121,7 +1582,7 @@ public class Func {
 	 * @param <T>           T 泛型标记
 	 * @return Bean
 	 */
-	public static <T> T parse(String jsonString, TypeReference<T> typeReference) {
+	public static <T> T readJson(String jsonString, TypeReference<T> typeReference) {
 		return JsonUtil.parse(jsonString, typeReference);
 	}
 
@@ -1133,42 +1594,33 @@ public class Func {
 	 * @param <T>           T 泛型标记
 	 * @return Bean
 	 */
-	public static <T> T parse(InputStream in, TypeReference<T> typeReference) {
+	public static <T> T readJson(InputStream in, TypeReference<T> typeReference) {
 		return JsonUtil.parse(in, typeReference);
 	}
 
 	/**
-	 * Encode all characters that are either illegal, or have any reserved
-	 * meaning, anywhere within a URI, as defined in
-	 * <a href="https://tools.ietf.org/html/rfc3986">RFC 3986</a>.
-	 * This is useful to ensure that the given String will be preserved as-is
-	 * and will not have any o impact on the structure or meaning of the URI.
+	 * url 编码
 	 *
 	 * @param source the String to be encoded
 	 * @return the encoded String
 	 */
-	public static String encode(String source) {
+	public static String urlEncode(String source) {
 		return UrlUtil.encode(source, Charsets.UTF_8);
 	}
 
 	/**
-	 * Encode all characters that are either illegal, or have any reserved
-	 * meaning, anywhere within a URI, as defined in
-	 * <a href="https://tools.ietf.org/html/rfc3986">RFC 3986</a>.
-	 * This is useful to ensure that the given String will be preserved as-is
-	 * and will not have any o impact on the structure or meaning of the URI.
+	 * url 编码
 	 *
 	 * @param source  the String to be encoded
 	 * @param charset the character encoding to encode to
 	 * @return the encoded String
 	 */
-	public static String encode(String source, Charset charset) {
+	public static String urlEncode(String source, Charset charset) {
 		return UrlUtil.encode(source, charset);
 	}
 
 	/**
-	 * Decode the given encoded URI component.
-	 * <p>See {@link StringUtils#uriDecode(String, Charset)} for the decoding rules.
+	 * url 解码
 	 *
 	 * @param source the encoded String
 	 * @return the decoded value
@@ -1176,13 +1628,12 @@ public class Func {
 	 * @see StringUtils#uriDecode(String, Charset)
 	 * @see java.net.URLDecoder#decode(String, String)
 	 */
-	public static String decode(String source) {
+	public static String urlDecode(String source) {
 		return StringUtils.uriDecode(source, Charsets.UTF_8);
 	}
 
 	/**
-	 * Decode the given encoded URI component.
-	 * <p>See {@link StringUtils#uriDecode(String, Charset)} for the decoding rules.
+	 * url 解码
 	 *
 	 * @param source  the encoded String
 	 * @param charset the character encoding to use
@@ -1191,7 +1642,7 @@ public class Func {
 	 * @see StringUtils#uriDecode(String, Charset)
 	 * @see java.net.URLDecoder#decode(String, String)
 	 */
-	public static String decode(String source, Charset charset) {
+	public static String urlDecode(String source, Charset charset) {
 		return StringUtils.uriDecode(source, charset);
 	}
 
@@ -1226,14 +1677,22 @@ public class Func {
 	}
 
 	/**
-	 * 日期格式化
+	 * 对象格式化 支持数字，date，java8时间
 	 *
-	 * @param date    时间
+	 * @param object  格式化对象
 	 * @param pattern 表达式
-	 * @return 格式化后的时间
+	 * @return 格式化后的字符串
 	 */
-	public static String format(Date date, String pattern) {
-		return DateUtil.format(date, pattern);
+	public static String format(Object object, String pattern) {
+		if (object instanceof Number) {
+			DecimalFormat decimalFormat = new DecimalFormat(pattern);
+			return decimalFormat.format(object);
+		} else if (object instanceof Date) {
+			return DateUtil.format((Date) object, pattern);
+		} else if (object instanceof TemporalAccessor) {
+			return DateTimeUtil.format((TemporalAccessor) object, pattern);
+		}
+		throw new IllegalArgumentException("未支持的对象:" + object + ",格式:" + object);
 	}
 
 	/**
@@ -1289,25 +1748,24 @@ public class Func {
 	}
 
 	/**
-	 * 日期格式化
+	 * 将字符串转换为时间
 	 *
-	 * @param temporal 时间
-	 * @param pattern  表达式
-	 * @return 格式化后的时间
+	 * @param dateStr   时间字符串
+	 * @param formatter DateTimeFormatter
+	 * @return 时间
 	 */
-	public static String format(TemporalAccessor temporal, String pattern) {
-		return DateTimeUtil.format(temporal, pattern);
+	public static LocalDateTime parseDateTime(String dateStr, DateTimeFormatter formatter) {
+		return DateTimeUtil.parseDateTime(dateStr, formatter);
 	}
 
 	/**
 	 * 将字符串转换为时间
 	 *
 	 * @param dateStr 时间字符串
-	 * @param pattern 表达式
 	 * @return 时间
 	 */
-	public static TemporalAccessor parse(String dateStr, String pattern) {
-		return DateTimeUtil.parse(dateStr, pattern);
+	public static LocalDateTime parseDateTime(String dateStr) {
+		return DateTimeUtil.parseDateTime(dateStr);
 	}
 
 	/**
@@ -1317,8 +1775,39 @@ public class Func {
 	 * @param formatter DateTimeFormatter
 	 * @return 时间
 	 */
-	public static TemporalAccessor parse(String dateStr, DateTimeFormatter formatter) {
-		return DateTimeUtil.parse(dateStr, formatter);
+	public static LocalDate parseDate(String dateStr, DateTimeFormatter formatter) {
+		return DateTimeUtil.parseDate(dateStr, formatter);
+	}
+
+	/**
+	 * 将字符串转换为日期
+	 *
+	 * @param dateStr 时间字符串
+	 * @return 时间
+	 */
+	public static LocalDate parseDate(String dateStr) {
+		return DateTimeUtil.parseDate(dateStr, DateTimeUtil.DATE_FORMAT);
+	}
+
+	/**
+	 * 将字符串转换为时间
+	 *
+	 * @param dateStr   时间字符串
+	 * @param formatter DateTimeFormatter
+	 * @return 时间
+	 */
+	public static LocalTime parseTime(String dateStr, DateTimeFormatter formatter) {
+		return DateTimeUtil.parseTime(dateStr, formatter);
+	}
+
+	/**
+	 * 将字符串转换为时间
+	 *
+	 * @param dateStr 时间字符串
+	 * @return 时间
+	 */
+	public static LocalTime parseTime(String dateStr) {
+		return DateTimeUtil.parseTime(dateStr);
 	}
 
 	/**
@@ -1330,6 +1819,63 @@ public class Func {
 	 */
 	public static Duration between(Temporal startInclusive, Temporal endExclusive) {
 		return Duration.between(startInclusive, endExclusive);
+	}
+
+	/**
+	 * 比较2个 时间差
+	 *
+	 * @param startDate 开始时间
+	 * @param endDate   结束时间
+	 * @return 时间间隔
+	 */
+	public static Duration between(Date startDate, Date endDate) {
+		return DateUtil.between(startDate, endDate);
+	}
+
+	/**
+	 * 对象类型转换
+	 *
+	 * @param source     the source object
+	 * @param targetType the target type
+	 * @param <T>        泛型标记
+	 * @return the converted value
+	 * @throws IllegalArgumentException if targetType is {@code null},
+	 *                                  or sourceType is {@code null} but source is not {@code null}
+	 */
+	@Nullable
+	public static <T> T convert(@Nullable Object source, Class<T> targetType) {
+		return ConvertUtil.convert(source, targetType);
+	}
+
+	/**
+	 * 对象类型转换
+	 *
+	 * @param source     the source object
+	 * @param sourceType the source type
+	 * @param targetType the target type
+	 * @param <T>        泛型标记
+	 * @return the converted value
+	 * @throws IllegalArgumentException if targetType is {@code null},
+	 *                                  or sourceType is {@code null} but source is not {@code null}
+	 */
+	@Nullable
+	public static <T> T convert(@Nullable Object source, TypeDescriptor sourceType, TypeDescriptor targetType) {
+		return ConvertUtil.convert(source, sourceType, targetType);
+	}
+
+	/**
+	 * 对象类型转换
+	 *
+	 * @param source     the source object
+	 * @param targetType the target type
+	 * @param <T>        泛型标记
+	 * @return the converted value
+	 * @throws IllegalArgumentException if targetType is {@code null},
+	 *                                  or sourceType is {@code null} but source is not {@code null}
+	 */
+	@Nullable
+	public static <T> T convert(@Nullable Object source, TypeDescriptor targetType) {
+		return ConvertUtil.convert(source, targetType);
 	}
 
 	/**
@@ -1355,7 +1901,7 @@ public class Func {
 	}
 
 	/**
-	 * 获取Annotation
+	 * 获取Annotation注解
 	 *
 	 * @param annotatedElement AnnotatedElement
 	 * @param annotationType   注解类
@@ -1368,7 +1914,7 @@ public class Func {
 	}
 
 	/**
-	 * 获取Annotation
+	 * 获取Annotation，先找方法，没有则再找方法上的类
 	 *
 	 * @param method         Method
 	 * @param annotationType 注解类
@@ -1381,7 +1927,7 @@ public class Func {
 	}
 
 	/**
-	 * 获取Annotation
+	 * 获取Annotation，先找HandlerMethod，没有则再找对应的类
 	 *
 	 * @param handlerMethod  HandlerMethod
 	 * @param annotationType 注解类
@@ -1423,7 +1969,8 @@ public class Func {
 	 * @param propertyName 属性名
 	 * @return 属性值
 	 */
-	public static Object getProperty(Object bean, String propertyName) {
+	@Nullable
+	public static Object getProperty(@Nullable Object bean, String propertyName) {
 		return BeanUtil.getProperty(bean, propertyName);
 	}
 
@@ -1439,50 +1986,101 @@ public class Func {
 	}
 
 	/**
-	 * 深复制
-	 * <p>
-	 * 注意：不支持链式Bean
+	 * 浅复制
 	 *
 	 * @param source 源对象
 	 * @param <T>    泛型标记
 	 * @return T
 	 */
-	public static <T> T clone(T source) {
+	@Nullable
+	public static <T> T clone(@Nullable T source) {
 		return BeanUtil.clone(source);
 	}
 
 	/**
-	 * copy 对象属性到另一个对象，默认不使用Convert
-	 * <p>
-	 * 注意：不支持链式Bean，链式用 copyProperties
+	 * 拷贝对象，支持 Map 和 Bean
 	 *
 	 * @param source 源对象
 	 * @param clazz  类名
 	 * @param <T>    泛型标记
 	 * @return T
 	 */
-	public static <T> T copy(Object source, Class<T> clazz) {
+	@Nullable
+	public static <T> T copy(@Nullable Object source, Class<T> clazz) {
 		return BeanUtil.copy(source, clazz);
 	}
 
 	/**
-	 * 拷贝对象
-	 * <p>
-	 * 注意：不支持链式Bean，链式用 copyProperties
+	 * 拷贝对象，支持 Map 和 Bean
 	 *
 	 * @param source     源对象
 	 * @param targetBean 需要赋值的对象
 	 */
-	public static void copy(Object source, Object targetBean) {
+	public static void copy(@Nullable Object source, @Nullable Object targetBean) {
 		BeanUtil.copy(source, targetBean);
 	}
 
 	/**
-	 * Copy the property values of the given source bean into the target class.
-	 * <p>Note: The source and target classes do not have to match or even be derived
-	 * from each other, as long as the properties match. Any bean properties that the
-	 * source bean exposes but the target bean does not will silently be ignored.
-	 * <p>This is just a convenience method. For more complex transfer needs,
+	 * 拷贝对象，source 对象属性做非 null 判断
+	 *
+	 * <p>
+	 * 支持 map bean copy
+	 * </p>
+	 *
+	 * @param source     源对象
+	 * @param targetBean 需要赋值的对象
+	 */
+	public static void copyNonNull(@Nullable Object source, @Nullable Object targetBean) {
+		BeanUtil.copyNonNull(source, targetBean);
+	}
+
+	/**
+	 * 拷贝对象，并对不同类型属性进行转换
+	 *
+	 * @param source 源对象
+	 * @param clazz  类名
+	 * @param <T>    泛型标记
+	 * @return T
+	 */
+	@Nullable
+	public static <T> T copyWithConvert(@Nullable Object source, Class<T> clazz) {
+		return BeanUtil.copyWithConvert(source, clazz);
+	}
+
+	/**
+	 * 拷贝列表对象
+	 *
+	 * <p>
+	 * 支持 map bean copy
+	 * </p>
+	 *
+	 * @param sourceList  源列表
+	 * @param targetClazz 转换成的类型
+	 * @param <T>         泛型标记
+	 * @return T
+	 */
+	public static <T> List<T> copy(@Nullable Collection<?> sourceList, Class<T> targetClazz) {
+		return BeanUtil.copy(sourceList, targetClazz);
+	}
+
+	/**
+	 * 拷贝列表对象，并对不同类型属性进行转换
+	 *
+	 * <p>
+	 * 支持 map bean copy
+	 * </p>
+	 *
+	 * @param sourceList  源对象列表
+	 * @param targetClazz 转换成的类
+	 * @param <T>         泛型标记
+	 * @return List
+	 */
+	public static <T> List<T> copyWithConvert(@Nullable Collection<?> sourceList, Class<T> targetClazz) {
+		return BeanUtil.copyWithConvert(sourceList, targetClazz);
+	}
+
+	/**
+	 * 拷贝对象，扩展 Spring 的拷贝方法
 	 *
 	 * @param source the source bean
 	 * @param clazz  the target bean class
@@ -1490,8 +2088,22 @@ public class Func {
 	 * @return T
 	 * @throws BeansException if the copying failed
 	 */
-	public static <T> T copyProperties(Object source, Class<T> clazz) throws BeansException {
+	@Nullable
+	public static <T> T copyProperties(@Nullable Object source, Class<T> clazz) throws BeansException {
 		return BeanUtil.copyProperties(source, clazz);
+	}
+
+	/**
+	 * 拷贝列表对象，扩展 Spring 的拷贝方法
+	 *
+	 * @param sourceList  the source list bean
+	 * @param targetClazz the target bean class
+	 * @param <T>         泛型标记
+	 * @return List
+	 * @throws BeansException if the copying failed
+	 */
+	public static <T> List<T> copyProperties(@Nullable Collection<?> sourceList, Class<T> targetClazz) throws BeansException {
+		return BeanUtil.copyProperties(sourceList, targetClazz);
 	}
 
 	/**
@@ -1500,7 +2112,7 @@ public class Func {
 	 * @param bean 源对象
 	 * @return {Map}
 	 */
-	public static Map<String, Object> toMap(Object bean) {
+	public static Map<String, Object> toMap(@Nullable Object bean) {
 		return BeanUtil.toMap(bean);
 	}
 

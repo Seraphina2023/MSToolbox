@@ -39,7 +39,7 @@ public class SuffixFileFilter implements FileFilter, Serializable {
 		return false;
 	}
 
-	public boolean checkEndsWith(final String str, final String end) {
+	private boolean checkEndsWith(final String str, final String end) {
 		final int endLen = end.length();
 		return str.regionMatches(true, str.length() - endLen, end, 0, endLen);
 	}

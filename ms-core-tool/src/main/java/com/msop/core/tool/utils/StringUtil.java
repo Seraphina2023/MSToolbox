@@ -2,10 +2,10 @@ package com.msop.core.tool.utils;
 
 import com.msop.core.tool.constant.CharConstant;
 import com.msop.core.tool.constant.StringConstant;
-import com.msop.core.tool.support.StrFormatter;
 import com.msop.core.tool.support.StrSpliter;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
+import org.springframework.util.PatternMatchUtils;
 import org.springframework.web.util.HtmlUtils;
 
 import java.io.StringReader;
@@ -13,6 +13,7 @@ import java.io.StringWriter;
 import java.text.MessageFormat;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 /**
@@ -92,6 +93,16 @@ public class StringUtil extends org.springframework.util.StringUtils {
 	}
 
 	/**
+	 * 是否全为 Blank
+	 *
+	 * @param css CharSequence
+	 * @return boolean
+	 */
+	public static boolean isAllBlank(final CharSequence... css) {
+		return Stream.of(css).allMatch(StringUtil::isBlank);
+	}
+
+	/**
 	 * 判断一个字符串是否是数字
 	 *
 	 * @param cs the CharSequence to check, may be null
@@ -108,6 +119,70 @@ public class StringUtil extends org.springframework.util.StringUtils {
 			}
 		}
 		return true;
+	}
+
+	/**
+	 * 将字符串中特定模式的字符转换成map中对应的值
+	 * <p>
+	 * use: format("my name is ${name}, and i like ${like}!", {"name":"L.cm", "like": "Java"})
+	 *
+	 * @param message 需要转换的字符串
+	 * @param params  转换所需的键值对集合
+	 * @return 转换后的字符串
+	 */
+	public static String format(@Nullable String message, @Nullable Map<String, Object> params) {
+		// message 为 null 返回空字符串
+		if (message == null) {
+			return StringConstant.EMPTY;
+		}
+		// 参数为 null 或者为空
+		if (params == null || params.isEmpty()) {
+			return message;
+		}
+		// 替换变量
+		StringBuilder sb = new StringBuilder((int) (message.length() * 1.5));
+		int cursor = 0;
+		for (int start, end; (start = message.indexOf(StringConstant.DOLLAR_LEFT_BRACE, cursor)) != -1 && (end = message.indexOf(StringConstant.RIGHT_BRACE, start)) != -1; ) {
+			sb.append(message, cursor, start);
+			String key = message.substring(start + 2, end);
+			Object value = params.get(StringUtil.trimWhitespace(key));
+			sb.append(value == null ? StringConstant.EMPTY : value);
+			cursor = end + 1;
+		}
+		sb.append(message.substring(cursor));
+		return sb.toString();
+	}
+
+	/**
+	 * 同 log 格式的 format 规则
+	 * <p>
+	 * use: format("my name is {}, and i like {}!", "L.cm", "Java")
+	 *
+	 * @param message   需要转换的字符串
+	 * @param arguments 需要替换的变量
+	 * @return 转换后的字符串
+	 */
+	public static String format(@Nullable String message, @Nullable Object... arguments) {
+		// message 为 null 返回空字符串
+		if (message == null) {
+			return StringConstant.EMPTY;
+		}
+		// 参数为 null 或者为空
+		if (arguments == null || arguments.length == 0) {
+			return message;
+		}
+		StringBuilder sb = new StringBuilder((int) (message.length() * 1.5));
+		int cursor = 0;
+		int index = 0;
+		int argsLength = arguments.length;
+		for (int start, end; (start = message.indexOf('{', cursor)) != -1 && (end = message.indexOf('}', start)) != -1 && index < argsLength; ) {
+			sb.append(message, cursor, start);
+			sb.append(arguments[index]);
+			cursor = end + 1;
+			index++;
+		}
+		sb.append(message.substring(cursor));
+		return sb.toString();
 	}
 
 	/**
@@ -158,6 +233,36 @@ public class StringUtil extends org.springframework.util.StringUtils {
 	}
 
 	/**
+	 * 字符串是否符合指定的 表达式
+	 *
+	 * <p>
+	 * pattern styles: "xxx*", "*xxx", "*xxx*" and "xxx*yyy"
+	 * </p>
+	 *
+	 * @param pattern 表达式
+	 * @param str     字符串
+	 * @return 是否匹配
+	 */
+	public static boolean simpleMatch(@Nullable String pattern, @Nullable String str) {
+		return PatternMatchUtils.simpleMatch(pattern, str);
+	}
+
+	/**
+	 * 字符串是否符合指定的 表达式
+	 *
+	 * <p>
+	 * pattern styles: "xxx*", "*xxx", "*xxx*" and "xxx*yyy"
+	 * </p>
+	 *
+	 * @param patterns 表达式 数组
+	 * @param str      字符串
+	 * @return 是否匹配
+	 */
+	public static boolean simpleMatch(@Nullable String[] patterns, String str) {
+		return PatternMatchUtils.simpleMatch(patterns, str);
+	}
+
+	/**
 	 * 生成uuid
 	 *
 	 * @return UUID
@@ -187,10 +292,45 @@ public class StringUtil extends org.springframework.util.StringUtils {
 		return txt.replaceAll("[ 　`·•�\\f\\t\\v\\s]", "");
 	}
 
+	/**
+	 * 特殊字符正则，sql特殊字符和空白符
+	 */
+	private final static Pattern SPECIAL_CHARS_REGEX = Pattern.compile("[`'\"|/,;()-+*%#·•�　\\s]");
 
-	private static final String S_INT = "0123456789";
-	private static final String S_STR = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-	private static final String S_ALL = S_INT + S_STR;
+	/**
+	 * 清理字符串，清理出某些不可见字符和一些sql特殊字符
+	 *
+	 * @param txt 文本
+	 * @return {String}
+	 */
+	@Nullable
+	public static String cleanText(@Nullable String txt) {
+		if (txt == null) {
+			return null;
+		}
+		return SPECIAL_CHARS_REGEX.matcher(txt).replaceAll(StringConstant.EMPTY);
+	}
+
+	/**
+	 * 获取标识符，用于参数清理
+	 *
+	 * @param param 参数
+	 * @return 清理后的标识符
+	 */
+	@Nullable
+	public static String cleanIdentifier(@Nullable String param) {
+		if (param == null) {
+			return null;
+		}
+		StringBuilder paramBuilder = new StringBuilder();
+		for (int i = 0; i < param.length(); i++) {
+			char c = param.charAt(i);
+			if (Character.isJavaIdentifierPart(c)) {
+				paramBuilder.append(c);
+			}
+		}
+		return paramBuilder.toString();
+	}
 
 	/**
 	 * 随机数生成
@@ -211,44 +351,16 @@ public class StringUtil extends org.springframework.util.StringUtils {
 	 */
 	public static String random(int count, RandomType randomType) {
 		if (count == 0) {
-			return "";
+			return StringConstant.EMPTY;
 		}
 		Assert.isTrue(count > 0, "Requested random string length " + count + " is less than 0.");
-		final ThreadLocalRandom random = ThreadLocalRandom.current();
+		final Random random = Holder.SECURE_RANDOM;
 		char[] buffer = new char[count];
 		for (int i = 0; i < count; i++) {
-			if (RandomType.INT == randomType) {
-				buffer[i] = S_INT.charAt(random.nextInt(S_INT.length()));
-			} else if (RandomType.STRING == randomType) {
-				buffer[i] = S_STR.charAt(random.nextInt(S_STR.length()));
-			} else {
-				buffer[i] = S_ALL.charAt(random.nextInt(S_ALL.length()));
-			}
+			String factor = randomType.getFactor();
+			buffer[i] = factor.charAt(random.nextInt(factor.length()));
 		}
 		return new String(buffer);
-	}
-
-	/**
-	 * 格式化文本, {} 表示占位符<br>
-	 * 此方法只是简单将占位符 {} 按照顺序替换为参数<br>
-	 * 如果想输出 {} 使用 \\转义 { 即可，如果想输出 {} 之前的 \ 使用双转义符 \\\\ 即可<br>
-	 * 例：<br>
-	 * 通常使用：format("this is {} for {}", "a", "b") =》 this is a for b<br>
-	 * 转义{}： format("this is \\{} for {}", "a", "b") =》 this is \{} for a<br>
-	 * 转义\： format("this is \\\\{} for {}", "a", "b") =》 this is \a for b<br>
-	 *
-	 * @param template 文本模板，被替换的部分用 {} 表示
-	 * @param params   参数值
-	 * @return 格式化后的文本
-	 */
-	public static String format(CharSequence template, Object... params) {
-		if (null == template) {
-			return null;
-		}
-		if (Func.isEmpty(params) || isBlank(template)) {
-			return template.toString();
-		}
-		return StrFormatter.format(template.toString(), params);
 	}
 
 	/**
@@ -288,27 +400,6 @@ public class StringUtil extends org.springframework.util.StringUtils {
 	}
 
 	/**
-	 * 获取标识符，用于参数清理
-	 *
-	 * @param param 参数
-	 * @return 清理后的标识符
-	 */
-	@Nullable
-	public static String cleanIdentifier(@Nullable String param) {
-		if (param == null) {
-			return null;
-		}
-		StringBuilder paramBuilder = new StringBuilder();
-		for (int i = 0; i < param.length(); i++) {
-			char c = param.charAt(i);
-			if (Character.isJavaIdentifierPart(c)) {
-				paramBuilder.append(c);
-			}
-		}
-		return paramBuilder.toString();
-	}
-
-	/**
 	 * 切分字符串，不去除切分后每个元素两边的空白符，不去除空白项
 	 *
 	 * @param str       被切分的字符串
@@ -318,6 +409,17 @@ public class StringUtil extends org.springframework.util.StringUtils {
 	 */
 	public static List<String> split(CharSequence str, char separator, int limit) {
 		return split(str, separator, limit, false, false);
+	}
+
+	/**
+	 * 分割 字符串 删除常见 空白符
+	 *
+	 * @param str       字符串
+	 * @param delimiter 分割符
+	 * @return 字符串数组
+	 */
+	public static String[] splitTrim(@Nullable String str, @Nullable String delimiter) {
+		return StringUtil.delimitedListToStringArray(str, delimiter, " \t\n\n\f");
 	}
 
 	/**
@@ -809,7 +911,7 @@ public class StringUtil extends org.springframework.util.StringUtils {
 	 * @return 切掉后的字符串，若后缀不是 suffix， 返回原字符串
 	 */
 	public static String removeSufAndLowerFirst(CharSequence str, CharSequence suffix) {
-		return lowerFirst(removeSuffix(str, suffix));
+		return firstCharToLower(removeSuffix(str, suffix));
 	}
 
 	/**
@@ -837,11 +939,11 @@ public class StringUtil extends org.springframework.util.StringUtils {
 	 * @param str 字符串
 	 * @return {String}
 	 */
-	public static String lowerFirst(String str) {
+	public static String firstCharToLower(String str) {
 		char firstChar = str.charAt(0);
 		if (firstChar >= CharConstant.UPPER_A && firstChar <= CharConstant.UPPER_Z) {
 			char[] arr = str.toCharArray();
-			arr[0] += ( CharConstant.LOWER_A -  CharConstant.UPPER_A);
+			arr[0] += (CharConstant.LOWER_A - CharConstant.UPPER_A);
 			return new String(arr);
 		}
 		return str;
@@ -853,7 +955,7 @@ public class StringUtil extends org.springframework.util.StringUtils {
 	 * @param str 字符串
 	 * @return {String}
 	 */
-	public static String upperFirst(String str) {
+	public static String firstCharToUpper(String str) {
 		char firstChar = str.charAt(0);
 		if (firstChar >= CharConstant.LOWER_A && firstChar <= CharConstant.LOWER_Z) {
 			char[] arr = str.toCharArray();
@@ -1226,7 +1328,7 @@ public class StringUtil extends org.springframework.util.StringUtils {
 	/**
 	 * 创建StringBuilder对象
 	 *
-	 * @return StringBuilder对象
+	 * @return {String}Builder对象
 	 */
 	public static StringBuilder builder() {
 		return new StringBuilder();
@@ -1236,7 +1338,7 @@ public class StringUtil extends org.springframework.util.StringUtils {
 	 * 创建StringBuilder对象
 	 *
 	 * @param capacity 初始大小
-	 * @return StringBuilder对象
+	 * @return {String}Builder对象
 	 */
 	public static StringBuilder builder(int capacity) {
 		return new StringBuilder(capacity);
@@ -1246,7 +1348,7 @@ public class StringUtil extends org.springframework.util.StringUtils {
 	 * 创建StringBuilder对象
 	 *
 	 * @param strs 初始字符串列表
-	 * @return StringBuilder对象
+	 * @return {String}Builder对象
 	 */
 	public static StringBuilder builder(CharSequence... strs) {
 		final StringBuilder sb = new StringBuilder();
@@ -1261,7 +1363,7 @@ public class StringUtil extends org.springframework.util.StringUtils {
 	 *
 	 * @param sb   初始StringBuilder
 	 * @param strs 初始字符串列表
-	 * @return StringBuilder对象
+	 * @return {String}Builder对象
 	 */
 	public static StringBuilder appendBuilder(StringBuilder sb, CharSequence... strs) {
 		for (CharSequence str : strs) {
@@ -1274,7 +1376,7 @@ public class StringUtil extends org.springframework.util.StringUtils {
 	 * 获得StringReader
 	 *
 	 * @param str 字符串
-	 * @return StringReader
+	 * @return {String}Reader
 	 */
 	public static StringReader getReader(CharSequence str) {
 		if (null == str) {
@@ -1286,7 +1388,7 @@ public class StringUtil extends org.springframework.util.StringUtils {
 	/**
 	 * 获得StringWriter
 	 *
-	 * @return StringWriter
+	 * @return {String}Writer
 	 */
 	public static StringWriter getWriter() {
 		return new StringWriter();
@@ -1351,7 +1453,7 @@ public class StringUtil extends org.springframework.util.StringUtils {
 	 * 下划线转驼峰
 	 *
 	 * @param para 字符串
-	 * @return String
+	 * @return {String}
 	 */
 	public static String underlineToHump(String para) {
 		StringBuilder result = new StringBuilder();
@@ -1371,10 +1473,10 @@ public class StringUtil extends org.springframework.util.StringUtils {
 	 * 驼峰转下划线
 	 *
 	 * @param para 字符串
-	 * @return String
+	 * @return {String}
 	 */
 	public static String humpToUnderline(String para) {
-		para = lowerFirst(para);
+		para = firstCharToLower(para);
 		StringBuilder sb = new StringBuilder(para);
 		int temp = 0;
 		for (int i = 0; i < para.length(); i++) {
@@ -1390,7 +1492,7 @@ public class StringUtil extends org.springframework.util.StringUtils {
 	 * 横线转驼峰
 	 *
 	 * @param para 字符串
-	 * @return String
+	 * @return {String}
 	 */
 	public static String lineToHump(String para) {
 		StringBuilder result = new StringBuilder();
@@ -1410,10 +1512,10 @@ public class StringUtil extends org.springframework.util.StringUtils {
 	 * 驼峰转横线
 	 *
 	 * @param para 字符串
-	 * @return String
+	 * @return {String}
 	 */
 	public static String humpToLine(String para) {
-		para = lowerFirst(para);
+		para = firstCharToLower(para);
 		StringBuilder sb = new StringBuilder(para);
 		int temp = 0;
 		for (int i = 0; i < para.length(); i++) {
@@ -1423,40 +1525,6 @@ public class StringUtil extends org.springframework.util.StringUtils {
 			}
 		}
 		return sb.toString().toLowerCase();
-	}
-
-
-
-	/**
-	 * 首字母变小写
-	 *
-	 * @param str 字符串
-	 * @return {String}
-	 */
-	public static String firstCharToLower(String str) {
-		char firstChar = str.charAt(0);
-		if (firstChar >= CharConstant.UPPER_A && firstChar <= CharConstant.UPPER_Z) {
-			char[] arr = str.toCharArray();
-			arr[0] += (CharConstant.LOWER_A - CharConstant.UPPER_A);
-			return new String(arr);
-		}
-		return str;
-	}
-
-	/**
-	 * 首字母变大写
-	 *
-	 * @param str 字符串
-	 * @return {String}
-	 */
-	public static String firstCharToUpper(String str) {
-		char firstChar = str.charAt(0);
-		if (firstChar >= CharConstant.LOWER_A && firstChar <= CharConstant.LOWER_Z) {
-			char[] arr = str.toCharArray();
-			arr[0] -= (CharConstant.LOWER_A - CharConstant.UPPER_A);
-			return new String(arr);
-		}
-		return str;
 	}
 
 

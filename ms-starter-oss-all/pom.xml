@@ -5,9 +5,29 @@
     <parent>
         <groupId>com.msop</groupId>
         <artifactId>MSToolbox</artifactId>
-        <version>0.2.2</version>
+        <version>0.2.3-SNAPSHOT</version>
     </parent>
     <artifactId>ms-starter-oss-all</artifactId>
     <name>${project.artifactId}</name>
     <packaging>jar</packaging>
+
+    <dependencies>
+        <!-- MSToolbox -->
+        <dependency>
+            <groupId>com.msop</groupId>
+            <artifactId>ms-starter-oss-aliyun</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.msop</groupId>
+            <artifactId>ms-starter-oss-minio</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.msop</groupId>
+            <artifactId>ms-starter-oss-qiniu</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.msop</groupId>
+            <artifactId>ms-starter-oss-tencent</artifactId>
+        </dependency>
+    </dependencies>
 </project>

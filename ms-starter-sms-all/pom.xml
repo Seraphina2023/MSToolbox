@@ -5,9 +5,25 @@
     <parent>
         <groupId>com.msop</groupId>
         <artifactId>MSToolbox</artifactId>
-        <version>0.2.2</version>
+        <version>0.2.3-SNAPSHOT</version>
     </parent>
     <artifactId>ms-starter-sms-all</artifactId>
     <name>${project.artifactId}</name>
     <packaging>jar</packaging>
+
+    <dependencies>
+        <!-- MSToolbox -->
+        <dependency>
+            <groupId>com.msop</groupId>
+            <artifactId>ms-starter-sms-aliyun</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.msop</groupId>
+            <artifactId>ms-starter-sms-qiniu</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.msop</groupId>
+            <artifactId>ms-starter-sms-yunpian</artifactId>
+        </dependency>
+    </dependencies>
 </project>

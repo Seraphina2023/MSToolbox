@@ -1,7 +1,7 @@
 package com.msop.core.tool.utils;
 
 import com.msop.core.tool.constant.CharConstant;
-import lombok.experimental.UtilityClass;
+import com.msop.core.tool.constant.StringConstant;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.FileSystemUtils;
@@ -17,9 +17,8 @@ import java.util.List;
 /**
  * 文件工具类
  *
- * @author L.cm
+ * @author ruozhuliufeng
  */
-@UtilityClass
 public class FileUtil extends org.springframework.util.FileCopyUtils {
 
 	/**
@@ -145,20 +144,24 @@ public class FileUtil extends org.springframework.util.FileCopyUtils {
 	 * @return {String}
 	 */
 	public static String getFileExtension(String fullName) {
-		Assert.notNull(fullName, "file fullName is null.");
+		if (StringUtil.isBlank(fullName)) {
+			return StringConstant.EMPTY;
+		}
 		String fileName = new File(fullName).getName();
-		int dotIndex = fileName.lastIndexOf('.');
+		int dotIndex = fileName.lastIndexOf(CharConstant.DOT);
 		return (dotIndex == -1) ? "" : fileName.substring(dotIndex + 1);
 	}
 
 	/**
 	 * 获取文件名，去除后缀名
-	 * @param file 文件
+	 * @param fullName 文件全名
 	 * @return {String}
 	 */
-	public static String getNameWithoutExtension(String file) {
-		Assert.notNull(file, "file is null.");
-		String fileName = new File(file).getName();
+	public static String getNameWithoutExtension(String fullName) {
+		if (StringUtil.isBlank(fullName)) {
+			return StringConstant.EMPTY;
+		}
+		String fileName = new File(fullName).getName();
 		int dotIndex = fileName.lastIndexOf(CharConstant.DOT);
 		return (dotIndex == -1) ? fileName : fileName.substring(0, dotIndex);
 	}
@@ -202,7 +205,7 @@ public class FileUtil extends org.springframework.util.FileCopyUtils {
 	 */
 	public static String readToString(final File file, final Charset encoding) {
 		try (InputStream in = Files.newInputStream(file.toPath())) {
-			return IoUtil.toString(in, encoding);
+			return IoUtil.readToString(in, encoding);
 		} catch (IOException e) {
 			throw Exceptions.unchecked(e);
 		}
@@ -217,7 +220,7 @@ public class FileUtil extends org.springframework.util.FileCopyUtils {
 	 */
 	public static byte[] readToByteArray(final File file) {
 		try (InputStream in = Files.newInputStream(file.toPath())) {
-			return IoUtil.toByteArray(in);
+			return IoUtil.readToByteArray(in);
 		} catch (IOException e) {
 			throw Exceptions.unchecked(e);
 		}

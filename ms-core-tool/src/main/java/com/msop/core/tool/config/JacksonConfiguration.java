@@ -8,7 +8,6 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.msop.core.tool.jackson.MsJacksonProperties;
 import com.msop.core.tool.jackson.MsJavaTimeModule;
 import com.msop.core.tool.utils.DateUtil;
-import lombok.AllArgsConstructor;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration;

@@ -27,7 +27,7 @@ import java.util.Map;
  *
  * <pre>
  *     文档地址：
- *     http://www.w3school.com.cn/xpath/index.asp
+ *     <a href="http://www.w3school.com.cn/xpath/index.asp">...</a>
  * </pre>
  *
  * @author ruozhuliufeng
@@ -43,6 +43,12 @@ public class XmlUtil {
 		path = getXPathFactory().newXPath();
 	}
 
+	/**
+	 * 创建工具类
+	 *
+	 * @param inputSource inputSource
+	 * @return XmlUtil
+	 */
 	private static XmlUtil create(InputSource inputSource) {
 		try {
 			return new XmlUtil(inputSource);
@@ -51,11 +57,23 @@ public class XmlUtil {
 		}
 	}
 
-	public static XmlUtil of(InputStream is) {
-		InputSource inputSource = new InputSource(is);
+	/**
+	 * 转换工具类
+	 *
+	 * @param inputStream inputStream
+	 * @return XmlUtil
+	 */
+	public static XmlUtil of(InputStream inputStream) {
+		InputSource inputSource = new InputSource(inputStream);
 		return create(inputSource);
 	}
 
+	/**
+	 * 转换工具类
+	 *
+	 * @param xmlStr xmlStr
+	 * @return XmlUtil
+	 */
 	public static XmlUtil of(String xmlStr) {
 		StringReader sr = new StringReader(xmlStr.trim());
 		InputSource inputSource = new InputSource(sr);
@@ -64,6 +82,14 @@ public class XmlUtil {
 		return xmlUtil;
 	}
 
+	/**
+	 * 转换路径
+	 *
+	 * @param expression 表达式
+	 * @param item       实体
+	 * @param returnType 返回类型
+	 * @return Object
+	 */
 	private Object evalXPath(String expression, @Nullable Object item, QName returnType) {
 		item = null == item ? doc : item;
 		try {
@@ -77,7 +103,7 @@ public class XmlUtil {
 	 * 获取String
 	 *
 	 * @param expression 路径
-	 * @return String
+	 * @return {String}
 	 */
 	public String getString(String expression) {
 		return (String) evalXPath(expression, null, XPathConstants.STRING);
@@ -87,7 +113,7 @@ public class XmlUtil {
 	 * 获取Boolean
 	 *
 	 * @param expression 路径
-	 * @return String
+	 * @return {String}
 	 */
 	public Boolean getBoolean(String expression) {
 		return (Boolean) evalXPath(expression, null, XPathConstants.BOOLEAN);
@@ -129,7 +155,7 @@ public class XmlUtil {
 	 *
 	 * @param node       节点
 	 * @param expression 相对于node的路径
-	 * @return String
+	 * @return {String}
 	 */
 	public String getString(Object node, String expression) {
 		return (String) evalXPath(expression, node, XPathConstants.STRING);
@@ -140,7 +166,7 @@ public class XmlUtil {
 	 *
 	 * @param node       节点
 	 * @param expression 相对于node的路径
-	 * @return String
+	 * @return {String}
 	 */
 	public Boolean getBoolean(Object node, String expression) {
 		return (Boolean) evalXPath(expression, node, XPathConstants.BOOLEAN);
@@ -211,6 +237,7 @@ public class XmlUtil {
 
 	/**
 	 * preventXXE
+	 *
 	 * @param dbf
 	 * @throws ParserConfigurationException
 	 */

@@ -1,5 +1,6 @@
 package com.msop.core.oss.rule;
 
+import com.msop.core.secure.utils.AuthUtil;
 import com.msop.core.tool.constant.StringConstant;
 import com.msop.core.tool.utils.DateUtil;
 import com.msop.core.tool.utils.FileUtil;
@@ -37,6 +38,6 @@ public class MsOssRule implements OssRule {
      */
     @Override
     public String fileName(String originalFilename) {
-        return "upload" + StringConstant.SLASH + DateUtil.toDay() + StringConstant.SLASH + StringUtil.randomUUID() + StringConstant.DOT + FileUtil.getFileExtension(originalFilename);
+        return "upload" + StringConstant.SLASH + DateUtil.today() + StringConstant.SLASH + StringUtil.randomUUID() + StringConstant.DOT + FileUtil.getFileExtension(originalFilename);
     }
 }

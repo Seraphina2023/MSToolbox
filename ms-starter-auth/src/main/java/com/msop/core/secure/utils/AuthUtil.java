@@ -1,26 +1,15 @@
 package com.msop.core.secure.utils;
 
 import com.msop.core.jwt.properties.JwtProperties;
+import com.msop.core.jwt.utils.JwtUtil;
 import com.msop.core.launch.constant.TokenConstant;
-import com.msop.core.secure.exception.SecureException;
 import com.msop.core.secure.model.MsUser;
-import com.msop.core.secure.model.TokenInfo;
 import com.msop.core.tool.constant.RoleConstant;
 import com.msop.core.tool.constant.StringConstant;
-import com.msop.core.tool.utils.Func;
-import com.msop.core.tool.utils.SpringUtil;
-import com.msop.core.tool.utils.StringUtil;
-import com.msop.core.tool.utils.WebUtil;
+import com.msop.core.tool.support.Kv;
+import com.msop.core.tool.utils.*;
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.JwtBuilder;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import lombok.SneakyThrows;
-
-import javax.crypto.spec.SecretKeySpec;
 import javax.servlet.http.HttpServletRequest;
-import java.nio.charset.StandardCharsets;
-import java.security.Key;
 import java.util.*;
 
 /**
@@ -74,8 +63,9 @@ public class AuthUtil {
      * @param request request
      * @return MsUser
      */
+    @SuppressWarnings("unchecked")
     public static MsUser getUser(HttpServletRequest request) {
-        Claims claims = null;
+        Claims claims = getClaims(request);
         if (claims == null) {
             return null;
         }
@@ -88,15 +78,21 @@ public class AuthUtil {
         String account = Func.toStr(claims.get(TokenConstant.ACCOUNT));
         String roleName = Func.toStr(claims.get(TokenConstant.ROLE_NAME));
         String userName = Func.toStr(claims.get(TokenConstant.USER_NAME));
+        String nickName = Func.toStr(claims.get(TokenConstant.NICK_NAME));
+        String realName = Func.toStr(claims.get(TokenConstant.REAL_NAME));
+        Kv detail = Kv.create().setAll((Map<? extends String, ?>) claims.get(TokenConstant.DETAIL));
         MsUser user = new MsUser();
         user.setClientId(clientId);
         user.setUserId(userId);
+        user.setNickName(nickName);
+        user.setAccount(account);
         user.setTenantId(tenantId);
-        user.setUserName(account);
         user.setRoleId(roleId);
         user.setDeptId(deptId);
         user.setRoleName(roleName);
         user.setUserName(userName);
+        user.setDetail(detail);
+        user.setOauthId(oauthId);
         return user;
     }
 
@@ -137,7 +133,7 @@ public class AuthUtil {
      */
     public static String getUserAccount() {
         MsUser user = getUser();
-        return (null == user) ? StringConstant.EMPTY : user.getUserName();
+        return (null == user) ? StringConstant.EMPTY : user.getAccount();
     }
 
     /**
@@ -148,7 +144,7 @@ public class AuthUtil {
      */
     public static String getUserAccount(HttpServletRequest request) {
         MsUser user = getUser(request);
-        return (null == user) ? StringConstant.EMPTY : user.getUserName();
+        return (null == user) ? StringConstant.EMPTY : user.getAccount();
     }
 
     /**
@@ -170,6 +166,48 @@ public class AuthUtil {
     public static String getUserName(HttpServletRequest request) {
         MsUser user = getUser(request);
         return (null == user) ? StringConstant.EMPTY : user.getUserName();
+    }
+
+    /**
+     * 获取用户昵称
+     *
+     * @return nickName
+     */
+    public static String getNickName() {
+        MsUser user = getUser();
+        return (null == user) ? StringConstant.EMPTY : user.getNickName();
+    }
+
+    /**
+     * 获取用户昵称
+     *
+     * @param request request
+     * @return nickName
+     */
+    public static String getNickName(HttpServletRequest request) {
+        MsUser user = getUser(request);
+        return (null == user) ? StringConstant.EMPTY : user.getNickName();
+    }
+
+    /**
+     * 获取第三方认证ID
+     *
+     * @return oauthId
+     */
+    public static String getOauthId() {
+        MsUser user = getUser();
+        return (null == user) ? StringConstant.EMPTY : user.getOauthId();
+    }
+
+    /**
+     * 获取第三方认证ID
+     *
+     * @param request request
+     * @return oauthId
+     */
+    public static String getOauthId(HttpServletRequest request) {
+        MsUser user = getUser(request);
+        return (null == user) ? StringConstant.EMPTY : user.getOauthId();
     }
 
     /**
@@ -236,6 +274,27 @@ public class AuthUtil {
     }
 
     /**
+     * 获取客户端详情
+     *
+     * @return kv
+     */
+    public static Kv getDetail() {
+        MsUser user = getUser();
+        return (null == user) ? Kv.create() : user.getDetail();
+    }
+
+    /**
+     * 获取客户端ID
+     *
+     * @param request request
+     * @return userAccount
+     */
+    public static Kv getDetail(HttpServletRequest request) {
+        MsUser user = getUser(request);
+        return (null == user) ? Kv.create() : user.getDetail();
+    }
+
+    /**
      * 获取请求头
      *
      * @return header
@@ -253,18 +312,40 @@ public class AuthUtil {
     public static String getHeader(HttpServletRequest request) {
         return request.getHeader(TokenConstant.HEADER);
     }
+
+    public static Claims getClaims(HttpServletRequest request){
+        String auth = request.getHeader(TokenConstant.HEADER);
+        Claims claims = null;
+        String token;
+        // 获取Token 参数
+        if(StringUtil.isNotBlank(auth)){
+            token = JwtUtil.getToken(auth);
+        }else {
+            String parameter = request.getParameter(TokenConstant.HEADER);
+            token = JwtUtil.getToken(parameter);
+        }
+        // 获取token 值
+        if(StringUtil.isNotBlank(token)){
+            claims = AuthUtil.parseJWT(token);
+        }
+        // 判断Token状态
+        if(ObjectUtil.isNotEmpty(claims) && getJwtProperties().getState()){
+            String tenantId = Func.toStr(claims.get(TokenConstant.TENANT_ID));
+            String userId = Func.toStr(claims.get(TokenConstant.USER_ID));
+            String accessToken = JwtUtil.getAccessToken(tenantId,userId,token);
+            if (!token.equalsIgnoreCase(accessToken)){
+                return null;
+            }
+        }
+        return claims;
+    }
+
     /**
-     * 获取过期时间 (次日凌晨3点)
-     *
-     * @return expire
+     * 解析jsonWebToken
+     * @param jsonWebToken token
+     * @return Claims
      */
-    public static long getExpire() {
-        Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.DAY_OF_YEAR, 1);
-        cal.set(Calendar.HOUR_OF_DAY, 3);
-        cal.set(Calendar.SECOND, 0);
-        cal.set(Calendar.MINUTE, 0);
-        cal.set(Calendar.MILLISECOND, 0);
-        return cal.getTimeInMillis() - System.currentTimeMillis();
+    public static Claims parseJWT(String jsonWebToken){
+        return JwtUtil.parseJWT(jsonWebToken);
     }
 }

@@ -7,6 +7,7 @@ import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 链式map
@@ -24,7 +25,7 @@ public class Kv extends LinkedCaseInsensitiveMap<Object> {
 	 *
 	 * @return Kv
 	 */
-	public static Kv init() {
+	public static Kv create() {
 		return new Kv();
 	}
 
@@ -44,6 +45,12 @@ public class Kv extends LinkedCaseInsensitiveMap<Object> {
 		return this;
 	}
 
+	public Kv setAll(Map<? extends String,?> map){
+		if(map != null){
+			this.putAll(map);
+		}
+		return this;
+	}
 	/**
 	 * 设置列，当键或值为null时忽略
 	 *

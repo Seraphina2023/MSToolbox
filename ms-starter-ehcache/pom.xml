@@ -5,9 +5,19 @@
     <parent>
         <groupId>com.msop</groupId>
         <artifactId>MSToolbox</artifactId>
-        <version>0.2.2</version>
+        <version>0.2.3-SNAPSHOT</version>
     </parent>
     <artifactId>ms-starter-ehcache</artifactId>
     <name>${project.artifactId}</name>
     <packaging>jar</packaging>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+        </dependency>
+    </dependencies>
 </project>

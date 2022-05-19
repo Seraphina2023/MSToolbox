@@ -1,7 +1,6 @@
 package com.msop.core.tool.utils;
 
 import com.msop.core.tool.convert.MsConversionService;
-import lombok.experimental.UtilityClass;
 import org.springframework.core.convert.TypeDescriptor;
 import org.springframework.core.convert.support.GenericConversionService;
 import org.springframework.lang.Nullable;
@@ -11,7 +10,6 @@ import org.springframework.lang.Nullable;
  *
  * @author ruozhuliufeng
  */
-@UtilityClass
 @SuppressWarnings("unchecked")
 public class ConvertUtil {
 

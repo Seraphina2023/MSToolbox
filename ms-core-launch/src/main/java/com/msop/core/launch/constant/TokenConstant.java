@@ -59,6 +59,14 @@ public interface TokenConstant {
      */
     String USER_NAME= "user_name";
     /**
+     * 昵称
+     */
+    String NICK_NAME = "nick_name";
+    /**
+     * 真实姓名
+     */
+    String REAL_NAME = "real_name";
+    /**
      * 角色名
      */
     String ROLE_NAME = "role_name";
@@ -74,6 +82,10 @@ public interface TokenConstant {
      * 客户端ID
      */
     String CLIENT_ID = "client_id";
+    /**
+     * 用户详情
+     */
+    String DETAIL = "detail";
     /**
      * 授权许可
      */
