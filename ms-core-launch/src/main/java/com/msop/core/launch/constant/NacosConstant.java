@@ -34,6 +34,10 @@ public interface NacosConstant {
      * Nacos 分组
      */
     String NACOS_CONFIG_GROUP = "DEFAULT_GROUP";
+    /**
+     * seata 分组
+     */
+    String NACOS_SETAT_GROUP = "SETAT_GROUP";
 
     /**
      * 构建服务对应的dataId
@@ -58,6 +62,11 @@ public interface NacosConstant {
         return appName + "-" + profile + "." + format;
     }
 
+    /**
+     * 服务默认加载的配置
+     * @param profile
+     * @return
+     */
     static String sharedDataIds(String profile) {
         return NACOS_CONFIG_PREFIX + "." + NACOS_CONFIG_FORMAT + "," + NACOS_CONFIG_PREFIX + "-" + profile + NACOS_CONFIG_FORMAT;
     }

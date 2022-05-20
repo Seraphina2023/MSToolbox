@@ -81,16 +81,19 @@ public class MsApplication {
         props.setProperty("ms.is-local", String.valueOf(isLocalDev()));
         props.setProperty("ms.dev-mode", profile.equals(AppConstant.PROD_MODE) ? "false" : "true");
         props.setProperty("ms.service.version", AppConstant.APPLICATION_VERSION);
-        props.setProperty("spring.main.allow-bean-definition-overriding", "true");
-        props.setProperty("spring.cloud.nacos.config.prefix", NacosConstant.NACOS_CONFIG_PREFIX);
-        props.setProperty("spring.cloud.nacos.config.file-extension", NacosConstant.NACOS_CONFIG_FORMAT);
-        props.setProperty("spring.cloud.sentinel.transport.dashboard", SentinelConstant.SENTINEL_ADDR);
-        props.setProperty("spring.cloud.alibaba.seata.tx-servie-group", appName.concat(NacosConstant.NACOS_GROUP_SUFFIX));
+        Properties defaultProperties = new Properties();
+        defaultProperties.setProperty("spring.main.allow-bean-definition-overriding", "true");
+        defaultProperties.setProperty("spring.sleuth.sampler.percentage", "1.0");
+        defaultProperties.setProperty("spring.cloud.nacos.config.shared-dataids", NacosConstant.sharedDataIds(profile));
+        defaultProperties.setProperty("spring.cloud.nacos.config.refreshable-dataids", NacosConstant.sharedDataIds(profile));
+        defaultProperties.setProperty("spring.cloud.nacos.config.file-extension", NacosConstant.NACOS_CONFIG_FORMAT);
+        defaultProperties.setProperty("spring.cloud.alibaba.seata.tx-servie-group", appName.concat(NacosConstant.NACOS_GROUP_SUFFIX));
+        builder.properties(defaultProperties);
         // 加载自定义组件
         List<LauncherService> launcherList = new ArrayList<>();
         ServiceLoader.load(LauncherService.class).forEach(launcherList::add);
         launcherList.stream().sorted(Comparator.comparing(LauncherService::getOrder)).collect(Collectors.toList())
-                .forEach(launcherService -> launcherService.launcher(builder, appName, profile));
+                .forEach(launcherService -> launcherService.launcher(builder, appName, profile,isLocalDev()));
         return builder;
     }
 
