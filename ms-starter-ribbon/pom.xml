@@ -10,4 +10,22 @@
     <artifactId>ms-starter-ribbon</artifactId>
     <name>${project.artifactId}</name>
     <packaging>jar</packaging>
+
+    <dependencies>
+        <!-- Nacos -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
+        <!-- MSToolbox -->
+        <dependency>
+            <groupId>com.msop</groupId>
+            <artifactId>ms-core-auto</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
 </project>
