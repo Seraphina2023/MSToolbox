@@ -47,6 +47,8 @@
         <easyexcel.version>2.2.6</easyexcel.version>
         <captcha.version>1.6.2</captcha.version>
         <fastjson.version>1.2.74</fastjson.version>
+        <sentinel.version>1.8.0</sentinel.version>
+        <alibaba.nacos.version>2.0.0</alibaba.nacos.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -190,6 +192,12 @@
                 <artifactId>ms-starter-log</artifactId>
                 <version>${ms.tool.version}</version>
             </dependency>
+            <!-- JAVA 代码检测 -->
+            <dependency>
+                <groupId>com.msop</groupId>
+                <artifactId>ms-starter-metrics</artifactId>
+                <version>${ms.tool.version}</version>
+            </dependency>
             <!-- mongo 拓展 -->
             <dependency>
                 <groupId>com.msop</groupId>
@@ -230,6 +238,12 @@
             <dependency>
                 <groupId>com.msop</groupId>
                 <artifactId>ms-starter-oss-tencent</artifactId>
+                <version>${ms.tool.version}</version>
+            </dependency>
+            <!-- 监控工具 -->
+            <dependency>
+                <groupId>com.msop</groupId>
+                <artifactId>ms-starter-promethus</artifactId>
                 <version>${ms.tool.version}</version>
             </dependency>
             <!-- Redis -->
@@ -315,6 +329,11 @@
                 <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
                 <version>${alibaba.cloud.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.alibaba.nacos</groupId>
+                <artifactId>nacos-client</artifactId>
+                <version>${alibaba.nacos.version}</version>
+            </dependency>
             <!-- Sentinel -->
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
@@ -395,7 +414,12 @@
                 <artifactId>spring-boot-admin-starter-client</artifactId>
                 <version>${spring.boot.admmin.version}</version>
             </dependency>
-            <!--  Druid -->
+            <!--  Druid "-->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid-spring-boot-starter</artifactId>
@@ -530,6 +554,12 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
                 <version>${fastjson.version}</version>
+            </dependency>
+            <!-- sentinel -->
+            <dependency>
+                <groupId>com.alibaba.csp</groupId>
+                <artifactId>sentinel-core</artifactId>
+                <version>${sentinel.version}</version>
             </dependency>
             <!-- easy excel -->
             <dependency>
