@@ -5,8 +5,11 @@ import feign.Target;
 import org.springframework.cloud.openfeign.encoding.FeignContentGzipEncodingAutoConfiguration;
 
 /**
- * 添加Ms默认的fallb
+ * 添加Ms默认的fallbackFactory
+ *
+ * @author ruozhuliufeng
  */
+@SuppressWarnings("unchecked")
 public class MsHystrixTargeter implements Targeter {
     /**
      * target

@@ -59,6 +59,7 @@
         <module>ms-starter-http</module>
         <module>ms-starter-jwt</module>
         <module>ms-starter-log</module>
+        <module>ms-starter-metrics</module>
         <module>ms-starter-mongo</module>
         <module>ms-starter-mybatis</module>
         <module>ms-starter-oss-aliyun</module>
@@ -66,6 +67,7 @@
         <module>ms-starter-oss-minio</module>
         <module>ms-starter-oss-qiniu</module>
         <module>ms-starter-oss-tencent</module>
+        <module>ms-starter-prometheus</module>
         <module>ms-starter-redis</module>
         <module>ms-starter-report</module>
         <module>ms-starter-ribbon</module>
