@@ -1,14 +1,13 @@
 package com.msop.core.prometheus.data;
 
+import lombok.Builder;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 @Getter
+@RequiredArgsConstructor
 public class ChangeItem<T> {
     private final T item;
     private final long changeIndex;
 
-    public ChangeItem(final T item,final long changeIndex) {
-        this.item = item;
-        this.changeIndex = changeIndex;
-    }
 }

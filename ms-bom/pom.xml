@@ -243,7 +243,7 @@
             <!-- 监控工具 -->
             <dependency>
                 <groupId>com.msop</groupId>
-                <artifactId>ms-starter-promethus</artifactId>
+                <artifactId>ms-starter-prometheus</artifactId>
                 <version>${ms.tool.version}</version>
             </dependency>
             <!-- Redis -->

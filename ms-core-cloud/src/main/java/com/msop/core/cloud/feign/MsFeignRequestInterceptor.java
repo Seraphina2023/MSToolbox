@@ -15,7 +15,7 @@ import org.springframework.http.HttpHeaders;
  * </p>
  * @author ruozhuliufeng
  */
-public class MsFeignRequestHeaderInterceptor implements RequestInterceptor {
+public class MsFeignRequestInterceptor implements RequestInterceptor {
     @Override
     public void apply(RequestTemplate requestTemplate) {
         // 默认都使用 hystrix
