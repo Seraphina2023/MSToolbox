@@ -43,6 +43,15 @@ public interface MsConstant {
      * mdc tenant id key
      */
     String MDC_TENANT_ID_KEY = "tenantId";
+    /**
+     * 租户字段get方法
+     */
+    String DB_TENANT_KEY_GET_METHOD = "getTenantId";
+
+    /**
+     * 租户字段set方法
+     */
+    String DB_TENANT_KEY_SET_METHOD = "setTenantId";
 
     /**
      * Security 角色前缀
@@ -75,6 +84,11 @@ public interface MsConstant {
      * 顶级父节点ID
      */
     Long TOP_PARENT_ID = 0L;
+
+    /**
+     * 顶级父节点名称
+     */
+    String TOP_PARENT_NAME = "顶级";
 
     /**
      * 管理员对应的租户ID
@@ -130,4 +144,8 @@ public interface MsConstant {
      * 类型
      */
     String BEARER_TYPE = "Bearer";
+    /**
+     * 主键字段你get方法
+     */
+    String DB_PRIMARY_KEY_METHOD = "getId";
 }

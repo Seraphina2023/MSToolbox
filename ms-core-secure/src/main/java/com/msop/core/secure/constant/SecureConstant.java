@@ -21,6 +21,15 @@ public interface SecureConstant {
 	 * 认证请求头前缀
 	 */
 	String BASIC_HEADER_PREFIX_EXT = "Basic%20";
+	/**
+	 * 认证请求头
+	 */
+	String BASIC_REALM_HEADER_KEY = "MS-Authenticate";
+
+	/**
+	 * 认证请求值
+	 */
+	String BASIC_REALM_HEADER_VALUE = "basic realm=\"no auth\"";
 
 	/**
 	 * oauth_client表字段
