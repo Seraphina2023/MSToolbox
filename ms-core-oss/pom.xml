@@ -13,7 +13,7 @@
         <!-- MSToolbox -->
         <dependency>
             <groupId>com.msop</groupId>
-            <artifactId>ms-starter-auth</artifactId>
+            <artifactId>ms-core-secure</artifactId>
         </dependency>
         <dependency>
             <groupId>com.msop</groupId>
