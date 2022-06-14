@@ -10,4 +10,33 @@
     <artifactId>ms-starter-trace</artifactId>
     <name>${project.artifactId}</name>
     <packaging>jar</packaging>
+
+    <dependencies>
+        <!-- MSToolbox -->
+        <dependency>
+            <groupId>com.msop</groupId>
+            <artifactId>ms-core-tool</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.msop</groupId>
+            <artifactId>ms-core-auto</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!-- Turbine -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-turbine</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.cloud</groupId>
+                    <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- Zipkin -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-zipkin</artifactId>
+        </dependency>
+    </dependencies>
 </project>
