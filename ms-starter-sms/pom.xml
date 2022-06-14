@@ -7,19 +7,7 @@
         <artifactId>MSToolbox</artifactId>
         <version>0.2.5-SNAPSHOT</version>
     </parent>
-    <artifactId>ms-starter-actuate</artifactId>
+    <artifactId>ms-starter-sms</artifactId>
     <name>${project.artifactId}</name>
-
-    <dependencies>
-        <!-- MSToolbox -->
-        <dependency>
-            <groupId>com.msop</groupId>
-            <artifactId>ms-core-tool</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.msop</groupId>
-            <artifactId>ms-core-auto</artifactId>
-            <scope>provided</scope>
-        </dependency>
-    </dependencies>
+    <packaging>jar</packaging>
 </project>

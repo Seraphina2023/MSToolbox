@@ -210,6 +210,12 @@
                 <artifactId>ms-starter-mybatis</artifactId>
                 <version>${ms.tool.version}</version>
             </dependency>
+            <!-- OSS -->
+            <dependency>
+                <groupId>com.msop</groupId>
+                <artifactId>ms-starter-oss</artifactId>
+                <version>${ms.tool.version}</version>
+            </dependency>
             <!-- 阿里云 OSS -->
             <dependency>
                 <groupId>com.msop</groupId>
@@ -262,6 +268,12 @@
             <dependency>
                 <groupId>com.msop</groupId>
                 <artifactId>ms-starter-ribbon</artifactId>
+                <version>${ms.tool.version}</version>
+            </dependency>
+            <!-- SMS -->
+            <dependency>
+                <groupId>com.msop</groupId>
+                <artifactId>ms-starter-sms</artifactId>
                 <version>${ms.tool.version}</version>
             </dependency>
             <!-- 阿里云 SMS -->
