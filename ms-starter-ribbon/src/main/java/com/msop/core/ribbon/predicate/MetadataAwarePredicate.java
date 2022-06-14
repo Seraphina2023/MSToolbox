@@ -3,7 +3,7 @@ package com.msop.core.ribbon.predicate;
 import com.alibaba.cloud.nacos.ribbon.NacosServer;
 import com.msop.core.ribbon.support.MsRibbonRuleProperties;
 import com.msop.core.ribbon.utils.BeanUtil;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang.StringUtils;
 
 import java.util.Map;
 

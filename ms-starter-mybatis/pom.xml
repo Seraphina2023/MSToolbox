@@ -5,9 +5,47 @@
     <parent>
         <groupId>com.msop</groupId>
         <artifactId>MSToolbox</artifactId>
-        <version>0.2.5</version>
+        <version>0.2.6-SNAPSHOT</version>
     </parent>
     <artifactId>ms-starter-mybatis</artifactId>
     <name>${project.artifactId}</name>
     <packaging>jar</packaging>
+
+    <dependencies>
+        <!-- MSToolbox -->
+        <dependency>
+            <groupId>com.msop</groupId>
+            <artifactId>ms-core-auto</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.msop</groupId>
+            <artifactId>ms-starter-auth</artifactId>
+        </dependency>
+        <!-- Mybatis Plus -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-typehandlers-jsr310</artifactId>
+        </dependency>
+        <!-- Jdbc -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.tomcat</groupId>
+                    <artifactId>tomcat-jdbc</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- Druid -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+        </dependency>
+    </dependencies>
 </project>

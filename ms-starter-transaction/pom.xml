@@ -5,9 +5,36 @@
     <parent>
         <groupId>com.msop</groupId>
         <artifactId>MSToolbox</artifactId>
-        <version>0.2.5</version>
+        <version>0.2.6-SNAPSHOT</version>
     </parent>
     <artifactId>ms-starter-transaction</artifactId>
     <name>${project.artifactId}</name>
     <packaging>jar</packaging>
+
+    <dependencies>
+        <!-- MSToolbox -->
+        <dependency>
+            <groupId>com.msop</groupId>
+            <artifactId>ms-core-auto</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.msop</groupId>
+            <artifactId>ms-starter-mybatis</artifactId>
+        </dependency>
+        <!-- Cloud -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-commons</artifactId>
+        </dependency>
+        <!-- Seata -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-seata</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.seata</groupId>
+            <artifactId>seata-spring-boot-starter</artifactId>
+        </dependency>
+    </dependencies>
 </project>
