@@ -19,39 +19,40 @@ import java.util.stream.Stream;
 
 /**
  * yml配置加载
+ * YmlPropertyLoaderFactory
  *
- YmlPropertyLoaderFactory
+ * @author ruozhuliufeng
  */
 public class YmlPropertyLoaderFactory extends DefaultPropertySourceFactory {
 
-	@Override
-	public PropertySource<?> createPropertySource(@Nullable String name, EncodedResource encodedResource) throws IOException {
-		if (encodedResource == null) {
-			return emptyPropertySource(name);
-		}
-		Resource resource = encodedResource.getResource();
-		String fileName = resource.getFilename();
-		List<PropertySource<?>> sources = new YamlPropertySourceLoader().load(fileName, resource);
-		if (sources.isEmpty()) {
-			return emptyPropertySource(fileName);
-		}
-		// yml 数据存储，合成一个 PropertySource
-		Map<String, Object> ymlDataMap = new HashMap<>(32);
-		for (PropertySource<?> source : sources) {
-			ymlDataMap.putAll(((MapPropertySource) source).getSource());
-		}
-		return new OriginTrackedMapPropertySource(getSourceName(fileName, name), ymlDataMap);
-	}
+    @Override
+    public PropertySource<?> createPropertySource(@Nullable String name, EncodedResource encodedResource) throws IOException {
+        if (encodedResource == null) {
+            return emptyPropertySource(name);
+        }
+        Resource resource = encodedResource.getResource();
+        String fileName = resource.getFilename();
+        List<PropertySource<?>> sources = new YamlPropertySourceLoader().load(fileName, resource);
+        if (sources.isEmpty()) {
+            return emptyPropertySource(fileName);
+        }
+        // yml 数据存储，合成一个 PropertySource
+        Map<String, Object> ymlDataMap = new HashMap<>(32);
+        for (PropertySource<?> source : sources) {
+            ymlDataMap.putAll(((MapPropertySource) source).getSource());
+        }
+        return new OriginTrackedMapPropertySource(getSourceName(fileName, name), ymlDataMap);
+    }
 
-	private static PropertySource<?> emptyPropertySource(@Nullable String name) {
-		return new MapPropertySource(getSourceName(name), Collections.emptyMap());
-	}
+    private static PropertySource<?> emptyPropertySource(@Nullable String name) {
+        return new MapPropertySource(getSourceName(name), Collections.emptyMap());
+    }
 
-	private static String getSourceName(String... names) {
-		return Stream.of(names)
-			.filter(StringUtil::isNotBlank)
-			.findFirst()
-			.orElse("MsYmlPropertySource");
-	}
+    private static String getSourceName(String... names) {
+        return Stream.of(names)
+                .filter(StringUtil::isNotBlank)
+                .findFirst()
+                .orElse("MsYmlPropertySource");
+    }
 
 }
