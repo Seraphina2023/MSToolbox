@@ -43,9 +43,7 @@
         <module>ms-core-db</module>
         <module>ms-core-launch</module>
         <module>ms-core-log4j2</module>
-        <module>ms-core-oss</module>
         <module>ms-core-secure</module>
-        <module>ms-core-sms</module>
         <module>ms-core-test</module>
         <module>ms-core-tool</module>
         <module>ms-starter-actuate</module>
@@ -62,21 +60,12 @@
         <module>ms-starter-metrics</module>
         <module>ms-starter-mongo</module>
         <module>ms-starter-mybatis</module>
-        <module>ms-starter-oss-aliyun</module>
-        <module>ms-starter-oss-all</module>
         <module>ms-starter-oss</module>
-        <module>ms-starter-oss-minio</module>
-        <module>ms-starter-oss-qiniu</module>
-        <module>ms-starter-oss-tencent</module>
         <module>ms-starter-prometheus</module>
         <module>ms-starter-redis</module>
         <module>ms-starter-report</module>
         <module>ms-starter-ribbon</module>
         <module>ms-starter-sms</module>
-        <module>ms-starter-sms-aliyun</module>
-        <module>ms-starter-sms-all</module>
-        <module>ms-starter-sms-qiniu</module>
-        <module>ms-starter-sms-yunpian</module>
         <module>ms-starter-social</module>
         <module>ms-starter-swagger</module>
         <module>ms-starter-tenant</module>
