@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 @Documented
-public @interface RedisLimiter {
+public @interface RateLimiter {
     /**
      * 限流的key，必须：保持唯一性
      *
