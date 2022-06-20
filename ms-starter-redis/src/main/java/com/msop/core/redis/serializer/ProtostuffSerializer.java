@@ -17,7 +17,7 @@ public class ProtostuffSerializer implements RedisSerializer<Object> {
 
     private final Schema<BytesWrapper> schema;
 
-    public ProtostuffSerializer(Schema<BytesWrapper> schema) {
+    public ProtostuffSerializer() {
         this.schema = RuntimeSchema.getSchema(BytesWrapper.class);
     }
 
