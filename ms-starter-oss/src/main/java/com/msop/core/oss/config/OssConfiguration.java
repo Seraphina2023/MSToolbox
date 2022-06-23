@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
  *
  * @author ruozhuliufeng
  */
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @AllArgsConstructor
 @EnableConfigurationProperties(OssProperties.class)
 public class OssConfiguration {

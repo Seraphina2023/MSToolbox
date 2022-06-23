@@ -23,7 +23,7 @@ public class OssProperties {
     /**
      * 是否开启租户模式
      */
-    private Boolean tenantMode;
+    private Boolean tenantMode = false;
     /**
      * 访问端点，对象存储服务的URL
      */

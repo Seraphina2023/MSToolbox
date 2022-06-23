@@ -29,6 +29,10 @@ public enum OssEnum {
      * 腾讯
      */
     TENCENT("tenccent", 4),
+    /**
+     * 华为
+     */
+    HUAWEI("huawei", 5),
     ;
     /**
      * 名称
