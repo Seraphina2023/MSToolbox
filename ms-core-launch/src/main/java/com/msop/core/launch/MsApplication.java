@@ -3,7 +3,6 @@ package com.msop.core.launch;
 
 import com.msop.core.launch.constant.AppConstant;
 import com.msop.core.launch.constant.NacosConstant;
-import com.msop.core.launch.constant.SentinelConstant;
 import com.msop.core.launch.service.LauncherService;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.cglib.core.internal.Function;
@@ -84,10 +83,14 @@ public class MsApplication {
         Properties defaultProperties = new Properties();
         defaultProperties.setProperty("spring.main.allow-bean-definition-overriding", "true");
         defaultProperties.setProperty("spring.sleuth.sampler.percentage", "1.0");
-        defaultProperties.setProperty("spring.cloud.nacos.config.shared-dataids", NacosConstant.sharedDataIds(profile));
-        defaultProperties.setProperty("spring.cloud.nacos.config.refreshable-dataids", NacosConstant.sharedDataIds(profile));
+        defaultProperties.setProperty("spring.cloud.alibaba.seata.tx-service-group", appName.concat(NacosConstant.NACOS_GROUP_SUFFIX));
         defaultProperties.setProperty("spring.cloud.nacos.config.file-extension", NacosConstant.NACOS_CONFIG_FORMAT);
-        defaultProperties.setProperty("spring.cloud.alibaba.seata.tx-servie-group", appName.concat(NacosConstant.NACOS_GROUP_SUFFIX));
+        defaultProperties.setProperty("spring.cloud.nacos.config.shared-configs[0].data-id", NacosConstant.sharedDataId());
+        defaultProperties.setProperty("spring.cloud.nacos.config.shared-configs[0].group", NacosConstant.NACOS_CONFIG_GROUP);
+        defaultProperties.setProperty("spring.cloud.nacos.config.shared-configs[0].refresh", NacosConstant.NACOS_CONFIG_REFRESH);
+        defaultProperties.setProperty("spring.cloud.nacos.config.shared-configs[1].data-id", NacosConstant.sharedDataId(profile));
+        defaultProperties.setProperty("spring.cloud.nacos.config.shared-configs[1].group", NacosConstant.NACOS_CONFIG_GROUP);
+        defaultProperties.setProperty("spring.cloud.nacos.config.shared-configs[1].refresh", NacosConstant.NACOS_CONFIG_REFRESH);
         builder.properties(defaultProperties);
         // 加载自定义组件
         List<LauncherService> launcherList = new ArrayList<>();

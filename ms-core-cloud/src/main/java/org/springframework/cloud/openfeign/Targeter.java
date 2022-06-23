@@ -21,6 +21,6 @@ public interface Targeter {
      * @param <T>     target
      * @return T
      */
-    <T> T target(FeignClientFactoryBean factory, Feign.Builder feign, FeignContentGzipEncodingAutoConfiguration context,
+    <T> T target(FeignClientFactoryBean factory, Feign.Builder feign, FeignContext context,
                  Target.HardCodedTarget<T> target);
 }

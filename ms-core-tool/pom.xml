@@ -56,6 +56,11 @@
             <groupId>io.protostuff</groupId>
             <artifactId>protostuff-runtime</artifactId>
         </dependency>
+        <!-- Validation -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
         <!-- 自动配置 -->
         <dependency>
             <groupId>com.msop</groupId>

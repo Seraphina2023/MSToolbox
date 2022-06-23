@@ -1,5 +1,6 @@
 package org.springframework.cloud.openfeign;
 
+import com.msop.core.cloud.feign.MsFallbackFactory;
 import feign.Feign;
 import feign.Target;
 import feign.hystrix.FallbackFactory;
@@ -34,9 +35,9 @@ public class MsHystrixTargeter implements Targeter {
         if (fallbackFactory != void.class) {
             return targetWithFallbackFactory(factory.getName(), context, target, builder, fallbackFactory);
         }
-        // zhisuan 默认的 fallbackFactory
-        ZhisuanFallbackFactory zhisuanFallbackFactory = new ZhisuanFallbackFactory(target);
-        return (T) builder.target(target, zhisuanFallbackFactory);
+        // MS 默认的 fallbackFactory
+        MsFallbackFactory msFallbackFactory = new MsFallbackFactory(target);
+        return (T) builder.target(target, msFallbackFactory);
     }
 
     private <T> T targetWithFallbackFactory(String feignClientName, FeignContext context,

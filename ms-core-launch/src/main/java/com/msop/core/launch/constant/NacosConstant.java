@@ -64,8 +64,28 @@ public interface NacosConstant {
 
     /**
      * 服务默认加载的配置
-     * @param profile
-     * @return
+     *
+     * @return sharedDataId
+     */
+    static String sharedDataId() {
+        return NACOS_CONFIG_PREFIX + "." + NACOS_CONFIG_FORMAT;
+    }
+
+    /**
+     * 服务默认加载的配置
+     *
+     * @param profile 环境变量
+     * @return sharedDataId
+     */
+    static String sharedDataId(String profile) {
+        return NACOS_CONFIG_PREFIX + "-" + profile + "." + NACOS_CONFIG_FORMAT;
+    }
+
+    /**
+     * 服务默认加载的配置
+     *
+     * @param profile 环境变量
+     * @return sharedDataIds
      */
     static String sharedDataIds(String profile) {
         return NACOS_CONFIG_PREFIX + "." + NACOS_CONFIG_FORMAT + "," + NACOS_CONFIG_PREFIX + "-" + profile + NACOS_CONFIG_FORMAT;
