@@ -17,7 +17,7 @@ public interface MsMapper<T> extends BaseMapper<T> {
      * @param entity 实体
      * @return 更改的条数
      */
-    int insertIgnored(T entity);
+    int insertIgnore(T entity);
 
     /**
      * 插入替换数据，需要表中有PrimaryKey，或者unique索引。如果表中已经你存在数据，则用新数据替换，如果没有数据，则插入

@@ -44,6 +44,10 @@ public interface MsConstant {
      */
     String MDC_TENANT_ID_KEY = "tenantId";
     /**
+     * 租户字段名
+     */
+    String DB_TENANT_KEY = "tenantId";
+    /**
      * 租户字段get方法
      */
     String DB_TENANT_KEY_GET_METHOD = "getTenantId";
@@ -66,7 +70,7 @@ public interface MsConstant {
     /**
      * 业务状态[1：正常]
      */
-    Integer DB_STATUS_NORMAL = 1;
+    Integer STATUS_NORMAL = 1;
 
     /**
      * 删除状态 [0:正常 1:删除]
