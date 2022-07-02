@@ -130,7 +130,7 @@ public class StringUtil extends org.springframework.util.StringUtils {
 	 * @param params  转换所需的键值对集合
 	 * @return 转换后的字符串
 	 */
-	public static String format(@Nullable String message, @Nullable Map<String, Object> params) {
+	public static String format(@Nullable String message, @Nullable Map<String, ?> params) {
 		// message 为 null 返回空字符串
 		if (message == null) {
 			return StringConstant.EMPTY;
@@ -183,6 +183,25 @@ public class StringUtil extends org.springframework.util.StringUtils {
 		}
 		sb.append(message.substring(cursor));
 		return sb.toString();
+	}
+
+	/**
+	 * 格式化执行时间，单位为 ms 和 s，保留三位小数
+	 *
+	 * @param nanos 纳秒
+	 * @return 格式化后的时间
+	 */
+	public static String format(long nanos) {
+		if (nanos < 1) {
+			return "0ms";
+		}
+		double millis = (double) nanos / (1000 * 1000);
+		// 不够 1 ms，最小单位为 ms
+		if (millis > 1000) {
+			return String.format("%.3fs", millis / 1000);
+		} else {
+			return String.format("%.3fms", millis);
+		}
 	}
 
 	/**
