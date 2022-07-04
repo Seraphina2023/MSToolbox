@@ -14,7 +14,7 @@ import java.util.List;
  * @author ruozhuliufeng
  */
 @Data
-public class BaseNode implements INode {
+public class BaseNode<T> implements INode<T> {
     private static final long serialVersionUID = 1L;
 
     /**
@@ -32,7 +32,7 @@ public class BaseNode implements INode {
      * 子孙节点
      */
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private List<INode> children = new ArrayList<>();
+    private List<T> children = new ArrayList<>();
 
     /**
      * 是否有子孙节点

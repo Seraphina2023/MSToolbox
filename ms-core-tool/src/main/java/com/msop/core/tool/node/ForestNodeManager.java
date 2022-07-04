@@ -13,7 +13,7 @@ import java.util.Map;
  *
  * @author ruozhuliufeng
  */
-public class ForestNodeManager<T extends INode> {
+public class ForestNodeManager<T extends INode<T>> {
     /**
      * 森林的所有节点
      */

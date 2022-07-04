@@ -10,7 +10,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class TreeNode extends BaseNode {
+public class TreeNode extends BaseNode<TreeNode> {
     private static final long serialVersionUID = 1L;
 
     private String title;

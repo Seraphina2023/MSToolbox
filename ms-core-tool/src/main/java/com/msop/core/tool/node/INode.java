@@ -28,7 +28,7 @@ public interface INode<T> extends Serializable {
      *
      * @return List
      */
-    List<INode> getChildren();
+    List<T> getChildren();
 
     /**
      * 是否有子孙节点
