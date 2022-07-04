@@ -15,4 +15,6 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface TableExclude {
+
+    String value() default "";
 }

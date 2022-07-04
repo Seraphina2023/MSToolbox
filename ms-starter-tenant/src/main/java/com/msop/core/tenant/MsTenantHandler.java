@@ -1,7 +1,11 @@
 package com.msop.core.tenant;
 
+import com.baomidou.mybatisplus.core.metadata.TableFieldInfo;
+import com.baomidou.mybatisplus.core.metadata.TableInfo;
+import com.baomidou.mybatisplus.core.metadata.TableInfoHelper;
 import com.baomidou.mybatisplus.extension.plugins.handler.TenantLineHandler;
 import com.msop.core.secure.utils.AuthUtil;
+import com.msop.core.tenant.annotation.TableExclude;
 import com.msop.core.tenant.properties.MsTenantProperties;
 import com.msop.core.tool.constant.MsConstant;
 import com.msop.core.tool.utils.Func;
@@ -17,6 +21,7 @@ import org.springframework.context.ApplicationContext;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 租户信息处理器
@@ -27,7 +32,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MsTenantHandler implements TenantLineHandler, SmartInitializingSingleton {
     /**
-     *  匹配的多租户表
+     * 匹配的多租户表
      */
     private final List<String> tenantTableList = new ArrayList<>();
 
@@ -43,6 +48,7 @@ public class MsTenantHandler implements TenantLineHandler, SmartInitializingSing
 
     /**
      * 获取租户ID
+     *
      * @return 租户ID
      */
     @Override
@@ -52,6 +58,7 @@ public class MsTenantHandler implements TenantLineHandler, SmartInitializingSing
 
     /**
      * 获取租户字段名称
+     *
      * @return 租户字段名称
      */
     @Override
@@ -61,12 +68,13 @@ public class MsTenantHandler implements TenantLineHandler, SmartInitializingSing
 
     /**
      * 根据表名判断是否忽略拼接多租户条件
-     * @param tableName     表名
+     *
+     * @param tableName 表名
      * @return 是否忽略拼接多租户条件 true：忽略，false：需要解析并拼接多租户条件
      */
     @Override
     public boolean ignoreTable(String tableName) {
-        if (MsTenantHolder.isIgnore()){
+        if (MsTenantHolder.isIgnore()) {
             return true;
         }
         return !(tenantTableList.contains(tableName) && StringUtil.isNotBlank(AuthUtil.getTenantId()));
@@ -75,6 +83,31 @@ public class MsTenantHandler implements TenantLineHandler, SmartInitializingSing
     @Override
     public void afterSingletonsInstantiated() {
         ApplicationContext context = SpringUtil.getContext();
+        if (tenantProperties.getAnnotationExclude() && context != null) {
+            Map<String, Object> tables = context.getBeansWithAnnotation(TableExclude.class);
+            List<String> excludeTableList = tenantProperties.getExcludeTables();
+            for (Object o : tables.values()) {
+                TableExclude annotation = o.getClass().getAnnotation(TableExclude.class);
+                String value = annotation.value();
+            }
+        }
+        List<TableInfo> tableInfos = TableInfoHelper.getTableInfos();
+        tableFor:
+        for (TableInfo tableInfo : tableInfos) {
+            String tableName = tableInfo.getTableName();
+            if (tenantProperties.getExcludeTables().contains(tableName) ||
+                    excludeTableList.contains(tableName.toLowerCase()) ||
+                    excludeTableList.contains(tableName.toUpperCase())) {
+                continue;
+            }
+            List<TableFieldInfo> fieldList = tableInfo.getFieldList();
+            for (TableFieldInfo fieldInfo : fieldList) {
+                if (tenantProperties.getColumn().equals(fieldInfo.getColumn())) {
+                    tenantTableList.add(tableName);
+                    continue tableFor;
+                }
+            }
+        }
 
     }
 }
