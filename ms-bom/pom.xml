@@ -44,7 +44,7 @@
         <redisson.version>3.11.6</redisson.version>
         <janino.version>3.0.15</janino.version>
         <jsr305.version>3.0.2</jsr305.version>
-        <JustAuth.version>1.15.8</JustAuth.version>
+        <JustAuth.version>1.16.5</JustAuth.version>
         <easyexcel.version>2.2.6</easyexcel.version>
         <captcha.version>1.6.2</captcha.version>
         <fastjson.version>1.2.74</fastjson.version>

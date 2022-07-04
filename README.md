@@ -44,7 +44,7 @@ MSToolbox
 ## 待处理
 - [x] ms-bom -- 统一依赖版本管理
 - [x] ms-core-auto -- 自动配置
-- [ ] ms-core-boot -- Spring Boot 启动配置
+- [x] ms-core-boot -- Spring Boot 启动配置
 - [x] ms-core-cloud -- 微服务版本控制
 - [x] ms-core-context -- Spring 上下文工具
 - [x] ms-core-db -- 多数据源管理
@@ -63,7 +63,7 @@ MSToolbox
 - [ ] ms-starter-excel -- Excel工具
 - [ ] ms-starter-http -- HTTP 工具
 - [x] ms-starter-jwt -- JWT 工具
-- [ ] ms-starter-log -- 日志
+- [x] ms-starter-log -- 日志
 - [ ] ms-starter-mongo -- mongo 文档工具
 - [x] ms-starter-metrics -- metrics工具
 - [x] ms-starter-mybatis -- mybatis 拓展
@@ -75,6 +75,6 @@ MSToolbox
 - [ ] ms-starter-sms -- SMS工具
 - [x] ms-starter-social -- 第三方登录工具
 - [ ] ms-starter-swagger -- Swagger 工具
-- [ ] ms-starter-tenant -- 多租户
+- [x] ms-starter-tenant -- 多租户
 - [x] ms-starter-trace -- 链路追踪
 - [x] ms-starter-trancation -- 分布式事务
