@@ -7,7 +7,7 @@ import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.PatternMatchUtils;
 import org.springframework.web.util.HtmlUtils;
-
+import org.springframework.util.StringUtils;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.text.MessageFormat;
@@ -21,7 +21,7 @@ import java.util.stream.Stream;
  *
  * @author ruozhuliufeng
  */
-public class StringUtil extends org.springframework.util.StringUtils {
+public class StringUtil extends StringUtils {
 
 	public static final int INDEX_NOT_FOUND = -1;
 
