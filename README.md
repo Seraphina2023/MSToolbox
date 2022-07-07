@@ -1,5 +1,7 @@
 # MSToolbox
 
+> 微服务工具箱
+
 ## 工程结构
 ``` 
 MSToolbox
@@ -44,7 +46,7 @@ MSToolbox
 ## 待处理
 - [x] ms-bom -- 统一依赖版本管理
 - [x] ms-core-auto -- 自动配置
-- [x] ms-core-boot -- Spring Boot 启动配置
+- [ ] ms-core-boot -- Spring Boot 启动配置
 - [x] ms-core-cloud -- 微服务版本控制
 - [x] ms-core-context -- Spring 上下文工具
 - [x] ms-core-db -- 多数据源管理
@@ -56,7 +58,7 @@ MSToolbox
 - [x] ms-starter-actuate -- 端点控制
 - [ ] ms-starter-api-crypto -- API 数据加密
 - [x] ms-starter-auth -- Security 认证
-- [ ] ms-starter-cache -- 缓存工具
+- [x] ms-starter-cache -- 缓存工具
 - [ ] ms-starter-datascope -- 数据授权范围
 - [ ] ms-starter-develop -- 代码生成工具
 - [x] ms-starter-ehcache -- 缓存
@@ -74,7 +76,7 @@ MSToolbox
 - [x] ms-starter-ribbon -- 负载均衡工具
 - [ ] ms-starter-sms -- SMS工具
 - [x] ms-starter-social -- 第三方登录工具
-- [ ] ms-starter-swagger -- Swagger 工具
+- [x] ms-starter-swagger -- Swagger 工具
 - [x] ms-starter-tenant -- 多租户
 - [x] ms-starter-trace -- 链路追踪
 - [x] ms-starter-trancation -- 分布式事务
