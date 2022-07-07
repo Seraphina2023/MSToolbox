@@ -60,7 +60,7 @@ MSToolbox
 - [ ] ms-starter-datascope -- 数据授权范围
 - [ ] ms-starter-develop -- 代码生成工具
 - [x] ms-starter-ehcache -- 缓存
-- [ ] ms-starter-excel -- Excel工具
+- [x] ms-starter-excel -- Excel工具
 - [ ] ms-starter-http -- HTTP 工具
 - [x] ms-starter-jwt -- JWT 工具
 - [x] ms-starter-log -- 日志

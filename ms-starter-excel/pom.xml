@@ -10,4 +10,17 @@
     <artifactId>ms-starter-excel</artifactId>
     <name>${project.artifactId}</name>
     <packaging>jar</packaging>
+
+    <dependencies>
+        <!-- MSToolbox -->
+        <dependency>
+            <groupId>com.msop</groupId>
+            <artifactId>ms-core-launch</artifactId>
+        </dependency>
+        <!-- EasyExcel -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>easyexcel</artifactId>
+        </dependency>
+    </dependencies>
 </project>
