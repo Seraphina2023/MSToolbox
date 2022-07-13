@@ -71,13 +71,13 @@ public enum MsLogLevel {
     BODY(3);
 
     /**
-     * 请求日志配置前缀
+     * 审计日志配置前缀
      */
-    public static final String REQ_LOG_PROPS_PREFIX = "ms.log.request";
+    public static final String LOG_PROPS_PREFIX = "ms.audit.log";
     /**
      * 控制台日志是否启用
      */
-    public static final String CONSOLE_LOG_ENABLED_PROP = "ms.log.console.enabled";
+    public static final String CONSOLE_LOG_ENABLED_PROP = "ms.audit.log.console.enabled";
 
     /**
      * 级别
