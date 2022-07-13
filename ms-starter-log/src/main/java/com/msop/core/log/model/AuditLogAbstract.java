@@ -26,6 +26,10 @@ public class AuditLogAbstract implements Serializable {
      */
     protected String serverHost;
     /**
+     * 链路ID
+     */
+    protected String traceId;
+    /**
      * 操作IP地址
      */
     protected String remoteIp;

@@ -1,11 +1,11 @@
 package com.msop.core.log.service.impl;
 
-import com.msop.core.common.utils.StringUtil;
 import com.msop.core.log.model.AuditApiLog;
 import com.msop.core.log.model.AuditErrorLog;
 import com.msop.core.log.model.AuditUsualLog;
 import com.msop.core.log.properties.LogDbProperties;
 import com.msop.core.log.service.IAuditService;
+import com.msop.core.tool.utils.StringUtil;
 import com.zaxxer.hikari.HikariDataSource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

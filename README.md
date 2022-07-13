@@ -56,7 +56,7 @@ MSToolbox
 - [x] ms-core-test -- 测试工具
 - [x] ms-core-tool -- 通用工具
 - [x] ms-starter-actuate -- 端点控制
-- [ ] ms-starter-api-crypto -- API 数据加密
+- [x] ms-starter-api-crypto -- API 数据加密
 - [x] ms-starter-auth -- Security 认证
 - [x] ms-starter-cache -- 缓存工具
 - [ ] ms-starter-datascope -- 数据授权范围
