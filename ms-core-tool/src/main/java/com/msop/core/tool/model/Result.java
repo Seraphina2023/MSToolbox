@@ -10,7 +10,6 @@ import java.io.Serializable;
  * 统一返回工具类
  *
  * @author ruozhuliufeng
- * @date 2021-08-04
  */
 @Data
 @AllArgsConstructor
@@ -55,6 +54,9 @@ public class Result<T> implements Serializable {
     public static <T> Result<T> succeed(Integer code, String msg) {
         return new Result<T>(null, code, msg);
     }
+    public static <T> Result<T> succeed(Integer code, T model, String msg) {
+        return new Result<T>(model, code, msg);
+    }
 
     public static <T> Result<T> succeed(CodeEnum codeEnum) {
         return new Result<>(codeEnum);
@@ -82,6 +84,10 @@ public class Result<T> implements Serializable {
 
     public static <T> Result<T> failed(T model, String msg) {
         return of(model, CodeEnum.FAILURE.getCode(), msg);
+    }
+
+    public static <T> Result<T> failed(Integer code,String msg,T model) {
+        return new Result<T>(model, code, msg);
     }
 
     public static <T> Result<T> failed() {
