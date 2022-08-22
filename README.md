@@ -66,7 +66,7 @@ MSToolbox
 - [ ] ms-starter-http -- HTTP 工具
 - [x] ms-starter-jwt -- JWT 工具
 - [x] ms-starter-log -- 日志
-- [ ] ms-starter-mongo -- mongo 文档工具
+- [x] ms-starter-mongo -- mongo 文档工具
 - [x] ms-starter-metrics -- metrics工具
 - [x] ms-starter-mybatis -- mybatis 拓展
 - [x] ms-starter-oss -- OSS存储工具
