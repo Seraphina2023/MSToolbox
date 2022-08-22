@@ -10,4 +10,22 @@
     <artifactId>ms-starter-report</artifactId>
     <name>${project.artifactId}</name>
     <packaging>jar</packaging>
+
+    <dependencies>
+        <!-- MSToolBox -->
+        <dependency>
+            <groupId>com.msop</groupId>
+            <artifactId>ms-starter-mybatis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.msop</groupId>
+            <artifactId>ms-core-auto</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!-- ureport -->
+        <dependency>
+            <groupId>com.bstek.ureport</groupId>
+            <artifactId>ureport2-console</artifactId>
+        </dependency>
+    </dependencies>
 </project>

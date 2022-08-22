@@ -59,6 +59,7 @@
         <aliyun.sdk.version>4.5.30</aliyun.sdk.version>
         <yunpian.sdk.version>1.2.7</yunpian.sdk.version>
         <tencent.sms.version>4.0.6</tencent.sms.version>
+        <ureport.version>2.2.9</ureport.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -604,6 +605,12 @@
                 <groupId>com.google.code.findbugs</groupId>
                 <artifactId>jsr305</artifactId>
                 <version>${jsr305.version}</version>
+            </dependency>
+            <!-- ureport -->
+            <dependency>
+                <groupId>com.bstek.ureport</groupId>
+                <artifactId>ureport2-console</artifactId>
+                <version>${ureport.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
