@@ -19,6 +19,7 @@
         <swagger.models.version>1.6.2</swagger.models.version>
         <knife4j.version>2.0.9</knife4j.version>
         <mybatis.plus.version>3.5.1</mybatis.plus.version>
+        <mybatis.plus.generator.version>3.5.2</mybatis.plus.generator.version>
         <mybatis.plus.dynamic.version>3.3.6</mybatis.plus.dynamic.version>
         <protostuff.version>1.6.0</protostuff.version>
         <disruptor.version>3.4.2</disruptor.version>
@@ -60,6 +61,7 @@
         <yunpian.sdk.version>1.2.7</yunpian.sdk.version>
         <tencent.sms.version>1.0.6</tencent.sms.version>
         <ureport.version>2.2.9</ureport.version>
+        <velocity.version>1.7</velocity.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -326,6 +328,11 @@
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-generator</artifactId>
+                <version>${mybatis.plus.generator.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-extension</artifactId>
                 <version>${mybatis.plus.version}</version>
             </dependency>
             <dependency>
@@ -611,6 +618,12 @@
                 <groupId>com.bstek.ureport</groupId>
                 <artifactId>ureport2-console</artifactId>
                 <version>${ureport.version}</version>
+            </dependency>
+            <!-- 模板引擎 velocity -->
+            <dependency>
+                <groupId>org.apache.velocity</groupId>
+                <artifactId>velocity</artifactId>
+                <version>${velocity.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
