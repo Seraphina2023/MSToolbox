@@ -54,6 +54,7 @@
         <module>ms-starter-develop</module>
         <module>ms-starter-ehcache</module>
         <module>ms-starter-excel</module>
+        <module>ms-starter-flowable</module>
         <module>ms-starter-http</module>
         <module>ms-starter-jwt</module>
         <module>ms-starter-log</module>
