@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true" scanPeriod="60 seconds">
     <!-- 自定义参数监听 -->
-    <contextListener class="org.springzhisuan.core.log.listener.LoggerStartupListener"/>
+    <contextListener class="com.msop.core.log.listener.LoggerStartupListener"/>
     <springProperty scope="context" name="springAppName" source="spring.application.name"/>
 
     <!-- 彩色日志依赖的渲染类 -->
@@ -25,7 +25,7 @@
     <appender name="INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- 日志文件输出的文件名 -->
-            <FileNamePattern>target/zhisuan/log/info-%d{yyyy-MM-dd}.log</FileNamePattern>
+            <FileNamePattern>target/msop/log/info-%d{yyyy-MM-dd}.log</FileNamePattern>
         </rollingPolicy>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <pattern>%n%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [%X{traceId}] [%logger{50}] %n%-5level: %msg%n</pattern>
@@ -42,7 +42,7 @@
     <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- 日志文件输出的文件名 -->
-            <FileNamePattern>target/zhisuan/log/error-%d{yyyy-MM-dd}.log</FileNamePattern>
+            <FileNamePattern>target/msop/log/error-%d{yyyy-MM-dd}.log</FileNamePattern>
         </rollingPolicy>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <pattern>%n%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [%X{traceId}] [%logger{50}] %n%-5level: %msg%n</pattern>

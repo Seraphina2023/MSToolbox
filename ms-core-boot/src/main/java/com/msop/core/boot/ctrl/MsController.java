@@ -113,7 +113,7 @@ public class MsController {
     /**============================     FILE    =================================================  */
 
     /**
-     * 获取ZhisuanFile封装类
+     * 获取MsFile封装类
      *
      * @param file
      * @return
@@ -123,7 +123,7 @@ public class MsController {
     }
 
     /**
-     * 获取ZhisuanFile封装类
+     * 获取MsFile封装类
      *
      * @param file
      * @param dir
@@ -134,7 +134,7 @@ public class MsController {
     }
 
     /**
-     * 获取ZhisuanFile封装类
+     * 获取MsFile封装类
      *
      * @param file
      * @param dir
@@ -147,7 +147,7 @@ public class MsController {
     }
 
     /**
-     * 获取ZhisuanFile封装类
+     * 获取MsFile封装类
      *
      * @param files
      * @return
@@ -157,7 +157,7 @@ public class MsController {
     }
 
     /**
-     * 获取ZhisuanFile封装类
+     * 获取MsFile封装类
      *
      * @param files
      * @param dir
@@ -168,7 +168,7 @@ public class MsController {
     }
 
     /**
-     * 获取ZhisuanFile封装类
+     * 获取MsFile封装类
      *
      * @param files
      * @param path

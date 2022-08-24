@@ -10,15 +10,16 @@
     </parent>
     <groupId>com.msop.platform</groupId>
     <artifactId>ms-bom</artifactId>
-    <version>0.3.4</version>
+    <version>1.0.0</version>
     <packaging>pom</packaging>
     <properties>
-        <ms.tool.version>0.3.4</ms.tool.version>
+        <ms.tool.version>1.0.0</ms.tool.version>
         <guava.version>30.0-jre</guava.version>
         <swagger.version>2.10.5</swagger.version>
         <swagger.models.version>1.6.2</swagger.models.version>
         <knife4j.version>2.0.9</knife4j.version>
         <mybatis.plus.version>3.5.1</mybatis.plus.version>
+        <mybatis.plus.generator.version>3.5.2</mybatis.plus.generator.version>
         <mybatis.plus.dynamic.version>3.3.6</mybatis.plus.dynamic.version>
         <protostuff.version>1.6.0</protostuff.version>
         <disruptor.version>3.4.2</disruptor.version>
@@ -58,8 +59,9 @@
         <huaweicloud.obs.version>3.21.12</huaweicloud.obs.version>
         <aliyun.sdk.version>4.5.30</aliyun.sdk.version>
         <yunpian.sdk.version>1.2.7</yunpian.sdk.version>
-        <tencent.sms.version>4.0.6</tencent.sms.version>
+        <tencent.sms.version>1.0.6</tencent.sms.version>
         <ureport.version>2.2.9</ureport.version>
+        <velocity.version>1.7</velocity.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -170,6 +172,12 @@
             <dependency>
                 <groupId>com.msop</groupId>
                 <artifactId>ms-starter-excel</artifactId>
+                <version>${ms.tool.version}</version>
+            </dependency>
+            <!-- 流程 -->
+            <dependency>
+                <groupId>com.msop</groupId>
+                <artifactId>ms-starter-flowable</artifactId>
                 <version>${ms.tool.version}</version>
             </dependency>
             <!-- HTTP 拓展 -->
@@ -326,6 +334,11 @@
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-generator</artifactId>
+                <version>${mybatis.plus.generator.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-extension</artifactId>
                 <version>${mybatis.plus.version}</version>
             </dependency>
             <dependency>
@@ -611,6 +624,12 @@
                 <groupId>com.bstek.ureport</groupId>
                 <artifactId>ureport2-console</artifactId>
                 <version>${ureport.version}</version>
+            </dependency>
+            <!-- 模板引擎 velocity -->
+            <dependency>
+                <groupId>org.apache.velocity</groupId>
+                <artifactId>velocity</artifactId>
+                <version>${velocity.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

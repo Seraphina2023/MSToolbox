@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true" scanPeriod="60 seconds">
     <!-- 自定义参数监听 -->
-    <contextListener class="org.springzhisuan.core.log.listener.LoggerStartupListener"/>
+    <contextListener class="com.msop.core.log.listener.LoggerStartupListener"/>
     <springProperty scope="context" name="springAppName" source="spring.application.name"/>
 
     <!-- 彩色日志依赖的渲染类 -->
@@ -102,9 +102,9 @@
     <logger name="com.netflix.discovery" level="INFO"/>
     <logger name="com.netflix.eureka" level="INFO"/>
     <!-- 业务日志 -->
-    <Logger name="org.springzhisuan" level="INFO"/>
-    <Logger name="org.springzhisuan.core.tenant" level="INFO"/>
-    <Logger name="org.springzhisuan.core.version" level="INFO"/>
+    <Logger name="com.msop" level="INFO"/>
+    <Logger name="com.msop.core.tenant" level="INFO"/>
+    <Logger name="com.msop.core.version" level="INFO"/>
 
     <!-- 减少nacos日志 -->
     <logger name="com.alibaba.nacos" level="ERROR"/>
