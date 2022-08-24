@@ -72,7 +72,7 @@ MSToolbox
 - [x] ms-starter-oss -- OSS存储工具
 - [x] ms-starter-prometheus -- 监控工具
 - [x] ms-starter-redis -- Redis 工具
-- [ ] ms-starter-report -- 报表工具
+- [x] ms-starter-report -- 报表工具
 - [x] ms-starter-ribbon -- 负载均衡工具
 - [ ] ms-starter-sms -- SMS工具
 - [x] ms-starter-social -- 第三方登录工具
