@@ -10,10 +10,10 @@
     </parent>
     <groupId>com.msop.platform</groupId>
     <artifactId>ms-bom</artifactId>
-    <version>0.3.3</version>
+    <version>0.3.4</version>
     <packaging>pom</packaging>
     <properties>
-        <ms.tool.version>0.3.3</ms.tool.version>
+        <ms.tool.version>0.3.4</ms.tool.version>
         <guava.version>30.0-jre</guava.version>
         <swagger.version>2.10.5</swagger.version>
         <swagger.models.version>1.6.2</swagger.models.version>
@@ -59,6 +59,7 @@
         <aliyun.sdk.version>4.5.30</aliyun.sdk.version>
         <yunpian.sdk.version>1.2.7</yunpian.sdk.version>
         <tencent.sms.version>4.0.6</tencent.sms.version>
+        <ureport.version>2.2.9</ureport.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -604,6 +605,12 @@
                 <groupId>com.google.code.findbugs</groupId>
                 <artifactId>jsr305</artifactId>
                 <version>${jsr305.version}</version>
+            </dependency>
+            <!-- ureport -->
+            <dependency>
+                <groupId>com.bstek.ureport</groupId>
+                <artifactId>ureport2-console</artifactId>
+                <version>${ureport.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
