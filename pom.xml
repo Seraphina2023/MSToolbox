@@ -81,7 +81,7 @@
         <dependencies>
             <!-- 工具版本管理 -->
             <dependency>
-                <groupId>tech.msop.platform</groupId>
+                <groupId>tech.msop</groupId>
                 <artifactId>ms-bom</artifactId>
                 <version>${project.version}</version>
                 <type>pom</type>
