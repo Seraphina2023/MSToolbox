@@ -8,12 +8,40 @@
         <version>2.3.12.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.msop.platform</groupId>
+    <groupId>tech.msop</groupId>
     <artifactId>ms-bom</artifactId>
-    <version>0.0.1</version>
+    <version>0.1.0</version>
+    <description> 统一版本管理 </description>
     <packaging>pom</packaging>
+    <url>https://github.com/ruozhuliufenng/MSToolbox</url>
+    <developers>
+        <developer>
+            <id>ruozhuliufeng</id>
+            <name>若竹流风</name>
+            <email>ruozhuliufeng@aixuxi.cn</email>
+            <roles>
+                <role>
+                    Java Development Engineer
+                </role>
+            </roles>
+            <timezone>2022-04-18 13:25:00</timezone>
+        </developer>
+    </developers>
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <scm>
+        <url>https://github.com/ruozhuliufenng/MSToolbox</url>
+        <connection>https://github.com/ruozhuliufenng/MSToolbox.git</connection>
+    </scm>
     <properties>
-        <ms.tool.version>1.0.0</ms.tool.version>
+        <ms.tool.version>0.1.0</ms.tool.version>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
         <guava.version>30.0-jre</guava.version>
         <swagger.version>2.10.5</swagger.version>
         <swagger.models.version>1.6.2</swagger.models.version>
@@ -66,220 +94,10 @@
     <dependencyManagement>
         <dependencies>
             <!-- MSToolbox 核心依赖版本管理 -->
-            <!-- 自动创建配置 -->
+            <!-- 自动配置项 -->
             <dependency>
-                <groupId>com.msop</groupId>
+                <groupId>tech.msop</groupId>
                 <artifactId>ms-core-auto</artifactId>
-                <version>${ms.tool.version}</version>
-                <scope>provided</scope>
-            </dependency>
-            <!-- Spring boot 工具 -->
-            <dependency>
-                <groupId>com.msop</groupId>
-                <artifactId>ms-core-boot</artifactId>
-                <version>${ms.tool.version}</version>
-            </dependency>
-            <!-- Spring Cloud 工具 -->
-            <dependency>
-                <groupId>com.msop</groupId>
-                <artifactId>ms-core-cloud</artifactId>
-                <version>${ms.tool.version}</version>
-            </dependency>
-            <!-- 上下文 -->
-            <dependency>
-                <groupId>com.msop</groupId>
-                <artifactId>ms-core-context</artifactId>
-                <version>${ms.tool.version}</version>
-            </dependency>
-            <!-- 数据库 -->
-            <dependency>
-                <groupId>com.msop</groupId>
-                <artifactId>ms-core-db</artifactId>
-                <version>${ms.tool.version}</version>
-            </dependency>
-            <!-- 启动配置 -->
-            <dependency>
-                <groupId>com.msop</groupId>
-                <artifactId>ms-core-launch</artifactId>
-                <version>${ms.tool.version}</version>
-            </dependency>
-            <!-- 日志处理 -->
-            <dependency>
-                <groupId>com.msop</groupId>
-                <artifactId>ms-core-log4j2</artifactId>
-                <version>${ms.tool.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.msop</groupId>
-                <artifactId>ms-core-secure</artifactId>
-                <version>${ms.tool.version}</version>
-            </dependency>
-            <!-- 测试工具 -->
-            <dependency>
-                <groupId>com.msop</groupId>
-                <artifactId>ms-core-test</artifactId>
-                <version>${ms.tool.version}</version>
-            </dependency>
-            <!-- 通用工具模块 -->
-            <dependency>
-                <groupId>com.msop</groupId>
-                <artifactId>ms-core-tool</artifactId>
-                <version>${ms.tool.version}</version>
-            </dependency>
-            <!-- MSTool Starter -->
-            <dependency>
-                <groupId>com.msop</groupId>
-                <artifactId>ms-starter-actuate</artifactId>
-                <version>${ms.tool.version}</version>
-            </dependency>
-            <!-- API 加密 -->
-            <dependency>
-                <groupId>com.msop</groupId>
-                <artifactId>ms-starter-api-crypto</artifactId>
-                <version>${ms.tool.version}</version>
-            </dependency>
-            <!-- AUTH 认证 -->
-            <dependency>
-                <groupId>com.msop</groupId>
-                <artifactId>ms-starter-auth</artifactId>
-                <version>${ms.tool.version}</version>
-            </dependency>
-            <!-- 缓存 -->
-            <dependency>
-                <groupId>com.msop</groupId>
-                <artifactId>ms-starter-cache</artifactId>
-                <version>${ms.tool.version}</version>
-            </dependency>
-            <!-- 权限范围 -->
-            <dependency>
-                <groupId>com.msop</groupId>
-                <artifactId>ms-starter-datascope</artifactId>
-                <version>${ms.tool.version}</version>
-            </dependency>
-            <!-- 开发与代码生成 -->
-            <dependency>
-                <groupId>com.msop</groupId>
-                <artifactId>ms-starter-develop</artifactId>
-                <version>${ms.tool.version}</version>
-            </dependency>
-            <!-- 缓存 -->
-            <dependency>
-                <groupId>com.msop</groupId>
-                <artifactId>ms-starter-ehcache</artifactId>
-                <version>${ms.tool.version}</version>
-            </dependency>
-            <!-- Excel -->
-            <dependency>
-                <groupId>com.msop</groupId>
-                <artifactId>ms-starter-excel</artifactId>
-                <version>${ms.tool.version}</version>
-            </dependency>
-            <!-- 流程 -->
-            <dependency>
-                <groupId>com.msop</groupId>
-                <artifactId>ms-starter-flowable</artifactId>
-                <version>${ms.tool.version}</version>
-            </dependency>
-            <!-- HTTP 拓展 -->
-            <dependency>
-                <groupId>com.msop</groupId>
-                <artifactId>ms-starter-http</artifactId>
-                <version>${ms.tool.version}</version>
-            </dependency>
-            <!-- JWT 拓展 -->
-            <dependency>
-                <groupId>com.msop</groupId>
-                <artifactId>ms-starter-jwt</artifactId>
-                <version>${ms.tool.version}</version>
-            </dependency>
-            <!-- log 日志拓展 -->
-            <dependency>
-                <groupId>com.msop</groupId>
-                <artifactId>ms-starter-log</artifactId>
-                <version>${ms.tool.version}</version>
-            </dependency>
-            <!-- JAVA 代码检测 -->
-            <dependency>
-                <groupId>com.msop</groupId>
-                <artifactId>ms-starter-metrics</artifactId>
-                <version>${ms.tool.version}</version>
-            </dependency>
-            <!-- mongo 拓展 -->
-            <dependency>
-                <groupId>com.msop</groupId>
-                <artifactId>ms-starter-mongo</artifactId>
-                <version>${ms.tool.version}</version>
-            </dependency>
-            <!-- Mybatis 拓展 -->
-            <dependency>
-                <groupId>com.msop</groupId>
-                <artifactId>ms-starter-mybatis</artifactId>
-                <version>${ms.tool.version}</version>
-            </dependency>
-            <!-- OSS -->
-            <dependency>
-                <groupId>com.msop</groupId>
-                <artifactId>ms-starter-oss</artifactId>
-                <version>${ms.tool.version}</version>
-            </dependency>
-            <!-- 监控工具 -->
-            <dependency>
-                <groupId>com.msop</groupId>
-                <artifactId>ms-starter-prometheus</artifactId>
-                <version>${ms.tool.version}</version>
-            </dependency>
-            <!-- Redis -->
-            <dependency>
-                <groupId>com.msop</groupId>
-                <artifactId>ms-starter-redis</artifactId>
-                <version>${ms.tool.version}</version>
-            </dependency>
-            <!-- 报表 -->
-            <dependency>
-                <groupId>com.msop</groupId>
-                <artifactId>ms-starter-report</artifactId>
-                <version>${ms.tool.version}</version>
-            </dependency>
-            <!-- Ribbon 负载均衡 -->
-            <dependency>
-                <groupId>com.msop</groupId>
-                <artifactId>ms-starter-ribbon</artifactId>
-                <version>${ms.tool.version}</version>
-            </dependency>
-            <!-- SMS -->
-            <dependency>
-                <groupId>com.msop</groupId>
-                <artifactId>ms-starter-sms</artifactId>
-                <version>${ms.tool.version}</version>
-            </dependency>
-            <!-- 第三方登录 -->
-            <dependency>
-                <groupId>com.msop</groupId>
-                <artifactId>ms-starter-social</artifactId>
-                <version>${ms.tool.version}</version>
-            </dependency>
-            <!-- Swagger模块 -->
-            <dependency>
-                <groupId>com.msop</groupId>
-                <artifactId>ms-starter-swagger</artifactId>
-                <version>${ms.tool.version}</version>
-            </dependency>
-            <!-- 多租户路模块 -->
-            <dependency>
-                <groupId>com.msop</groupId>
-                <artifactId>ms-starter-tenant</artifactId>
-                <version>${ms.tool.version}</version>
-            </dependency>
-            <!-- 链路追踪模块 -->
-            <dependency>
-                <groupId>com.msop</groupId>
-                <artifactId>ms-starter-trace</artifactId>
-                <version>${ms.tool.version}</version>
-            </dependency>
-            <!-- 分布式事务模块 -->
-            <dependency>
-                <groupId>com.msop</groupId>
-                <artifactId>ms-starter-transaction</artifactId>
                 <version>${ms.tool.version}</version>
             </dependency>
             <!-- Nacos -->
@@ -633,4 +451,82 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <profiles>
+        <profile>
+            <id>default</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-deploy-plugin</artifactId>
+                        <version>2.8.2</version>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>2.2.1</version>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>jar-no-fork</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>2.9.1</version>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <version>1.6.7</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <serverId>ossrh</serverId>
+                            <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.6</version>
+                        <executions>
+                            <execution>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+            <distributionManagement>
+                <snapshotRepository>
+                    <id>ossrh</id>
+                    <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+                </snapshotRepository>
+                <repository>
+                    <id>ossrh</id>
+                    <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+                </repository>
+            </distributionManagement>
+        </profile>
+    </profiles>
 </project>

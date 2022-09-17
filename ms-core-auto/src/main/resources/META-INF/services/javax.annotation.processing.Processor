@@ -1,2 +1,2 @@
-com.msop.core.auto.service.AutoServiceProcessor
-com.msop.core.auto.factories.AutoFactoriesProcessor
+tech.msop.core.autod.service.AutoServiceProcessor
+tech.msop.core.autod.factories.AutoFactoriesProcessor
