@@ -2,9 +2,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.msop</groupId>
+    <groupId>tech.msop</groupId>
     <artifactId>MSToolbox</artifactId>
-    <version>0.0.1</version>
+    <version>0.1.0</version>
     <name>MSToolbox</name>
     <packaging>pom</packaging>
     <description>
@@ -24,6 +24,18 @@
             <timezone>2022-04-18 13:25:00</timezone>
         </developer>
     </developers>
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <scm>
+        <url>https://github.com/ruozhuliufenng/MSToolbox</url>
+        <connection>https://github.com/ruozhuliufenng/MSToolbox.git</connection>
+    </scm>
+
     <properties>
         <java.version>1.8</java.version>
         <maven.plugin.version>3.8.1</maven.plugin.version>
@@ -37,48 +49,13 @@
         <!-- 统一版本管理 -->
         <module>ms-bom</module>
         <module>ms-core-auto</module>
-        <module>ms-core-boot</module>
-        <module>ms-core-cloud</module>
-        <module>ms-core-context</module>
-        <module>ms-core-db</module>
-        <module>ms-core-launch</module>
-        <module>ms-core-log4j2</module>
-        <module>ms-core-secure</module>
-        <module>ms-core-test</module>
-        <module>ms-core-tool</module>
-        <module>ms-starter-actuate</module>
-        <module>ms-starter-api-crypto</module>
-        <module>ms-starter-auth</module>
-        <module>ms-starter-cache</module>
-        <module>ms-starter-datascope</module>
-        <module>ms-starter-develop</module>
-        <module>ms-starter-ehcache</module>
-        <module>ms-starter-excel</module>
-        <module>ms-starter-flowable</module>
-        <module>ms-starter-http</module>
-        <module>ms-starter-jwt</module>
-        <module>ms-starter-log</module>
-        <module>ms-starter-metrics</module>
-        <module>ms-starter-mongo</module>
-        <module>ms-starter-mybatis</module>
-        <module>ms-starter-oss</module>
-        <module>ms-starter-prometheus</module>
-        <module>ms-starter-redis</module>
-        <module>ms-starter-report</module>
-        <module>ms-starter-ribbon</module>
-        <module>ms-starter-sms</module>
-        <module>ms-starter-social</module>
-        <module>ms-starter-swagger</module>
-        <module>ms-starter-tenant</module>
-        <module>ms-starter-trace</module>
-        <module>ms-starter-transaction</module>
     </modules>
 
     <dependencyManagement>
         <dependencies>
             <!-- 工具版本管理 -->
             <dependency>
-                <groupId>com.msop.platform</groupId>
+                <groupId>tech.msop.platform</groupId>
                 <artifactId>ms-bom</artifactId>
                 <version>${project.version}</version>
                 <type>pom</type>
@@ -142,76 +119,65 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
-
-    <distributionManagement>
-        <!-- Jetbrains Space 制品仓库 -->
-        <repository>
-            <id>space-maven</id>
-            <url>https://maven.pkg.jetbrains.space/ruozhuliufeng/p/mstoolbox/maven</url>
-        </repository>
-    </distributionManagement>
-
-    <build>
-        <finalName>${project.name}</finalName>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-            </resource>
-            <resource>
-                <directory>src/main/java</directory>
-                <includes>
-                    <include>**/*.xml</include>
-                </includes>
-            </resource>
-        </resources>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven.plugin.version}</version>
-                <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                    <encoding>UTF-8</encoding>
-                    <compilerArgs>
-                        <arg>-parameters</arg>
-                    </compilerArgs>
-                </configuration>
-            </plugin>
-            <!-- 打jar包 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.1.0</version>
-            </plugin>
-        </plugins>
-    </build>
-
     <profiles>
         <profile>
-            <id>develop</id>
+            <id>default</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
             <build>
                 <plugins>
-                    <!-- 打source包 -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-source-plugin</artifactId>
-                        <version>3.0.1</version>
-                        <configuration>
-                            <attach>true</attach>
-                        </configuration>
+                        <version>2.2.1</version>
                         <executions>
                             <execution>
-                                <phase>compile</phase>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>jar-no-fork</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>2.9.1</version>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
                                 <goals>
                                     <goal>jar</goal>
                                 </goals>
                             </execution>
                         </executions>
                     </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.6</version>
+                        <executions>
+                            <execution>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
                 </plugins>
             </build>
+            <distributionManagement>
+                <snapshotRepository>
+                    <id>ossrh</id>
+                    <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+                </snapshotRepository>
+                <repository>
+                    <id>ossrh</id>
+                    <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+                </repository>
+            </distributionManagement>
         </profile>
     </profiles>
-
 </project>
