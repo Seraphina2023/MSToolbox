@@ -1,9 +1,9 @@
-package com.msop.core.auto.service;
+package tech.msop.core.auto.service;
 
-import com.msop.core.auto.common.AbstractMsProcessor;
-import com.msop.core.auto.common.MultiSetMap;
-import com.msop.core.auto.common.Sets;
-import com.msop.core.auto.common.TypeHelper;
+import tech.msop.core.auto.common.AbstractMsProcessor;
+import tech.msop.core.auto.common.MultiSetMap;
+import tech.msop.core.auto.common.Sets;
+import tech.msop.core.auto.common.TypeHelper;
 
 import javax.annotation.processing.Filer;
 import javax.annotation.processing.ProcessingEnvironment;

@@ -1,9 +1,9 @@
-package com.msop.core.auto.common;
+package tech.msop.core.auto.common;
 
 
-import com.msop.core.auto.annotation.AutoContextInitializer;
-import com.msop.core.auto.annotation.AutoFailureAnalyzer;
-import com.msop.core.auto.annotation.AutoListener;
+import tech.msop.core.auto.annotation.AutoContextInitializer;
+import tech.msop.core.auto.annotation.AutoFailureAnalyzer;
+import tech.msop.core.auto.annotation.AutoListener;
 
 /**
  * 注解类型

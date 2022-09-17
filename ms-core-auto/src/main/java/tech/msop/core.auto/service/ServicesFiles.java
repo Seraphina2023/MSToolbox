@@ -1,4 +1,4 @@
-package com.msop.core.auto.service;
+package tech.msop.core.auto.service;
 
 import java.io.*;
 import java.nio.charset.Charset;
@@ -12,7 +12,7 @@ import java.util.Set;
  *
  * @author ruozhuliufeng
  */
-class ServicesFiles {
+public class ServicesFiles {
 	private static final Charset UTF_8 = StandardCharsets.UTF_8;
 
 	/**

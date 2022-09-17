@@ -1,6 +1,6 @@
-package com.msop.core.auto.factories;
+package tech.msop.core.auto.factories;
 
-import com.msop.core.auto.common.MultiSetMap;
+import tech.msop.core.auto.common.MultiSetMap;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -16,7 +16,7 @@ import java.util.StringJoiner;
  *
  * @author ruozhuliufeng
  */
-class FactoriesFiles {
+public class FactoriesFiles {
 	private static final Charset UTF_8 = StandardCharsets.UTF_8;
 
 	/**

@@ -1,4 +1,4 @@
-package com.msop.core.auto.annotation;
+package tech.msop.core.auto.annotation;
 
 import java.lang.annotation.*;
 

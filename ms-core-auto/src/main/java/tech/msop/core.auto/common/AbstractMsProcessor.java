@@ -1,4 +1,4 @@
-package com.msop.core.auto.common;
+package tech.msop.core.auto.common;
 
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.RoundEnvironment;

@@ -1,9 +1,9 @@
-package com.msop.core.auto.factories;
+package tech.msop.core.auto.factories;
 
-import com.msop.core.auto.common.AbstractMsProcessor;
-import com.msop.core.auto.common.BootAutoType;
-import com.msop.core.auto.common.MultiSetMap;
-import com.msop.core.auto.service.AutoService;
+import tech.msop.core.auto.common.AbstractMsProcessor;
+import tech.msop.core.auto.common.BootAutoType;
+import tech.msop.core.auto.common.MultiSetMap;
+import tech.msop.core.auto.service.AutoService;
 
 import javax.annotation.processing.*;
 import javax.lang.model.element.AnnotationMirror;
