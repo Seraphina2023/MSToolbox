@@ -10,7 +10,7 @@
     </parent>
     <groupId>tech.msop</groupId>
     <artifactId>ms-bom</artifactId>
-    <version>0.1.0</version>
+    <version>0.1.1</version>
     <description> 统一版本管理 </description>
     <packaging>pom</packaging>
     <url>https://github.com/ruozhuliufenng/MSToolbox</url>
@@ -62,7 +62,7 @@
         </profile>
     </profiles>
     <properties>
-        <ms.tool.version>0.1.0</ms.tool.version>
+        <ms.tool.version>0.1.1</ms.tool.version>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <guava.version>30.0-jre</guava.version>
