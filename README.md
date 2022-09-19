@@ -45,17 +45,17 @@ MSToolbox
 ```
 
 ## 待处理
-- [ ] ms-bom -- 统一依赖版本管理
-- [ ] ms-core-auto -- 自动配置
+- [x] ms-bom -- 统一依赖版本管理
+- [x] ms-core-auto -- 自动配置
 - [ ] ms-core-boot -- Spring Boot 启动配置
 - [ ] ms-core-cloud -- 微服务版本控制
 - [ ] ms-core-context -- Spring 上下文工具
 - [ ] ms-core-db -- 多数据源管理
-- [ ] ms-core-launch -- 启动工具
+- [x] ms-core-launch -- 启动工具
 - [ ] ms-core-log4j2 -- 日志工具优化
 - [ ] ms-core-secure -- 安全工具
 - [ ] ms-core-test -- 测试工具
-- [ ] ms-core-tool -- 通用工具
+- [x] ms-core-tool -- 通用工具
 - [ ] ms-starter-actuate -- 端点控制
 - [ ] ms-starter-api-crypto -- API 数据加密
 - [ ] ms-starter-auth -- Security 认证

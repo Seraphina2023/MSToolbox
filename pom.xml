@@ -52,6 +52,8 @@
         <!-- 统一版本管理 -->
         <module>ms-bom</module>
         <module>ms-core-auto</module>
+        <module>ms-core-launch</module>
+        <module>ms-core-tool</module>
     </modules>
 
     <dependencyManagement>
