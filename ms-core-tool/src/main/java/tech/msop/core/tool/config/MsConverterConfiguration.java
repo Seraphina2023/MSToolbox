@@ -7,7 +7,8 @@ import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
- * Ms enum <=> String 转换配置
+ * Ms enum &lt;=&gt; String 转换配置
+ *
  * @author ruozhuliufeng
  */
 @Configuration

@@ -81,7 +81,7 @@ public class Func {
 	 * 断言，必须不能为 null
 	 * <blockquote><pre>
 	 * public Foo(Bar bar, Baz baz) {
-	 *     this.bar = $.requireNotNull(bar, () -> "bar must not be null");
+	 *     this.bar = $.requireNotNull(bar, () -&gt; "bar must not be null");
 	 * }
 	 * </pre></blockquote>
 	 *

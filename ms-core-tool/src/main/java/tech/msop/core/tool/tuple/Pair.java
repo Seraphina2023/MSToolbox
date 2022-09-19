@@ -20,6 +20,9 @@ public class Pair<L, R> {
 
     /**
      * Returns an empty pair.
+     *
+     * @return 返回数据
+     *
      */
     @SuppressWarnings("unchecked")
     public static <L, R> Pair<L, R> empty() {
@@ -30,6 +33,7 @@ public class Pair<L, R> {
      * Constructs a pair with its left value being {@code left}, or returns an empty pair if
      * {@code left} is null.
      *
+     * @param left left
      * @return the constructed pair or an empty pair if {@code left} is null.
      */
     public static <L, R> Pair<L, R> createLeft(L left) {
@@ -44,6 +48,7 @@ public class Pair<L, R> {
      * Constructs a pair with its right value being {@code right}, or returns an empty pair if
      * {@code right} is null.
      *
+     * @param right right
      * @return the constructed pair or an empty pair if {@code right} is null.
      */
     public static <L, R> Pair<L, R> createRight(R right) {

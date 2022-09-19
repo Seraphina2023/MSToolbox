@@ -18,7 +18,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 /**
- * 接收参数 同 jackson Enum => String 转换
+ * 接收参数 同 jackson Enum =&gt; String 转换
  *
  * @author ruozhuliufeng
  */

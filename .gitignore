@@ -32,3 +32,4 @@ hs_err_pid*
 **/node_modules
 # 配置文件不上传
 /ossp-config/**
+deploy.bat
