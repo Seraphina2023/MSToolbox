@@ -1,10 +1,8 @@
 package tech.msop.core.tool.utils;
 
-import cn.hutool.core.date.SystemClock;
-import cn.hutool.core.lang.Assert;
-import cn.hutool.core.util.StrUtil;
-import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.util.Assert;
+import tech.msop.core.tool.constant.StringConstant;
 
 import java.lang.management.ManagementFactory;
 import java.net.InetAddress;
@@ -89,9 +87,9 @@ public class Sequence {
      * @param datacenterId 序列号
      */
     public Sequence(long workerId, long datacenterId) {
-        Assert.isFalse(workerId > maxWorkerId || workerId < 0,
+        Assert.isTrue(workerId < maxWorkerId && workerId > 0,
                 String.format("worker Id can't be greater than %d or less than 0", maxWorkerId));
-        Assert.isFalse(datacenterId > maxDatacenterId || datacenterId < 0,
+        Assert.isTrue(datacenterId < maxDatacenterId && datacenterId > 0,
                 String.format("datacenter Id can't be greater than %d or less than 0", maxDatacenterId));
         this.workerId = workerId;
         this.datacenterId = datacenterId;
@@ -106,11 +104,11 @@ public class Sequence {
         StringBuilder mpid = new StringBuilder();
         mpid.append(datacenterId);
         String name = ManagementFactory.getRuntimeMXBean().getName();
-        if (StrUtil.isNotEmpty(name)) {
+        if (StringUtil.isNotBlank(name)) {
             /*
              * GET jvmPid
              */
-            mpid.append(name.split(StringPool.AT)[0]);
+            mpid.append(name.split(StringConstant.AT)[0]);
         }
         /*
          * MAC + PID 的 hashcode 获取16个低位
@@ -198,6 +196,6 @@ public class Sequence {
     }
 
     protected long timeGen() {
-        return SystemClock.now();
+        return System.currentTimeMillis();
     }
 }

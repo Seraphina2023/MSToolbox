@@ -1,5 +1,6 @@
 package tech.msop.core.tool.beans;
 
+import org.springframework.cglib.core.*;
 import tech.msop.core.tool.utils.ReflectUtil;
 import org.springframework.asm.ClassVisitor;
 import org.springframework.asm.Label;

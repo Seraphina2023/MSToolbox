@@ -1,7 +1,5 @@
 package tech.msop.core.tool.utils;
 
-
-
 import tech.msop.core.tool.beans.BeanProperty;
 import tech.msop.core.tool.beans.MsBeanCopier;
 import tech.msop.core.tool.beans.MsBeanMap;
