@@ -115,7 +115,13 @@
             <!-- 测试工具类 -->
             <dependency>
                 <groupId>tech.msop</groupId>
-                <artifactId>ms-core-tool</artifactId>
+                <artifactId>ms-core-test</artifactId>
+                <version>${ms.tool.version}</version>
+            </dependency>
+            <!-- context工具 -->
+            <dependency>
+                <groupId>tech.msop</groupId>
+                <artifactId>ms-core-context</artifactId>
                 <version>${ms.tool.version}</version>
             </dependency>
             <!-- Nacos -->

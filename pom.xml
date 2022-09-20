@@ -56,6 +56,7 @@
         <module>ms-core-tool</module>
         <module>ms-core-test</module>
         <module>ms-core-db</module>
+        <module>ms-core-context</module>
     </modules>
 
     <dependencyManagement>

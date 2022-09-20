@@ -49,8 +49,8 @@ MSToolbox
 - [x] ms-core-auto -- 自动配置
 - [ ] ms-core-boot -- Spring Boot 启动配置
 - [ ] ms-core-cloud -- 微服务版本控制
-- [ ] ms-core-context -- Spring 上下文工具
-- [ ] ms-core-db -- 多数据源管理
+- [x] ms-core-context -- Spring 上下文工具
+- [x] ms-core-db -- 多数据源管理
 - [x] ms-core-launch -- 启动工具
 - [ ] ms-core-log4j2 -- 日志工具优化
 - [ ] ms-core-secure -- 安全工具
