@@ -55,6 +55,7 @@
         <module>ms-core-launch</module>
         <module>ms-core-tool</module>
         <module>ms-core-test</module>
+        <module>ms-core-db</module>
     </modules>
 
     <dependencyManagement>
