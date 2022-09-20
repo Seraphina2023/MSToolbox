@@ -125,11 +125,11 @@
                 <version>${ms.tool.version}</version>
             </dependency>
             <!-- 微服务版本及客户端核心工具 -->
-            <dependency>
-                <groupId>tech.msop</groupId>
-                <artifactId>ms-core-cloud</artifactId>
-                <version>${ms.tool.version}</version>
-            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>tech.msop</groupId>-->
+<!--                <artifactId>ms-core-cloud</artifactId>-->
+<!--                <version>${ms.tool.version}</version>-->
+<!--            </dependency>-->
             <!-- Nacos -->
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
