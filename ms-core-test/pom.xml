@@ -5,7 +5,7 @@
     <parent>
         <groupId>tech.msop</groupId>
         <artifactId>MSToolbox</artifactId>
-        <version>0.1.2</version>
+        <version>0.1.3</version>
     </parent>
     <artifactId>ms-core-test</artifactId>
     <name>${project.artifactId}</name>
