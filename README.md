@@ -48,7 +48,7 @@ MSToolbox
 - [x] ms-bom -- 统一依赖版本管理
 - [x] ms-core-auto -- 自动配置
 - [ ] ms-core-boot -- Spring Boot 启动配置
-- [ ] ms-core-cloud -- 微服务版本控制
+- [x] ms-core-cloud -- 微服务版本控制
 - [x] ms-core-context -- Spring 上下文工具
 - [x] ms-core-db -- 多数据源管理
 - [x] ms-core-launch -- 启动工具
