@@ -54,7 +54,7 @@ MSToolbox
 - [x] ms-core-launch -- 启动工具
 - [ ] ms-core-log4j2 -- 日志工具优化
 - [ ] ms-core-secure -- 安全工具
-- [ ] ms-core-test -- 测试工具
+- [x] ms-core-test -- 测试工具
 - [x] ms-core-tool -- 通用工具
 - [ ] ms-starter-actuate -- 端点控制
 - [ ] ms-starter-api-crypto -- API 数据加密

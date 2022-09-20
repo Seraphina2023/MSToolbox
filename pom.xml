@@ -54,6 +54,7 @@
         <module>ms-core-auto</module>
         <module>ms-core-launch</module>
         <module>ms-core-tool</module>
+        <module>ms-core-test</module>
     </modules>
 
     <dependencyManagement>
