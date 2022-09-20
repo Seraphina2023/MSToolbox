@@ -16,11 +16,10 @@
             <groupId>tech.msop</groupId>
             <artifactId>ms-core-launch</artifactId>
         </dependency>
-        <!-- 自动配置 -->
+        <!-- Test -->
         <dependency>
-            <groupId>tech.msop</groupId>
-            <artifactId>ms-core-auto</artifactId>
-            <scope>provided</scope>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
     </dependencies>
 </project>
