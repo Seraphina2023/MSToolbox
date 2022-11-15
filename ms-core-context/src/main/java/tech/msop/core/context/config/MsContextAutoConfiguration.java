@@ -1,5 +1,6 @@
 package tech.msop.core.context.config;
 
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import tech.msop.core.context.MsContext;
 import tech.msop.core.context.MsHttpHeadersGetter;
 import tech.msop.core.context.MsServletContext;
@@ -17,7 +18,7 @@ import org.springframework.core.annotation.Order;
  *
  * @author ruozhuliufeng
  */
-@Configuration
+@AutoConfiguration
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @EnableConfigurationProperties(MsContextProperties.class)
 public class MsContextAutoConfiguration {

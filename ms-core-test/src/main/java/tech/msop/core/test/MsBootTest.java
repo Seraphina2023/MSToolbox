@@ -1,6 +1,6 @@
 package tech.msop.core.test;
 
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.core.annotation.AliasFor;
 
 import java.lang.annotation.*;
@@ -14,7 +14,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Inherited
-@SpringBootTest
+@ExtendWith(MsSpringExtension.class)
 public @interface MsBootTest {
     /**
      * 服务名：appName

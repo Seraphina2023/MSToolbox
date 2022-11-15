@@ -1,8 +1,8 @@
 package tech.msop.core.tool.config;
 
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import tech.msop.core.tool.convert.EnumToStringConverter;
 import tech.msop.core.tool.convert.StringToEnumConverter;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  *
  * @author ruozhuliufeng
  */
-@Configuration
+@AutoConfiguration
 public class MsConverterConfiguration implements WebMvcConfigurer {
 
     @Override

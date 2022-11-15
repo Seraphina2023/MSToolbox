@@ -1,13 +1,13 @@
 package tech.msop.core.tool.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.http.converter.*;
 import tech.msop.core.tool.jackson.MappingApiJackson2HttpMessageConverter;
 import tech.msop.core.tool.jackson.MsJacksonProperties;
 import tech.msop.core.tool.utils.Charsets;
 import tech.msop.core.tool.utils.DateUtil;
 import lombok.AllArgsConstructor;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.format.FormatterRegistry;
@@ -22,7 +22,7 @@ import java.util.List;
  *
  * @author ruozhuliufeng
  */
-@Configuration(proxyBeanMethods = false)
+@AutoConfiguration
 @AllArgsConstructor
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class MessageConfiguration implements WebMvcConfigurer {

@@ -1,10 +1,10 @@
 package tech.msop.core.tool.config;
 
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import tech.msop.core.tool.support.BinderSupplier;
 import tech.msop.core.tool.utils.SpringUtil;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 
@@ -14,7 +14,7 @@ import java.util.function.Supplier;
  * 工具配置类
  * @author ruozhuliufeng
  */
-@Configuration(proxyBeanMethods = false)
+@AutoConfiguration
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class ToolConfiguration {
 

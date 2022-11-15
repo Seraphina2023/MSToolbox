@@ -1,7 +1,7 @@
 package tech.msop.core.launch.config;
 
 import lombok.AllArgsConstructor;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 
@@ -10,7 +10,7 @@ import org.springframework.core.annotation.Order;
  *
  * @author ruozhuliufeng
  */
-@Configuration
+@AutoConfiguration
 @AllArgsConstructor
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class MsLaunchConfiguration {

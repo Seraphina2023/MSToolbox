@@ -44,8 +44,8 @@
         <maven.deploy.skip>true</maven.deploy.skip>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <spring.boot.version>2.3.12.RELEASE</spring.boot.version>
-        <spring.cloud.verion>Hoxton.SR12</spring.cloud.verion>
+        <spring.boot.version>2.7.1</spring.boot.version>
+        <spring.cloud.verion>2021.0.3</spring.cloud.verion>
         <spring.platform.version>Cairo-SR8</spring.platform.version>
     </properties>
     <modules>
@@ -57,6 +57,9 @@
         <module>ms-core-test</module>
         <module>ms-core-db</module>
         <module>ms-core-context</module>
+        <module>ms-starter-redis</module>
+        <module>ms-starter-oss</module>
+        <module>ms-starter-jwt</module>
     </modules>
 
     <dependencyManagement>

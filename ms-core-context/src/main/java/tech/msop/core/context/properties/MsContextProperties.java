@@ -44,7 +44,7 @@ public class MsContextProperties {
         /**
          * 自定义 RestTemplate 和 Feign透传到下层的Headers名称列表
          */
-        private List<String> allowed = Arrays.asList("X-Real-IP", "x-forwarded-for",
+        private List<String> allowed = Arrays.asList("X-Real-IP", "x-forwarded-for","version","VERSION",
                 "authorization", "Authorization", TokenConstant.HEADER.toLowerCase(), TokenConstant.HEADER);
     }
 
