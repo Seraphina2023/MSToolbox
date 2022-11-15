@@ -9,6 +9,7 @@
     </parent>
     <artifactId>ms-core-context</artifactId>
     <name>${project.artifactId}</name>
+    <version>${project.parent.version}</version>
     <packaging>jar</packaging>
     <dependencies>
         <!-- MSToolbox -->

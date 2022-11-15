@@ -9,7 +9,7 @@
     </parent>
     <artifactId>ms-core-db</artifactId>
     <name>${project.artifactId}</name>
-
+    <version>${project.parent.version}</version>
     <dependencies>
         <!-- MSToolbox -->
         <dependency>

@@ -9,7 +9,7 @@
     </parent>
     <artifactId>ms-core-launch</artifactId>
     <name>${project.artifactId}</name>
-
+    <version>${project.parent.version}</version>
     <dependencies>
         <!-- Spring Web -->
         <dependency>

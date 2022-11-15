@@ -9,6 +9,7 @@
     </parent>
     <artifactId>ms-core-auto</artifactId>
     <name>${project.artifactId}</name>
+    <version>${project.parent.version}</version>
     <description>ms-core-auto</description>
     <packaging>jar</packaging>
 

@@ -9,6 +9,7 @@
     </parent>
     <artifactId>ms-core-tool</artifactId>
     <name>${project.artifactId}</name>
+    <version>${project.parent.version}</version>
     <description>
         工具通用模块
     </description>

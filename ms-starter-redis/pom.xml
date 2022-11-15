@@ -10,6 +10,7 @@
     <artifactId>ms-starter-redis</artifactId>
     <packaging>jar</packaging>
     <name>${project.artifactId}</name>
+    <version>${project.parent.version}</version>
     <description>
         MS-Redis操作工具
     </description>
