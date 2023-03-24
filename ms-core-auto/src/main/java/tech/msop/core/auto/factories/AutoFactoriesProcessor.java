@@ -1,5 +1,7 @@
+
 package tech.msop.core.auto.factories;
 
+import tech.msop.core.auto.annotation.AutoIgnore;
 import tech.msop.core.auto.common.AbstractMsProcessor;
 import tech.msop.core.auto.common.BootAutoType;
 import tech.msop.core.auto.common.MultiSetMap;
@@ -25,7 +27,7 @@ import java.util.stream.Collectors;
 /**
  * spring boot 自动配置处理器
  *
- * @author ruozhuliufeng
+ * @author L.cm
  */
 @AutoService(Processor.class)
 @SupportedAnnotationTypes("*")
@@ -81,10 +83,10 @@ public class AutoFactoriesProcessor extends AbstractMsProcessor {
 
 		// 过滤 TypeElement
 		Set<TypeElement> typeElementSet = elementSet.stream()
-			.filter(this::isClassOrInterface)
-			.filter(e -> e instanceof TypeElement)
-			.map(e -> (TypeElement) e)
-			.collect(Collectors.toSet());
+				.filter(this::isClassOrInterface)
+				.filter(e -> e instanceof TypeElement)
+				.map(e -> (TypeElement) e)
+				.collect(Collectors.toSet());
 		// 如果为空直接跳出
 		if (typeElementSet.isEmpty()) {
 			log("Annotations elementSet is isEmpty");
@@ -92,7 +94,9 @@ public class AutoFactoriesProcessor extends AbstractMsProcessor {
 		}
 
 		for (TypeElement typeElement : typeElementSet) {
-			if (isAnnotation(elementUtils, typeElement, FEIGN_CLIENT_ANNOTATION)) {
+			if (isAnnotation(elementUtils, typeElement, AutoIgnore.class.getName())) {
+				log("Found @AutoIgnore annotation，ignore Element: " + typeElement.toString());
+			} else if (isAnnotation(elementUtils, typeElement, FEIGN_CLIENT_ANNOTATION)) {
 				log("Found @FeignClient Element: " + typeElement.toString());
 
 				ElementKind elementKind = typeElement.getKind();
@@ -108,7 +112,7 @@ public class AutoFactoriesProcessor extends AbstractMsProcessor {
 				}
 
 				log("读取到新配置 spring.factories factoryName：" + factoryName);
-				factories.put(FEIGN_AUTO_CONFIGURE_KEY,  factoryName);
+				factories.put(FEIGN_AUTO_CONFIGURE_KEY, factoryName);
 			} else {
 				for (BootAutoType autoType : BootAutoType.values()) {
 					String annotation = autoType.getAnnotationName();
@@ -121,7 +125,7 @@ public class AutoFactoriesProcessor extends AbstractMsProcessor {
 						}
 
 						log("读取到新配置 spring.factories factoryName：" + factoryName);
-						factories.put(autoType.getConfigureKey(),  factoryName);
+						factories.put(autoType.getConfigureKey(), factoryName);
 					}
 				}
 			}

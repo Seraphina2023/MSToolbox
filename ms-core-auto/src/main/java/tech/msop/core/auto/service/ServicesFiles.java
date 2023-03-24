@@ -12,7 +12,7 @@ import java.util.Set;
  *
  * @author ruozhuliufeng
  */
-public class ServicesFiles {
+class ServicesFiles {
 	private static final Charset UTF_8 = StandardCharsets.UTF_8;
 
 	/**

@@ -11,6 +11,12 @@ import javax.lang.model.util.Types;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Type utilities.
+ *
+ * @author Stephane Nicoll
+ * @since 5.0
+ */
 public class TypeHelper {
 
 	private final ProcessingEnvironment env;

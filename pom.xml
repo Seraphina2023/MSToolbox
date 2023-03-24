@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>tech.msop</groupId>
     <artifactId>MSToolbox</artifactId>
-    <version>0.1.3</version>
+    <version>0.2.0.RELEASE</version>
     <name>MSToolbox</name>
     <packaging>pom</packaging>
     <description>
@@ -51,15 +51,12 @@
     <modules>
         <!-- 统一版本管理 -->
         <module>ms-bom</module>
+        <!-- 自动配置SpringBoot -->
         <module>ms-core-auto</module>
-        <module>ms-core-launch</module>
-        <module>ms-core-tool</module>
-        <module>ms-core-test</module>
-        <module>ms-core-db</module>
-        <module>ms-core-context</module>
-        <module>ms-starter-redis</module>
-        <module>ms-starter-oss</module>
-        <module>ms-starter-jwt</module>
+        <!-- Spring 文件存储 -->
+        <module>ms-starter-file-storage</module>
+        <!-- Spring Mybatis 处理加密字段 -->
+        <module>ms-starter-mybatis-encrypt</module>
     </modules>
 
     <dependencyManagement>
