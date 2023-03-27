@@ -65,6 +65,8 @@
         <module>ms-bom</module>
         <!-- 自动配置SpringBoot -->
         <module>ms-core-auto</module>
+        <!-- MS 上下文工具 -->
+        <module>ms-core-context</module>
         <!-- Spring 数据库连接类 -->
         <module>ms-core-db</module>
         <!-- 工具 -->

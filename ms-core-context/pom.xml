@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>tech.msop</groupId>
+        <artifactId>MSToolbox</artifactId>
+        <version>0.2.0.RELEASE</version>
+    </parent>
+    <artifactId>ms-core-context</artifactId>
+    <name>${project.artifactId}</name>
+    <packaging>jar</packaging>
+    <description>
+        Spring 上下文工具类，用于传递相关数据
+    </description>
+    <dependencies>
+        <!-- MSToolbox -->
+        <dependency>
+            <groupId>tech.msop</groupId>
+            <artifactId>ms-core-tool</artifactId>
+        </dependency>
+        <!-- 自动配置 -->
+        <dependency>
+            <groupId>tech.msop</groupId>
+            <artifactId>ms-core-auto</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+
+</project>

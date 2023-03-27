@@ -152,4 +152,9 @@ public interface MsConstant {
      * 主键字段你get方法
      */
     String DB_PRIMARY_KEY_METHOD = "getId";
+
+    /**
+     * 签名头
+     */
+    String HEADER = "Ms-Auth";
 }
