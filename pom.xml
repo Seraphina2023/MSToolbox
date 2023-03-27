@@ -77,6 +77,8 @@
         <module>ms-starter-file-storage</module>
         <!-- Spring Mybatis 处理加密字段 -->
         <module>ms-starter-mybatis-encrypt</module>
+        <!-- Spring Redis 处理工具 -->
+        <module>ms-starter-redis</module>
     </modules>
 
     <dependencyManagement>
