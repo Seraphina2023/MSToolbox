@@ -155,6 +155,12 @@
                 <artifactId>ms-starter-file-storage</artifactId>
                 <version>${ms.tool.version}</version>
             </dependency>
+            <!-- Spring 负载均衡 -->
+            <dependency>
+                <groupId>tech.msop</groupId>
+                <artifactId>ms-starter-loadbalancer</artifactId>
+                <version>${ms.tool.version}</version>
+            </dependency>
             <!-- Spring 字段加密 -->
             <dependency>
                 <groupId>tech.msop</groupId>
