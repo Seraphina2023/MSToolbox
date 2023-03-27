@@ -71,6 +71,8 @@
         <module>ms-core-db</module>
         <!-- 工具 -->
         <module>ms-core-tool</module>
+        <!-- HTTP 缓存 -->
+        <module>ms-starter-actuate</module>
         <!-- Spring 文件存储 -->
         <module>ms-starter-file-storage</module>
         <!-- Spring Mybatis 处理加密字段 -->
