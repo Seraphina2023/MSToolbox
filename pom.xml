@@ -75,6 +75,8 @@
         <module>ms-starter-actuate</module>
         <!-- Spring 文件存储 -->
         <module>ms-starter-file-storage</module>
+        <!-- Spring HTTP 工具 -->
+        <module>ms-starter-http</module>
         <!-- Spring 负载均衡 -->
         <module>ms-starter-loadbalancer</module>
         <!-- Spring Mybatis 处理加密字段 -->
