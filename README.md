@@ -11,6 +11,8 @@ MSToolbox
 ├── ms-core-db -- 数据库连接类及Druid配置
 ├── ms-core-tool -- MS 通用工具
 ├── ms-starter-actuate -- Spring HTTP 缓存管理
+├── ms-starter-api-crypto -- Spring API 数据加密与解密
+├── ms-starter-ehcache -- Spring 数据缓存
 ├── ms-starter-file-storage -- Spring 文件管理
 ├── ms-starter-http -- Spring HTTP 工具类
 ├── ms-starter-loadbalancer -- Spring 负载均衡
