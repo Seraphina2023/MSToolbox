@@ -7,25 +7,34 @@
         <artifactId>MSToolbox</artifactId>
         <version>0.2.2.RELEASE</version>
     </parent>
-    <artifactId>ms-core-context</artifactId>
+    <artifactId>ms-http-starter</artifactId>
     <name>${project.artifactId}</name>
     <packaging>jar</packaging>
-    <description>
-        Spring 上下文工具类，用于传递相关数据
-    </description>
+
     <dependencies>
         <!-- MSToolbox -->
         <dependency>
             <groupId>tech.msop</groupId>
             <artifactId>ms-core-tool</artifactId>
         </dependency>
-        <!-- 自动配置 -->
+        <!-- okhttp3 -->
         <dependency>
-            <groupId>tech.msop</groupId>
-            <artifactId>ms-core-auto</artifactId>
-            <scope>provided</scope>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>logging-interceptor</artifactId>
+        </dependency>
+        <!-- jsoup -->
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>jsr305</artifactId>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
-
-
 </project>

@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>tech.msop</groupId>
     <artifactId>MSToolbox</artifactId>
-    <version>0.2.1.RELEASE</version>
+    <version>0.2.2.RELEASE</version>
     <name>MSToolbox</name>
     <packaging>pom</packaging>
     <description>
@@ -69,24 +69,26 @@
         <module>ms-core-context</module>
         <!-- Spring 数据库连接类 -->
         <module>ms-core-db</module>
+        <!-- Spring 自定义启动类 -->
+        <module>ms-core-launch</module>
         <!-- 工具 -->
         <module>ms-core-tool</module>
         <!-- HTTP 缓存 -->
-        <module>ms-starter-actuate</module>
+        <module>ms-actuate-starter</module>
         <!-- Spring API 加密 -->
-        <module>ms-starter-api-crypto</module>
+        <module>ms-api-crypto-starter</module>
         <!-- Spring 缓存框架 -->
-        <module>ms-starter-ehcache</module>
+        <module>ms-ehcache-starter</module>
         <!-- Spring 文件存储 -->
-        <module>ms-starter-file-storage</module>
+        <module>ms-file-storage-starter</module>
         <!-- Spring HTTP 工具 -->
-        <module>ms-starter-http</module>
+        <module>ms-http-starter</module>
         <!-- Spring 负载均衡 -->
-        <module>ms-starter-loadbalancer</module>
+        <module>ms-loadbalancer-starter</module>
         <!-- Spring Mybatis 处理加密字段 -->
-        <module>ms-starter-mybatis-encrypt</module>
+        <module>ms-mybatis-encrypt-starter</module>
         <!-- Spring Redis 处理工具 -->
-        <module>ms-starter-redis</module>
+        <module>ms-redis-starter</module>
     </modules>
 
     <dependencyManagement>

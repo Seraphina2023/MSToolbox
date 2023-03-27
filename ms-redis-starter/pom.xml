@@ -7,25 +7,40 @@
         <artifactId>MSToolbox</artifactId>
         <version>0.2.2.RELEASE</version>
     </parent>
-    <artifactId>ms-core-context</artifactId>
+    <artifactId>ms-redis-starter</artifactId>
     <name>${project.artifactId}</name>
     <packaging>jar</packaging>
-    <description>
-        Spring 上下文工具类，用于传递相关数据
-    </description>
+
     <dependencies>
         <!-- MSToolbox -->
         <dependency>
             <groupId>tech.msop</groupId>
             <artifactId>ms-core-tool</artifactId>
         </dependency>
-        <!-- 自动配置 -->
         <dependency>
             <groupId>tech.msop</groupId>
             <artifactId>ms-core-auto</artifactId>
             <scope>provided</scope>
         </dependency>
+        <!-- Redis -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson</artifactId>
+        </dependency>
+        <!-- protostuff -->
+        <dependency>
+            <groupId>io.protostuff</groupId>
+            <artifactId>protostuff-core</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>io.protostuff</groupId>
+            <artifactId>protostuff-runtime</artifactId>
+            <optional>true</optional>
+        </dependency>
     </dependencies>
-
-
 </project>
