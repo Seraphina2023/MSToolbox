@@ -73,6 +73,8 @@
         <module>ms-core-tool</module>
         <!-- HTTP 缓存 -->
         <module>ms-starter-actuate</module>
+        <!-- Spring API 加密 -->
+        <module>ms-starter-api-crypto</module>
         <!-- Spring 文件存储 -->
         <module>ms-starter-file-storage</module>
         <!-- Spring HTTP 工具 -->

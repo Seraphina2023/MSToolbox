@@ -149,6 +149,12 @@
                 <artifactId>ms-starter-actuate</artifactId>
                 <version>${ms.tool.version}</version>
             </dependency>
+            <!-- Spring API 加密解密 -->
+            <dependency>
+                <groupId>tech.msop</groupId>
+                <artifactId>ms-starter-api-crypto</artifactId>
+                <version>${ms.tool.version}</version>
+            </dependency>
             <!-- Spring 文件存储 -->
             <dependency>
                 <groupId>tech.msop</groupId>
