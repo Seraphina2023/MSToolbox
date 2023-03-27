@@ -125,6 +125,12 @@
                 <artifactId>ms-core-auto</artifactId>
                 <version>${ms.tool.version}</version>
             </dependency>
+            <!-- Spring 数据库连接类 -->
+            <dependency>
+                <groupId>tech.msop</groupId>
+                <artifactId>ms-core-db</artifactId>
+                <version>${ms.tool.version}</version>
+            </dependency>
             <!-- 工具 -->
             <dependency>
                 <groupId>tech.msop</groupId>
