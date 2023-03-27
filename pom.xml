@@ -65,6 +65,8 @@
         <module>ms-bom</module>
         <!-- 自动配置SpringBoot -->
         <module>ms-core-auto</module>
+        <!-- 工具 -->
+        <module>ms-core-tool</module>
         <!-- Spring 文件存储 -->
         <module>ms-starter-file-storage</module>
         <!-- Spring Mybatis 处理加密字段 -->
