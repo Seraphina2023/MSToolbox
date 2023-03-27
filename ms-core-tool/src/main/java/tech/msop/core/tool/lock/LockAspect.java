@@ -1,10 +1,7 @@
-package tech.msop.core.redis.lock;
+package tech.msop.core.tool.lock;
 
-import org.springframework.util.Assert;
-import tech.msop.core.tool.constant.CharConstant;
-import tech.msop.core.tool.spel.MsExpressionEvaluator;
-import tech.msop.core.tool.utils.StringUtil;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -14,41 +11,49 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.expression.AnnotatedElementKey;
 import org.springframework.expression.EvaluationContext;
+import org.springframework.util.Assert;
+import tech.msop.core.tool.constant.CharConstant;
+import tech.msop.core.tool.spel.MsExpressionEvaluator;
+import tech.msop.core.tool.utils.StringUtil;
 
 import java.lang.reflect.Method;
 import java.util.concurrent.TimeUnit;
 
 /**
- * redis 分布式锁切面
+ * 分布式锁切面
  *
  * @author ruozhuliufeng
  */
+@Slf4j
 @Aspect
 @RequiredArgsConstructor
-public class RedisLockAspect implements ApplicationContextAware {
+public class LockAspect implements ApplicationContextAware {
+    /**
+     * 分布式锁接口
+     */
+    private final DistributedLock locker;
     /**
      * 表达式处理
      */
     private static final MsExpressionEvaluator EVALUATOR = new MsExpressionEvaluator();
     /**
-     * Redis 限流服务
+     * Spring 上下文
      */
-    private final RedisLockClient redisLockClient;
-
     private ApplicationContext applicationContext;
+
 
     /**
      * AOP 环切 注解  @RedisLock
      *
      * @param point     切点
-     * @param redisLock 注解
+     * @param lock 锁注解
      */
-    @Around("@annotation(redisLock)")
-    public Object aroundRedisLock(ProceedingJoinPoint point, RedisLock redisLock) {
-        String lockName = redisLock.value();
-        Assert.hasText(lockName, "@RedisLock注解值不能为空");
+    @Around("@annotation(lock)")
+    public Object aroundRedisLock(ProceedingJoinPoint point, Lock lock) {
+        String lockName = lock.value();
+        Assert.hasText(lockName, "@Lock 注解值不能为空");
         // EL表达式
-        String lockParam = redisLock.param();
+        String lockParam = lock.param();
         // 表达式不为空
         String lockKey;
         if (StringUtil.isNotBlank(lockParam)) {
@@ -57,11 +62,11 @@ public class RedisLockAspect implements ApplicationContextAware {
         } else {
             lockKey = lockName;
         }
-        LockType lockType = redisLock.type();
-        long waitTime = redisLock.waitTime();
-        long leaseTime = redisLock.leaseTime();
-        TimeUnit timeUnit = redisLock.timeUnit();
-        return redisLockClient.lock(lockKey, lockType, waitTime, leaseTime, timeUnit, point::proceed);
+        LockType lockType = lock.type();
+        long waitTime = lock.waitTime();
+        long leaseTime = lock.leaseTime();
+        TimeUnit timeUnit = lock.timeUnit();
+        return locker.lock(lockKey, lockType, waitTime, leaseTime, timeUnit, point::proceed);
     }
 
     /**
@@ -81,7 +86,6 @@ public class RedisLockAspect implements ApplicationContextAware {
         AnnotatedElementKey elementKey = new AnnotatedElementKey(method, targetClass);
         return EVALUATOR.evalAsText(lockParam, elementKey, context);
     }
-
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {

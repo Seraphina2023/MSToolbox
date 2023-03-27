@@ -2,7 +2,7 @@ package tech.msop.core.redis.config;
 
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import tech.msop.core.redis.cache.MsRedis;
+import tech.msop.core.redis.cache.RedisRepository;
 import tech.msop.core.redis.serializer.RedisKeySerializer;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
@@ -60,7 +60,7 @@ public class RedisTemplateConfiguration implements MsRedisSerializerConfigAble {
     }
 
     @Bean
-    public MsRedis msRedis(RedisTemplate<String, Object> redisTemplate, StringRedisTemplate stringRedisTemplate) {
-        return new MsRedis(redisTemplate,stringRedisTemplate);
+    public RedisRepository msRedis(RedisTemplate<String, Object> redisTemplate, StringRedisTemplate stringRedisTemplate) {
+        return new RedisRepository(redisTemplate,stringRedisTemplate);
     }
 }

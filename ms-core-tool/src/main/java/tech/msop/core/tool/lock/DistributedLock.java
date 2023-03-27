@@ -1,15 +1,15 @@
-package tech.msop.core.redis.lock;
+package tech.msop.core.tool.lock;
 
 import tech.msop.core.tool.function.CheckedSupplier;
 
 import java.util.concurrent.TimeUnit;
 
 /**
- * 锁客户端
+ * 分布式锁顶级接口
  *
  * @author ruozhuliufeng
  */
-public interface RedisLockClient {
+public interface DistributedLock {
 
     /**
      * 尝试获取锁

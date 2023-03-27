@@ -1,8 +1,8 @@
-package tech.msop.core.redis.lock;
-
+package tech.msop.core.tool.lock;
 
 import java.lang.annotation.*;
 import java.util.concurrent.TimeUnit;
+
 
 /**
  * 分布式锁注解，redisson，支持的锁的种类有很多，适合注解形式的只有重入锁、公平锁
@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 @Documented
-public @interface RedisLock {
+public @interface Lock {
     /**
      * 分布式锁的key，必须：保持唯一性
      *
@@ -62,5 +62,4 @@ public @interface RedisLock {
      * @return LockTpe
      */
     LockType type() default LockType.FAIR;
-
 }

@@ -1,22 +1,31 @@
 package tech.msop.core.redis.lock;
 
-import tech.msop.core.tool.function.CheckedSupplier;
-import tech.msop.core.tool.utils.Exceptions;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import tech.msop.core.tool.function.CheckedSupplier;
+import tech.msop.core.tool.lock.DistributedLock;
+import tech.msop.core.tool.lock.LockType;
+import tech.msop.core.tool.utils.Exceptions;
 
 import java.util.concurrent.TimeUnit;
 
 /**
- * 锁客户端
+ * Redisson 分布式锁实现，基本锁功能的抽象实现
  *
  * @author ruozhuliufeng
  */
 @Slf4j
 @RequiredArgsConstructor
-public class RedisLockClientImpl implements RedisLockClient {
+@ConditionalOnClass(RedissonClient.class)
+@ConditionalOnProperty(prefix = "ms.lock",name = "lockerType", havingValue = "REDIS", matchIfMissing = true)
+public class RedissonDistributedLock implements DistributedLock {
+    /**
+     * Redisson 客户端
+     */
     private final RedissonClient redissonClient;
 
     /**

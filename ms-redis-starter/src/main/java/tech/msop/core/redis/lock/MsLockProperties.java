@@ -19,6 +19,10 @@ public class MsLockProperties {
      */
     private Boolean enabled = Boolean.FALSE;
     /**
+     * 分布式锁类型：REDIS
+     */
+    private String lockerType = "REDIS";
+    /**
      * 单机配置：redis服务地址
      */
     private String address = "redis://127.0.0.1:6379";

@@ -1,6 +1,8 @@
 package tech.msop.core.redis.lock;
 
 import org.springframework.boot.autoconfigure.AutoConfiguration;
+import tech.msop.core.tool.lock.DistributedLock;
+import tech.msop.core.tool.lock.LockAspect;
 import tech.msop.core.tool.utils.StringUtil;
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
@@ -96,14 +98,8 @@ public class MsLockAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public RedisLockClient redisLockClient(MsLockProperties properties){
-        return new RedisLockClientImpl(redissonClient(properties));
-    }
-
-    @Bean
-    @ConditionalOnMissingBean
-    public RedisLockAspect redisLockAspect(RedisLockClient redisLockClient){
-        return new RedisLockAspect(redisLockClient);
+    public LockAspect redisLockAspect(DistributedLock lock){
+        return new LockAspect(lock);
     }
 
 

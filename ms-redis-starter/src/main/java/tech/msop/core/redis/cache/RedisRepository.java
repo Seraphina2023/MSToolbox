@@ -18,7 +18,7 @@ import java.util.function.Supplier;
  */
 @Getter
 @SuppressWarnings("unchecked")
-public class MsRedis {
+public class RedisRepository {
 	private final RedisTemplate<String, Object> redisTemplate;
 	private final StringRedisTemplate stringRedisTemplate;
 	private final ValueOperations<String, Object> valueOps;
@@ -27,7 +27,7 @@ public class MsRedis {
 	private final SetOperations<String, Object> setOps;
 	private final ZSetOperations<String, Object> zSetOps;
 
-	public MsRedis(RedisTemplate<String, Object> redisTemplate,StringRedisTemplate stringRedisTemplate) {
+	public RedisRepository(RedisTemplate<String, Object> redisTemplate,StringRedisTemplate stringRedisTemplate) {
 		this.redisTemplate = redisTemplate;
 		this.stringRedisTemplate = stringRedisTemplate;
 		Assert.notNull(redisTemplate, "redisTemplate is null");

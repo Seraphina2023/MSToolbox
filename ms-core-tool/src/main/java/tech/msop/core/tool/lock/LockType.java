@@ -1,4 +1,4 @@
-package tech.msop.core.redis.lock;
+package tech.msop.core.tool.lock;
 
 /**
  * 锁类型
