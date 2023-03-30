@@ -89,6 +89,8 @@
         <module>ms-mybatis-encrypt-starter</module>
         <!-- Spring Redis 处理工具 -->
         <module>ms-redis-starter</module>
+        <!-- Token 生成工具 -->
+        <module>ms-token-starter</module>
     </modules>
 
     <dependencyManagement>

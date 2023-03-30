@@ -89,6 +89,7 @@
         <ureport.version>2.2.9</ureport.version>
         <velocity.version>1.7</velocity.version>
         <spring.security.oauth2.version>2.3.8.RELEASE</spring.security.oauth2.version>
+        <spring.cloud.oauth2.version>2.2.5.RELEASE</spring.cloud.oauth2.version>
         <log4j2.version>2.18.0</log4j2.version>
         <logback.version>1.2.11</logback.version>
         <tika.version>2.4.1</tika.version>
@@ -170,31 +171,37 @@
             <!-- Spring 文件存储 -->
             <dependency>
                 <groupId>tech.msop</groupId>
-                <artifactId>ms-starter-file-storage</artifactId>
+                <artifactId>ms-file-storage-starter</artifactId>
                 <version>${ms.tool.version}</version>
             </dependency>
             <!-- Spring HTTP 工具 -->
             <dependency>
                 <groupId>tech.msop</groupId>
-                <artifactId>ms-starter-http</artifactId>
+                <artifactId>ms-http-starter</artifactId>
                 <version>${ms.tool.version}</version>
             </dependency>
             <!-- Spring 负载均衡 -->
             <dependency>
                 <groupId>tech.msop</groupId>
-                <artifactId>ms-starter-loadbalancer</artifactId>
+                <artifactId>ms-loadbalancer-starter</artifactId>
                 <version>${ms.tool.version}</version>
             </dependency>
             <!-- Spring 字段加密 -->
             <dependency>
                 <groupId>tech.msop</groupId>
-                <artifactId>ms-starter-mybatis-encrypt</artifactId>
+                <artifactId>ms-mybatis-encrypt-starter</artifactId>
                 <version>${ms.tool.version}</version>
             </dependency>
             <!-- Spring Redis 处理 -->
             <dependency>
                 <groupId>tech.msop</groupId>
-                <artifactId>ms-starter-redis</artifactId>
+                <artifactId>ms-redis-starter</artifactId>
+                <version>${ms.tool.version}</version>
+            </dependency>
+            <!-- Spring Token 处理 -->
+            <dependency>
+                <groupId>tech.msop</groupId>
+                <artifactId>ms-token-starter</artifactId>
                 <version>${ms.tool.version}</version>
             </dependency>
 
@@ -660,6 +667,11 @@
                 <groupId>org.apache.tika</groupId>
                 <artifactId>tika-core</artifactId>
                 <version>${tika.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-oauth2</artifactId>
+                <version>${spring.cloud.oauth2.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

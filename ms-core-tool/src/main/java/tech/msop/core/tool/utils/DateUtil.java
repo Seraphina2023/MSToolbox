@@ -26,6 +26,7 @@ public class DateUtil {
 	public static final String PATTERN_DATETIME_MINI = "yyyyMMddHHmmss";
 	public static final String PATTERN_DATE = "yyyy-MM-dd";
 	public static final String PATTERN_TIME = "HH:mm:ss";
+	public static final String TIME_ZONE_GMT8 = "GMT+8";
 	/**
 	 * 老 date 格式化
 	 */

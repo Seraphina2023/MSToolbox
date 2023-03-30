@@ -1,5 +1,7 @@
 package tech.msop.core.tool.utils;
 
+import sun.misc.BASE64Decoder;
+import sun.misc.BASE64Encoder;
 import tech.msop.core.tool.tuple.KeyPair;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Base64Utils;
@@ -8,6 +10,7 @@ import javax.crypto.Cipher;
 import java.math.BigInteger;
 
 import java.security.*;
+import java.security.interfaces.RSAPublicKey;
 import java.security.spec.*;
 import java.util.Objects;
 
@@ -180,7 +183,7 @@ public class RsaUtil {
 	}
 
 	/**
-	 * 共要加密
+	 * 公钥加密
 	 *
 	 * @param base64PublicKey base64 的公钥
 	 * @param data            待加密的内容
@@ -191,7 +194,7 @@ public class RsaUtil {
 	}
 
 	/**
-	 * 共要加密
+	 * 公钥加密
 	 *
 	 * @param publicKey 公钥
 	 * @param data      待加密的内容
@@ -363,4 +366,71 @@ public class RsaUtil {
 		return new String(decryptByPublicKeyFromBase64(base64PublicKey, Base64Utils.decodeFromString(base64Data)), Charsets.UTF_8);
 	}
 
+	/**
+	 * 公钥加密
+	 * @param content 要加密的内容
+	 * @param publicKey 公钥
+	 */
+	public static String encrypt(String content, PublicKey publicKey) {
+		try{
+			Cipher cipher = Cipher.getInstance(RSA_PADDING);
+			cipher.init(Cipher.ENCRYPT_MODE, publicKey);
+			byte[] output = cipher.doFinal(content.getBytes());
+			BASE64Encoder encoder = new BASE64Encoder();
+			return encoder.encode(output);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	/**
+	 * 公钥加密
+	 * @param content 要加密的内容
+	 * @param publicKey 公钥
+	 */
+	public static byte[] encrypt(byte[] content, PublicKey publicKey) {
+		try{
+			Cipher cipher = Cipher.getInstance(RSA_PADDING);
+			cipher.init(Cipher.ENCRYPT_MODE, publicKey);
+			return  cipher.doFinal(content);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	/**
+	 * 私钥解密
+	 * @param content 要解密的内容
+	 * @param privateKey 私钥
+	 */
+	public static byte[] decrypt(byte[] content, PrivateKey privateKey) {
+		try {
+			Cipher cipher = Cipher.getInstance(RSA_PADDING);
+			cipher.init(Cipher.DECRYPT_MODE, privateKey);
+			return cipher.doFinal(content);
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	/**
+	 * 私钥解密
+	 * @param content 要解密的内容
+	 * @param privateKey 私钥
+	 */
+	public static String decrypt(String content, PrivateKey privateKey) {
+		try {
+			Cipher cipher = Cipher.getInstance(RSA_PADDING);
+			cipher.init(Cipher.DECRYPT_MODE, privateKey);
+			byte [] b = cipher.doFinal(content.getBytes());
+			BASE64Encoder encoder = new BASE64Encoder();
+			return encoder.encode(b);
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		return null;
+	}
 }
