@@ -186,6 +186,12 @@
                 <artifactId>ms-loadbalancer-starter</artifactId>
                 <version>${ms.tool.version}</version>
             </dependency>
+            <!-- Spring 日志记录 -->
+            <dependency>
+                <groupId>tech.msop</groupId>
+                <artifactId>ms-log-starter</artifactId>
+                <version>${ms.tool.version}</version>
+            </dependency>
             <!-- Spring 字段加密 -->
             <dependency>
                 <groupId>tech.msop</groupId>

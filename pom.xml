@@ -85,6 +85,8 @@
         <module>ms-http-starter</module>
         <!-- Spring 负载均衡 -->
         <module>ms-loadbalancer-starter</module>
+        <!-- Spring 日志记录 -->
+        <module>ms-log-starter</module>
         <!-- Spring Mybatis 处理加密字段 -->
         <module>ms-mybatis-encrypt-starter</module>
         <!-- Spring Redis 处理工具 -->

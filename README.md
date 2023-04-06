@@ -17,6 +17,7 @@ MSToolbox
 ├── ms-file-storage-starter -- Spring 文件管理
 ├── ms-http-starter -- Spring HTTP 工具类
 ├── ms-loadbalancer-starter -- Spring 负载均衡
+├── ms-log-starter -- Spring 日志记录
 ├── ms-mybtais-encrypt-starter -- MyBatis 处理字段加密
 ├── ms-redis-starter -- Spring Redis 处理工具
 ```
