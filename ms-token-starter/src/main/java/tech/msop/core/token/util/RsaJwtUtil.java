@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 /**
  * RSA 非对称加密 JWT 工具类
  */
-public class JwtUtil {
+public class RsaJwtUtil {
     private static final String PUBKEY_START = "-----BEGIN PUBLIC KEY-----";
     private static final String PUBKEY_END = "-----END PUBLIC KEY-----";
 

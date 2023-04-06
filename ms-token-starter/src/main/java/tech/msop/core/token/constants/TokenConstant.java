@@ -44,13 +44,21 @@ public interface TokenConstant {
      */
     String TOKEN_STYLE_RES_JWT = "res-jwt";
     /**
-     * Token风格: JWT
+     * Token风格: AES 对称加密 JWT
      */
-    String TOKEN_STYLE_JWT = "jwt";
+    String TOKEN_STYLE_AES_JWT = "aes-jwt";
 
     //============================ JWT 相关常量  =================================
     /**
      * rsa公钥
      */
     String RSA_PUBLIC_KEY = "pubkey.txt";
+    /**
+     * 默认key
+     */
+    String DEFAULT_SECRET_KEY = "mstoolboxisapowerfulmicroservicetool";
+    /**
+     * key 安全长度，具体见：<a href="https://tools.ietf.org/html/rfc7518#section-3.2">...</a>
+     */
+    int SECRET_KEY_LENGTH = 32;
 }
