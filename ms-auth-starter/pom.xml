@@ -9,11 +9,7 @@
         <version>0.2.2.RELEASE</version>
     </parent>
 
-    <artifactId>ms-token-starter</artifactId>
-
-    <description>
-        Spring Token 生成工具类
-    </description>
+    <artifactId>ms-auth-starter</artifactId>
 
     <dependencies>
         <!-- MSToolbox -->
@@ -22,29 +18,40 @@
             <artifactId>ms-core-auto</artifactId>
             <scope>provided</scope>
         </dependency>
+        <!-- Token 生成 -->
         <dependency>
             <groupId>tech.msop</groupId>
-            <artifactId>ms-core-tool</artifactId>
-        </dependency>
-
-        <!-- Spring Cloud Oauth2 -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-oauth2</artifactId>
+            <artifactId>ms-token-starter</artifactId>
         </dependency>
         <!-- Redis -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
+            <groupId>tech.msop</groupId>
+            <artifactId>ms-redis-starter</artifactId>
         </dependency>
-        <!-- JWT -->
+        <!-- Spring Cloud 上下文 -->
         <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-impl</artifactId>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-context</artifactId>
+            <scope>provided</scope>
         </dependency>
+        <!-- Mybatis-plus -->
         <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-jackson</artifactId>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!-- Javax -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!-- Tomcat Websocket -->
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-websocket</artifactId>
+            <optional>true</optional>
         </dependency>
     </dependencies>
+
 </project>

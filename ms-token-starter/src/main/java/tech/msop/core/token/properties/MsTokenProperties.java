@@ -13,7 +13,7 @@ public class MsTokenProperties {
     /**
      * Token 风格
      */
-    private String tokenStyle = TokenConstant.TOKEN_STYLE_AES_JWT;
+    private String tokenStyle = TokenConstant.TOKEN_STYLE_UUID;
     /**
      * token 是否有状态
      */

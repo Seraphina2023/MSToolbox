@@ -162,10 +162,16 @@
                 <artifactId>ms-api-crypto-starter</artifactId>
                 <version>${ms.tool.version}</version>
             </dependency>
+            <!-- Spring 认证 -->
+            <dependency>
+                <groupId>tech.msop</groupId>
+                <artifactId>ms-auth-starter</artifactId>
+                <version>${ms.tool.version}</version>
+            </dependency>
             <!-- Spring 数据缓存框架 -->
             <dependency>
                 <groupId>tech.msop</groupId>
-                <artifactId>ms-starter-ehcache</artifactId>
+                <artifactId>ms-ehcache-starter</artifactId>
                 <version>${ms.tool.version}</version>
             </dependency>
             <!-- Spring 文件存储 -->

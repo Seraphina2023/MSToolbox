@@ -35,18 +35,6 @@ public interface TokenConstant {
      * Token风格: tik风格 (2_14_16)
      */
     String TOKEN_STYLE_TIK = "tik";
-    /**
-     * Token风格: 认证服务器使用 RSA 非对称加密 JWT
-     */
-    String TOKEN_STYLE_AUTH_JWT = "auth-jwt";
-    /**
-     * Token风格: 资源服务器使用 RSA 非对称加密 JWT
-     */
-    String TOKEN_STYLE_RES_JWT = "res-jwt";
-    /**
-     * Token风格: AES 对称加密 JWT
-     */
-    String TOKEN_STYLE_AES_JWT = "aes-jwt";
 
     //============================ JWT 相关常量  =================================
     /**

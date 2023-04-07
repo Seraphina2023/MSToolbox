@@ -77,6 +77,8 @@
         <module>ms-actuate-starter</module>
         <!-- Spring API 加密 -->
         <module>ms-api-crypto-starter</module>
+        <!-- Spring 认证工具 -->
+        <module>ms-auth-starter</module>
         <!-- Spring 缓存框架 -->
         <module>ms-ehcache-starter</module>
         <!-- Spring 文件存储 -->
