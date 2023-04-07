@@ -27,9 +27,9 @@ public class AuditLogProperties {
      */
     private Boolean console = true;
     /**
-     * 日志记录类型(logger/redis/db/es)
+     * 日志记录类型(logger/redis/db/es/feign)
      */
-//    private String logType = "db";
+    private String logType = "logger";
     /**
      * 日志记录级别
      */

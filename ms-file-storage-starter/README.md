@@ -139,7 +139,7 @@ ms:
     <dependency>
         <groupId>tech.msop</groupId>
         <artifactId>ms-starter-file-storage</artifactId>
-        <version>0.2.2.RELEASE</version>
+        <version>0.2.3.RELEASE</version>
     </dependency>
 
     <!-- 华为云 OBS 不使用的情况下可以不引入 -->

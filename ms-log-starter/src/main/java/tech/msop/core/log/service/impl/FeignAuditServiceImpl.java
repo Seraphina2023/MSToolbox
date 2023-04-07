@@ -10,7 +10,7 @@ import tech.msop.core.log.model.AuditUsualLog;
 import tech.msop.core.log.service.IAuditService;
 
 @Service
-@ConditionalOnProperty(value = "ms.audit.log.log-type", havingValue = "feign", matchIfMissing = true)
+@ConditionalOnProperty(value = "ms.audit.log.log-type", havingValue = "feign")
 @AllArgsConstructor
 public class FeignAuditServiceImpl implements IAuditService {
     private final ILogClient logClient;
