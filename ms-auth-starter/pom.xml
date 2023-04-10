@@ -18,11 +18,11 @@
             <artifactId>ms-core-auto</artifactId>
             <scope>provided</scope>
         </dependency>
-        <!-- Token 生成 -->
-        <dependency>
-            <groupId>tech.msop</groupId>
-            <artifactId>ms-token-starter</artifactId>
-        </dependency>
+<!--        &lt;!&ndash; Token 生成 &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>tech.msop</groupId>-->
+<!--            <artifactId>ms-token-starter</artifactId>-->
+<!--        </dependency>-->
         <!-- Redis -->
         <dependency>
             <groupId>tech.msop</groupId>
@@ -33,6 +33,11 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-context</artifactId>
             <scope>provided</scope>
+        </dependency>
+        <!-- Spring Cloud Oauth2 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-oauth2</artifactId>
         </dependency>
         <!-- Mybatis-plus -->
         <dependency>

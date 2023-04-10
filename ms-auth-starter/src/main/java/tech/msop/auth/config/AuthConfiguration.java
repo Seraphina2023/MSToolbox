@@ -3,9 +3,9 @@ package tech.msop.auth.config;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import tech.msop.auth.properties.MsSecurityProperties;
-import tech.msop.core.token.properties.MsTokenProperties;
+import tech.msop.auth.properties.TokenStoreProperties;
 
-@EnableConfigurationProperties({MsTokenProperties.class, MsSecurityProperties.class})
+@EnableConfigurationProperties({MsSecurityProperties.class, TokenStoreProperties.class})
 @AutoConfiguration
-public class AuthAutoConfiguration {
+public class AuthConfiguration {
 }
