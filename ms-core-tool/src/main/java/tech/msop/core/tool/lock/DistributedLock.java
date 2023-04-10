@@ -25,6 +25,20 @@ public interface DistributedLock {
     boolean tryLock(String lockName, LockType lockType, long waitTime, long leaseTime, TimeUnit timeUnit) throws InterruptedException;
 
     /**
+     * 尝试获取公平锁
+     *
+     * @param lockName  锁名
+     * @param waitTime  等待时间
+     * @param leaseTime 自动解锁时间，一定要大于方法执行时间
+     * @param timeUnit  时间单位
+     * @return 是否成功
+     * @throws InterruptedException InterruptedException
+     */
+    default boolean tryFairLock(String lockName, long waitTime, long leaseTime, TimeUnit timeUnit) throws InterruptedException {
+        return tryLock(lockName, LockType.FAIR, waitTime, leaseTime, timeUnit);
+    }
+
+    /**
      * 解锁
      *
      * @param lockName 锁名

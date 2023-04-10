@@ -3,6 +3,7 @@ package tech.msop.core.file.storage.properties;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @Data
 @ConfigurationProperties("ms.file-storage")
+@RefreshScope
 public class MsFileStorageProperties {
     /**
      * 默认存储平台

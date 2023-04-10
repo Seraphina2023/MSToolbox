@@ -198,6 +198,12 @@
                 <artifactId>ms-log-starter</artifactId>
                 <version>${ms.tool.version}</version>
             </dependency>
+            <!-- Spring MyBatis 处理工具 -->
+            <dependency>
+                <groupId>tech.msop</groupId>
+                <artifactId>ms-mybatis-starter</artifactId>
+                <version>${ms.tool.version}</version>
+            </dependency>
             <!-- Spring 字段加密 -->
             <dependency>
                 <groupId>tech.msop</groupId>

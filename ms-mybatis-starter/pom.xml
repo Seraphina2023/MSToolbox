@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>tech.msop</groupId>
+        <artifactId>MSToolbox</artifactId>
+        <version>0.2.3.RELEASE</version>
+    </parent>
+
+    <artifactId>ms-mybatis-starter</artifactId>
+
+    <dependencies>
+        <!-- MSToolbox -->
+        <dependency>
+            <groupId>tech.msop</groupId>
+            <artifactId>ms-core-auto</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>tech.msop</groupId>
+            <artifactId>ms-core-tool</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>tech.msop</groupId>
+            <artifactId>ms-core-launch</artifactId>
+        </dependency>
+        <!-- Mybatis Plus -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-typehandlers-jsr310</artifactId>
+        </dependency>
+        <!-- Jdbc -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.tomcat</groupId>
+                    <artifactId>tomcat-jdbc</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- Druid -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>
