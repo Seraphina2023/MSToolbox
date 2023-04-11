@@ -10,7 +10,7 @@
     </parent>
     <groupId>tech.msop</groupId>
     <artifactId>ms-bom</artifactId>
-    <version>0.2.3.RELEASE</version>
+    <version>0.2.4.RELEASE</version>
     <description> 统一版本管理 </description>
     <packaging>pom</packaging>
     <url>https://github.com/ruozhuliufeng/MSToolbox</url>
@@ -39,7 +39,7 @@
         <connection>https://github.com/ruozhuliufenng/MSToolbox.git</connection>
     </scm>
     <properties>
-        <ms.tool.version>0.2.3.RELEASE</ms.tool.version>
+        <ms.tool.version>0.2.4.RELEASE</ms.tool.version>
         <guava.version>30.1.1-jre</guava.version>
         <swagger.version>2.10.5</swagger.version>
         <swagger.models.version>1.6.2</swagger.models.version>
