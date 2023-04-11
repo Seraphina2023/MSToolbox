@@ -1,4 +1,4 @@
-package tech.msop.auth.util;
+package tech.msop.auth.utils;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.cloud.bootstrap.encrypt.KeyProperties;
@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
  *
  * @author ruozhuliufeng
  */
-public class JwtUtils {
+public class JwtUtil {
     private static final String PUBKEY_START = "-----BEGIN PUBLIC KEY-----";
     private static final String PUBKEY_END = "-----END PUBLIC KEY-----";
 

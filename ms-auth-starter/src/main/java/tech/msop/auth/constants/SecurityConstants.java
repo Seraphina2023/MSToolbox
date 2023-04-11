@@ -175,15 +175,5 @@ public interface SecurityConstants {
     /**
      * 令牌颁发者
      */
-    String ISS = "http://zlt2000.cn";
-
-    /**
-     * 默认账号类型
-     */
-    String DEF_ACCOUNT_TYPE = "admin";
-
-    /**
-     * 账号类型参数名
-     */
-    String ACCOUNT_TYPE_PARAM_NAME = "account_type";
+    String ISS = "http://msop.tech";
 }
