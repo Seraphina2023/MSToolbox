@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import tech.msop.core.launch.properties.MsProperties;
 import tech.msop.core.launch.server.ServerInfo;
 import tech.msop.core.log.constant.EventConstant;
-//import tech.msop.core.log.feign.ILogClient;
 import tech.msop.core.log.model.AuditApiLog;
 import tech.msop.core.log.service.IAuditService;
 import tech.msop.core.log.utils.AuditLogAbstractUtil;
@@ -34,7 +33,6 @@ public class AuditApiLogListener {
         Map<String, Object> source = (Map<String, Object>) event.getSource();
         AuditApiLog apiLog = (AuditApiLog) source.get(EventConstant.EVENT_LOG);
         AuditLogAbstractUtil.addOtherInfoLog(apiLog, msProperties, serverInfo);
-//        logClient.saveApiLog(apiLog);
         auditService.saveAuditApiLog(apiLog);
     }
 }

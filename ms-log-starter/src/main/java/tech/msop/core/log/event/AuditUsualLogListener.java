@@ -3,7 +3,6 @@ package tech.msop.core.log.event;
 import tech.msop.core.launch.properties.MsProperties;
 import tech.msop.core.launch.server.ServerInfo;
 import tech.msop.core.log.constant.EventConstant;
-import tech.msop.core.log.feign.ILogClient;
 import tech.msop.core.log.model.AuditUsualLog;
 import tech.msop.core.log.service.IAuditService;
 import tech.msop.core.log.utils.AuditLogAbstractUtil;
@@ -30,11 +29,10 @@ public class AuditUsualLogListener {
     @Async
     @Order
     @EventListener(AuditUsualLogEvent.class)
-    public void saveAuditApiLog(AuditApiLogEvent event) {
+    public void saveAuditUsualLog(AuditApiLogEvent event) {
         Map<String, Object> source = (Map<String, Object>) event.getSource();
         AuditUsualLog usualLog = (AuditUsualLog) source.get(EventConstant.EVENT_LOG);
         AuditLogAbstractUtil.addOtherInfoLog(usualLog, msProperties, serverInfo);
         auditService.saveAuditUsualLog(usualLog);
-//        logClient.saveUsualLog(usualLog);
     }
 }
