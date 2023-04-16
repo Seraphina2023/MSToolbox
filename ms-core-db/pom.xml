@@ -29,11 +29,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <!-- MyBatis -->
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-        </dependency>
         <!-- Druid -->
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -72,6 +67,11 @@
         <dependency>
             <groupId>tech.msop</groupId>
             <artifactId>ms-core-auto</artifactId>
+        </dependency>
+        <!-- 反射 -->
+        <dependency>
+            <groupId>org.reflections</groupId>
+            <artifactId>reflections</artifactId>
         </dependency>
     </dependencies>
 </project>

@@ -103,7 +103,7 @@
         <google.cloud.storage.version>2.14.0</google.cloud.storage.version>
         <thumbnailator.version>0.4.17</thumbnailator.version>
         <alibaba.transmittable.version>2.12.1</alibaba.transmittable.version>
-
+        <reflections.version>0.9.11</reflections.version>
 
         <!-- plugin -->
         <java.version>1.8</java.version>
@@ -698,6 +698,12 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>transmittable-thread-local</artifactId>
                 <version>${alibaba.transmittable.version}</version>
+            </dependency>
+            <!-- 反射工具类 -->
+            <dependency>
+                <groupId>org.reflections</groupId>
+                <artifactId>reflections</artifactId>
+                <version>${reflections.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

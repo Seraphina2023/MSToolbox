@@ -1,5 +1,6 @@
 package tech.msop.core.log.properties;
 
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import tech.msop.core.launch.log.MsLogLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -7,12 +8,14 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  * 审计日志配置
- * @RefreshScope 实现配置、类热部署
+ *
+ * 使用 @RefreshScope 实现配置、类热部署
  * @author ruozhuliufeng
  */
 @Setter
 @Getter
 @ConfigurationProperties(prefix = MsLogLevel.LOG_PROPS_PREFIX)
+@RefreshScope
 public class AuditLogProperties {
     /**
      * 是否开启审计日志
