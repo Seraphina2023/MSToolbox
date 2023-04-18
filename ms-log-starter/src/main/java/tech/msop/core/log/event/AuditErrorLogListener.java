@@ -29,7 +29,7 @@ public class AuditErrorLogListener {
     @Async
     @Order
     @EventListener(AuditErrorLogEvent.class)
-    public void saveAuditErrorLog(AuditApiLogEvent event) {
+    public void saveAuditErrorLog(AuditErrorLogEvent event) {
         Map<String, Object> source = (Map<String, Object>) event.getSource();
         AuditErrorLog errorLog = (AuditErrorLog) source.get(EventConstant.EVENT_LOG);
         AuditLogAbstractUtil.addOtherInfoLog(errorLog, msProperties, serverInfo);

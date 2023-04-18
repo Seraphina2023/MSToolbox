@@ -29,7 +29,7 @@ public class AuditUsualLogListener {
     @Async
     @Order
     @EventListener(AuditUsualLogEvent.class)
-    public void saveAuditUsualLog(AuditApiLogEvent event) {
+    public void saveAuditUsualLog(AuditUsualLogEvent event) {
         Map<String, Object> source = (Map<String, Object>) event.getSource();
         AuditUsualLog usualLog = (AuditUsualLog) source.get(EventConstant.EVENT_LOG);
         AuditLogAbstractUtil.addOtherInfoLog(usualLog, msProperties, serverInfo);
