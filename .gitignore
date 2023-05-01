@@ -33,3 +33,5 @@ hs_err_pid*
 # 配置文件不上传
 /ossp-config/**
 deploy.bat
+.flattened-pom.xml
+**/.flattened-pom.xml
