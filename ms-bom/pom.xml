@@ -104,7 +104,7 @@
         <thumbnailator.version>0.4.17</thumbnailator.version>
         <alibaba.transmittable.version>2.12.1</alibaba.transmittable.version>
         <reflections.version>0.9.11</reflections.version>
-
+        <curator.version>5.1.0</curator.version>
         <!-- plugin -->
         <java.version>1.8</java.version>
         <maven.compiler.source>8</maven.compiler.source>
@@ -221,6 +221,11 @@
             <dependency>
                 <groupId>tech.msop</groupId>
                 <artifactId>ms-token-starter</artifactId>
+                <version>${ms.tool.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>tech.msop</groupId>
+                <artifactId>ms-zookeeper-starter</artifactId>
                 <version>${ms.tool.version}</version>
             </dependency>
 
@@ -704,6 +709,17 @@
                 <groupId>org.reflections</groupId>
                 <artifactId>reflections</artifactId>
                 <version>${reflections.version}</version>
+            </dependency>
+            <!-- Zookeeper curator框架 -->
+            <dependency>
+                <groupId>org.apache.curator</groupId>
+                <artifactId>curator-recipes</artifactId>
+                <version>${curator.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.curator</groupId>
+                <artifactId>curator-framework</artifactId>
+                <version>${curator.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

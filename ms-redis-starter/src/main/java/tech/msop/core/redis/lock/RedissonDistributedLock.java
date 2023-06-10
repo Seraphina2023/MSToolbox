@@ -7,11 +7,9 @@ import org.redisson.api.RedissonClient;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import tech.msop.core.tool.exception.LockException;
-import tech.msop.core.tool.function.CheckedSupplier;
 import tech.msop.core.tool.lock.DistributedLock;
 import tech.msop.core.tool.lock.LockType;
 import tech.msop.core.tool.lock.MLock;
-import tech.msop.core.tool.utils.Exceptions;
 
 import java.util.concurrent.TimeUnit;
 

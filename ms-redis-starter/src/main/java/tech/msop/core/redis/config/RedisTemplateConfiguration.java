@@ -60,7 +60,7 @@ public class RedisTemplateConfiguration implements MsRedisSerializerConfigAble {
     }
 
     @Bean
-    public RedisRepository msRedis(RedisTemplate<String, Object> redisTemplate, StringRedisTemplate stringRedisTemplate) {
+    public RedisRepository redisRepository(RedisTemplate<String, Object> redisTemplate, StringRedisTemplate stringRedisTemplate) {
         return new RedisRepository(redisTemplate,stringRedisTemplate);
     }
 }

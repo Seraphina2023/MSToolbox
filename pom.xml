@@ -97,6 +97,8 @@
         <module>ms-redis-starter</module>
         <!-- Token 生成工具 -->
         <module>ms-token-starter</module>
+        <!-- Spring Zookeeper 处理工具 -->
+        <module>ms-zookeeper-starter</module>
     </modules>
 
     <dependencyManagement>
