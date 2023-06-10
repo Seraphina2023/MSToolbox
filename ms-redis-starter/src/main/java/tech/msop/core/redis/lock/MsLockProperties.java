@@ -90,7 +90,6 @@ public class MsLockProperties {
         single,
         master,
         sentinel,
-
         cluster
     }
 }

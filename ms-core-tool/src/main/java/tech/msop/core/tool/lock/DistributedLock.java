@@ -10,81 +10,74 @@ import java.util.concurrent.TimeUnit;
  * @author ruozhuliufeng
  */
 public interface DistributedLock {
-
     /**
-     * 尝试获取锁
+     * 自动获取锁
      *
      * @param lockName  锁名
      * @param lockType  锁类型
-     * @param waitTime  等待时间
-     * @param leaseTime 自动解锁时间，一定要大于方法执行时间
+     * @param leaseTime 自动解锁时间，默认100
      * @param timeUnit  时间单位
-     * @return 是否成功
-     * @throws InterruptedException InterruptedException
+     * @return 锁对象
      */
-    boolean tryLock(String lockName, LockType lockType, long waitTime, long leaseTime, TimeUnit timeUnit) throws InterruptedException;
+    MLock lock(String lockName, long leaseTime, TimeUnit timeUnit, LockType lockType) throws Exception;
 
     /**
-     * 尝试获取公平锁
-     *
-     * @param lockName  锁名
-     * @param waitTime  等待时间
-     * @param leaseTime 自动解锁时间，一定要大于方法执行时间
-     * @param timeUnit  时间单位
-     * @return 是否成功
-     * @throws InterruptedException InterruptedException
+     * 默认重入锁
      */
-    default boolean tryFairLock(String lockName, long waitTime, long leaseTime, TimeUnit timeUnit) throws InterruptedException {
-        return tryLock(lockName, LockType.FAIR, waitTime, leaseTime, timeUnit);
+    default MLock lock(String lockName, long leaseTime, TimeUnit timeUnit) throws Exception {
+        return this.lock(lockName, leaseTime, timeUnit, LockType.REENTRANT);
+    }
+
+    default MLock lock(String lockName, LockType lockType) throws Exception {
+        return this.lock(lockName, -1, TimeUnit.SECONDS, lockType);
+    }
+
+    default MLock lock(String lockName) throws Exception {
+        return this.lock(lockName, LockType.REENTRANT);
     }
 
     /**
-     * 解锁
+     * 尝试获取锁，如果锁不可用则等待最多waitTime时间后放弃
      *
-     * @param lockName 锁名
-     * @param lockType 锁类型
+     * @param lockName  锁的key
+     * @param waitTime  获取锁的最大尝试时间(单位 {@code unit})
+     * @param leaseTime 加锁的时间，超过这个时间后锁便自动解锁；
+     *                  如果leaseTime为-1，则保持锁定直到显式解锁
+     * @param unit      {@code waitTime} 和 {@code leaseTime} 参数的时间单位
+     * @return 锁对象，如果获取锁失败则为null
      */
-    void unLock(String lockName, LockType lockType);
+    MLock tryLock(String lockName, long waitTime, long leaseTime, TimeUnit unit, LockType lockType) throws Exception;
 
-    /**
-     * 自动获取锁后执行方法
-     *
-     * @param lockName  锁名
-     * @param lockType  锁类型
-     * @param waitTime  等待锁超时时间
-     * @param leaseTime 自动解锁时间，默认100
-     * @param timeUnit  时间单位
-     * @param supplier  获取锁后的回调
-     * @param <T>       泛型
-     * @return 返回数据
-     */
-    <T> T lock(String lockName, LockType lockType, long waitTime, long leaseTime, TimeUnit timeUnit, CheckedSupplier<T> supplier);
-
-    /**
-     * 公平锁
-     *
-     * @param lockName  锁名
-     * @param waitTime  等待锁超时时间
-     * @param leaseTime 自动解锁时间，默认100
-     * @param supplier  获取锁后的回调
-     * @param <T>       泛型
-     * @return 返回数据
-     */
-    default <T> T lockFair(String lockName, long waitTime, long leaseTime, CheckedSupplier<T> supplier) {
-        return lock(lockName, LockType.FAIR, waitTime, leaseTime, TimeUnit.SECONDS, supplier);
+    default MLock tryLock(String lockName, long waitTime, long leaseTime, TimeUnit unit) throws Exception {
+        return this.tryLock(lockName, waitTime, leaseTime, unit, LockType.REENTRANT);
     }
 
+    default MLock tryLock(String lockName, long waitTime, TimeUnit unit, LockType lockType) throws Exception {
+        return this.tryLock(lockName, waitTime, -1, unit, lockType);
+    }
+
+    default MLock tryLock(String lockName, long waitTime, TimeUnit unit) throws Exception {
+        return this.tryLock(lockName, waitTime, -1, unit, LockType.REENTRANT);
+    }
+
+
     /**
-     * 可重入锁
+     * 释放锁
      *
-     * @param lockName  锁名
-     * @param waitTime  等待锁超时时间
-     * @param leaseTime 自动解锁时间，默认100
-     * @param supplier  获取锁后的回调
-     * @param <T>       泛型
-     * @return 返回数据
+     * @param lock 锁对象
+     * @throws Exception 异常信息
      */
-    default <T> T lockReentrant(String lockName, long waitTime, long leaseTime, CheckedSupplier<T> supplier) {
-        return lock(lockName, LockType.REENTRANT, waitTime, leaseTime, TimeUnit.SECONDS, supplier);
+    void unlock(Object lock) throws Exception;
+
+    /**
+     * 释放锁
+     *
+     * @param mLock 锁对象抽象
+     * @throws Exception 异常信息
+     */
+    default void unlock(MLock mLock) throws Exception {
+        if (mLock != null) {
+            this.unlock(mLock.getLock());
+        }
     }
 }

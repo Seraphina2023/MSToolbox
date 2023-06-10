@@ -1,5 +1,6 @@
 package tech.msop.core.tool.lock;
 
+import jdk.nashorn.internal.ir.IfNode;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -13,6 +14,7 @@ import org.springframework.context.expression.AnnotatedElementKey;
 import org.springframework.expression.EvaluationContext;
 import org.springframework.util.Assert;
 import tech.msop.core.tool.constant.CharConstant;
+import tech.msop.core.tool.exception.LockException;
 import tech.msop.core.tool.spel.MsExpressionEvaluator;
 import tech.msop.core.tool.utils.StringUtil;
 
@@ -48,10 +50,19 @@ public class LockAspect implements ApplicationContextAware {
      * @param point     切点
      * @param lock 锁注解
      */
-    @Around("@annotation(lock)")
-    public Object aroundRedisLock(ProceedingJoinPoint point, Lock lock) {
+    @Around("@within(lock) || @annotation(lock)")
+    public Object aroundRedisLock(ProceedingJoinPoint point, Lock lock) throws Throwable{
+        if (lock == null){
+            // 获取类上的注解
+            lock = point.getTarget().getClass().getDeclaredAnnotation(Lock.class);
+        }
         String lockName = lock.value();
-        Assert.hasText(lockName, "@Lock 注解值不能为空");
+        if (locker == null){
+            throw new LockException("DistributedLock is null","分布式锁不能为空");
+        }
+        if (StringUtil.isBlank(lockName)){
+            throw new LockException("@Lock value is null","@Lock 注解值不能为空");
+        }
         // EL表达式
         String lockParam = lock.param();
         // 表达式不为空
@@ -62,11 +73,26 @@ public class LockAspect implements ApplicationContextAware {
         } else {
             lockKey = lockName;
         }
-        LockType lockType = lock.type();
-        long waitTime = lock.waitTime();
-        long leaseTime = lock.leaseTime();
-        TimeUnit timeUnit = lock.timeUnit();
-        return locker.lock(lockKey, lockType, waitTime, leaseTime, timeUnit, point::proceed);
+        MLock mLock = null;
+        try {
+            // 加锁
+            LockType lockType = lock.type();
+            long waitTime = lock.waitTime();
+            long leaseTime = lock.leaseTime();
+            TimeUnit timeUnit = lock.timeUnit();
+            if (waitTime > 0){
+                mLock = locker.tryLock(lockKey,waitTime,leaseTime,timeUnit,lockType);
+            }else {
+                mLock = locker.lock(lockKey,leaseTime,timeUnit,lockType);
+            }
+            if (mLock != null){
+                return point.proceed();
+            }else {
+                throw new LockException("lock wait timeout","锁等待时间超时");
+            }
+        }finally {
+            locker.unlock(mLock);
+        }
     }
 
     /**

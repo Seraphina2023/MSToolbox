@@ -15,6 +15,7 @@ import tech.msop.core.tool.exception.IdempotencyException;
 import tech.msop.core.tool.exception.LockException;
 import tech.msop.core.tool.lock.DistributedLock;
 import tech.msop.core.tool.lock.LockType;
+import tech.msop.core.tool.lock.MLock;
 import tech.msop.core.tool.utils.*;
 import tech.msop.mybatis.injector.MsSqlMethod;
 import tech.msop.mybatis.mapper.SuperMapper;
@@ -37,14 +38,13 @@ public class SuperServiceImpl<M extends SuperMapper<T>, T extends BaseEntity> ex
     @Override
     public boolean saveIdempotency(T entity, DistributedLock locker, String lockKey, Wrapper<T> countWrapper, String msg) throws Exception {
         if (locker == null) {
-            throw new LockException("DistributedLock is null");
+            throw new LockException("DistributedLock is null","分布式锁不能为空");
         }
         if (StringUtil.isBlank(lockKey)) {
-            throw new LockException("lockKey is null");
+            throw new LockException("lockKey is null","锁名不能为空");
         }
-        try {
-            boolean lock = locker.tryFairLock(lockKey, 10, 60, TimeUnit.SECONDS);
-            if (lock) {
+        try(MLock lock = locker.tryLock(lockKey, 10, 60, TimeUnit.SECONDS, LockType.FAIR)) {
+            if (!ObjectUtil.isEmpty(lock)) {
                 //判断记录是否已存在
                 long count = super.count(countWrapper);
                 if (count == 0) {
@@ -58,9 +58,6 @@ public class SuperServiceImpl<M extends SuperMapper<T>, T extends BaseEntity> ex
             } else {
                 throw new LockException("锁等待超时");
             }
-        }finally {
-            // 释放锁
-            locker.unLock(lockKey, LockType.FAIR);
         }
     }
 

@@ -6,9 +6,11 @@ import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import tech.msop.core.tool.exception.LockException;
 import tech.msop.core.tool.function.CheckedSupplier;
 import tech.msop.core.tool.lock.DistributedLock;
 import tech.msop.core.tool.lock.LockType;
+import tech.msop.core.tool.lock.MLock;
 import tech.msop.core.tool.utils.Exceptions;
 
 import java.util.concurrent.TimeUnit;
@@ -28,71 +30,71 @@ public class RedissonDistributedLock implements DistributedLock {
      */
     private final RedissonClient redissonClient;
 
-    /**
-     * 尝试获取锁
-     *
-     * @param lockName  锁名
-     * @param lockType  锁类型
-     * @param waitTime  等待时间
-     * @param leaseTime 自动解锁时间，一定要大于方法执行时间
-     * @param timeUnit  时间单位
-     * @return 是否成功
-     * @throws InterruptedException InterruptedException
-     */
-    @Override
-    public boolean tryLock(String lockName, LockType lockType, long waitTime, long leaseTime, TimeUnit timeUnit) throws InterruptedException {
-        RLock lock = getLock(lockName, lockType);
-        return lock.tryLock(waitTime, leaseTime, timeUnit);
-    }
-
-    /**
-     * 解锁
-     *
-     * @param lockName 锁名
-     * @param lockType 锁类型
-     */
-    @Override
-    public void unLock(String lockName, LockType lockType) {
-        RLock lock = getLock(lockName, lockType);
-        // 仅仅在已经锁定和当前线程持有锁时解锁
-        if (lock.isLocked() && lock.isHeldByCurrentThread()) {
-            lock.unlock();
-        }
-    }
-
-    private RLock getLock(String lockName, LockType lockType) {
+    private MLock getLock(String lockName,LockType lockType){
         RLock lock;
-        if (LockType.REENTRANT == lockType) {
-            lock = redissonClient.getLock(lockName);
-        } else {
+        if (LockType.FAIR == lockType){
             lock = redissonClient.getFairLock(lockName);
+        }else {
+            lock = redissonClient.getLock(lockName);
         }
-        return lock;
+        return new MLock(lock,this);
     }
 
     /**
-     * 自动获取锁后执行方法
+     * 自动获取锁
      *
      * @param lockName  锁名
-     * @param lockType  锁类型
-     * @param waitTime  等待锁超时时间
      * @param leaseTime 自动解锁时间，默认100
      * @param timeUnit  时间单位
-     * @param supplier  获取锁后的回调
-     * @return 返回数据
+     * @param lockType  锁类型
+     * @return 锁对象
      */
     @Override
-    public <T> T lock(String lockName, LockType lockType, long waitTime, long leaseTime, TimeUnit timeUnit, CheckedSupplier<T> supplier) {
-        try {
-            boolean result = this.tryLock(lockName, lockType, waitTime, leaseTime, timeUnit);
-            if (result) {
-                return supplier.get();
-            }
-        } catch (Throwable throwable) {
-            throw Exceptions.unchecked(throwable);
-        } finally {
-            this.unLock(lockName, lockType);
+    public MLock lock(String lockName, long leaseTime, TimeUnit timeUnit, LockType lockType) throws Exception {
+        MLock mLock = getLock(lockName,lockType);
+        RLock lock = (RLock) mLock.getLock();
+        lock.lock(leaseTime,timeUnit);
+        return mLock;
+    }
+
+    /**
+     * 尝试获取锁，如果锁不可用则等待最多waitTime时间后放弃
+     *
+     * @param lockName       锁的key
+     * @param waitTime  获取锁的最大尝试时间(单位 {@code unit})
+     * @param leaseTime 加锁的时间，超过这个时间后锁便自动解锁；
+     *                  如果leaseTime为-1，则保持锁定直到显式解锁
+     * @param unit      {@code waitTime} 和 {@code leaseTime} 参数的时间单位
+     * @param lockType
+     * @return 锁对象，如果获取锁失败则为null
+     */
+    @Override
+    public MLock tryLock(String lockName, long waitTime, long leaseTime, TimeUnit unit, LockType lockType) throws Exception {
+        MLock mLock = getLock(lockName,lockType);
+        RLock lock = (RLock) mLock.getLock();
+        if (lock.tryLock(waitTime,leaseTime,unit)){
+            return mLock;
         }
         return null;
+    }
+
+    /**
+     * 释放锁
+     *
+     * @param lock 锁对象
+     * @throws Exception 异常信息
+     */
+    @Override
+    public void unlock(Object lock) throws Exception {
+        if (lock != null){
+            if (lock instanceof RLock){
+                RLock rLock = (RLock) lock;
+                if (rLock.isLocked()){
+                    rLock.unlock();
+                }
+            }else {
+                throw new LockException("require RLock type","锁类型必须为RLock");
+            }
+        }
     }
 }
