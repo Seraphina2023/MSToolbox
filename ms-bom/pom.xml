@@ -223,9 +223,16 @@
                 <artifactId>ms-token-starter</artifactId>
                 <version>${ms.tool.version}</version>
             </dependency>
+            <!-- Spring Zookeeper 处理 -->
             <dependency>
                 <groupId>tech.msop</groupId>
                 <artifactId>ms-zookeeper-starter</artifactId>
+                <version>${ms.tool.version}</version>
+            </dependency>
+            <!-- Sentinel 处理 -->
+            <dependency>
+                <groupId>tech.msop</groupId>
+                <artifactId>ms-sentinel-starter</artifactId>
                 <version>${ms.tool.version}</version>
             </dependency>
 

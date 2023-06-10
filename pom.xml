@@ -46,6 +46,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring.boot.version>2.7.1</spring.boot.version>
         <spring.cloud.verion>2021.0.3</spring.cloud.verion>
+        <spring.cloud.alibaba.verion>2021.1</spring.cloud.alibaba.verion>
         <spring.platform.version>Cairo-SR8</spring.platform.version>
 
         <!-- plugin -->
@@ -99,6 +100,8 @@
         <module>ms-token-starter</module>
         <!-- Spring Zookeeper 处理工具 -->
         <module>ms-zookeeper-starter</module>
+        <!-- Sentinel 工具 -->
+        <module>ms-sentinel-starter</module>
     </modules>
 
     <dependencyManagement>
@@ -124,6 +127,14 @@
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
                 <version>${spring.cloud.verion}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- Spring Alibaba 版本管理 -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring.cloud.alibaba.verion}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
