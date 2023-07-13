@@ -241,6 +241,12 @@
                 <artifactId>ms-cache-starter</artifactId>
                 <version>${ms.tool.version}</version>
             </dependency>
+            <!-- Cache 缓存处理 -->
+            <dependency>
+                <groupId>tech.msop</groupId>
+                <artifactId>ms-mongo-starter</artifactId>
+                <version>${ms.tool.version}</version>
+            </dependency>
 
 
             <!-- Nacos -->

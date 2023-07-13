@@ -104,6 +104,8 @@
         <module>ms-sentinel-starter</module>
         <!-- 缓存工具 -->
         <module>ms-cache-starter</module>
+        <!-- Mongo 优化工具 -->
+        <module>ms-mongo-starter</module>
     </modules>
 
     <dependencyManagement>
