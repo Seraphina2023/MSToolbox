@@ -102,6 +102,8 @@
         <module>ms-zookeeper-starter</module>
         <!-- Sentinel 工具 -->
         <module>ms-sentinel-starter</module>
+        <!-- 缓存工具 -->
+        <module>ms-cache-starter</module>
     </modules>
 
     <dependencyManagement>

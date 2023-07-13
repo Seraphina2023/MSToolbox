@@ -109,8 +109,6 @@ public class DesensitizeUtil {
      *
      * @param sourceStr 需要处理的敏感信息
      * @return String
-     * @author tyg
-     * @date 2018年5月5日下午3:59:28
      */
     public static String encryptSensitiveInfo(String sourceStr, String replacement) {
         if (sourceStr == null) {
